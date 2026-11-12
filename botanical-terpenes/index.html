@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="en" data-dossier="modal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An atlas of botanical terpenes | High Forest</title>
+<meta name="description" content="The eleven plant aroma compounds used in High Forest honeys: structure, scent, where each grows, and what research has and has not shown, with its sources.">
+<link rel="canonical" href="https://highforest.ca/botanical-terpenes">
+<meta property="og:title" content="An atlas of botanical terpenes">
+<meta property="og:description" content="The eleven plant aroma compounds used in High Forest honeys: structure, scent, where each grows, and what research has and has not shown, with its sources.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;1,400&family=Barlow+Condensed:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="./../tokens.css">
+<link rel="stylesheet" href="./atlas.css">
+<link rel="stylesheet" href="../prototypes/picker.css">
+<script>
+// prototype: the way of opening a dossier, from ?v=, before first paint
+(d => { const w = ["inline","modal","sheet"][parseInt(new URLSearchParams(location.search).get('v'), 10) - 1]; if (w) d.dossier = w })(document.documentElement.dataset)
+</script>
+<script type="module" src="./atlas.js"></script>
+<script type="module" src="./proto.js"></script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<header class="mast" data-ground="wood">
+  <a class="wordmark" href="/"><b>High</b>Forest</a>
+  <nav aria-label="Site">
+    <a href="/shop-wellness-honey">Shop</a>
+    <a href="/unpasteurized-honey">The honey</a>
+    <a href="/highforest-product-guide">Make a cup</a>
+  </nav>
+</header>
+
+<main id="content">
+<section class="hero">
+  <div class="hero-text" data-ground="wood">
+    <h1>An atlas of <em>botanical terpenes</em></h1>
+    <p class="lead">Terpenes are the molecules that make a lemon smell of lemon and a pine wood of pine. This atlas describes the eleven used in High Forest honeys: what each one is, where it grows, how it smells, and what research has and has not shown.</p>
+  </div>
+  <aside class="first" data-ground="wood">
+    <h2>Read this first</h2>
+    <p>In these honeys terpenes are flavourings. High Forest has not published how much a jar contains, and nobody has tested the honeys themselves. Most of the research cited here was done in animals. In the human studies, doses ran from milligrams inhaled to grams swallowed. This atlas describes the ingredients and makes no statement about what a jar of honey does. <a href="./do-terpenes-do-anything/">How to read the research</a></p>
+  </aside>
+  <p class="credit">Stand-in photograph. To be replaced by one taken in Quebec.</p>
+</section>
+
+<nav class="sections" aria-label="Atlas">
+  <a href="./" aria-current="page">The eleven</a>
+  <a href="./boiling-points/">Boiling points</a>
+  <a href="./do-terpenes-do-anything/">Do terpenes do anything?</a>
+</nav>
+
+<section class="what" id="what">
+  <div class="prose">
+    <h2>What a terpene is</h2>
+    <p>Plants build terpenes from five-carbon pieces called isoprene units. Two units make a monoterpene: ten carbons, light enough to leave a leaf at the touch of a finger. Three units make a sesquiterpene: fifteen carbons, heavier and slower to evaporate. Add an oxygen atom and chemists call the result a terpenoid. Outside chemistry all of them are called terpenes, and this atlas follows that habit.<sup class="cite"><a href="#ref-1">1</a></sup></p>
+    <p>Plants make them to repel what eats the leaf and to attract what pollinates the flower, and they are part of how a plant responds to heat and injury.<sup class="cite"><a href="#ref-2">2</a></sup> The smell of a forest is largely terpenes in the air.</p>
+  </div>
+  <figure class="units">
+    <div class="units-row">
+      <div><svg class="mol" viewBox="0 0 99.6 71" width="99.6" height="71" role="img" aria-label="Skeletal structure of isoprene"><path d="M38.5 29L16 16M38.5 29L61 16M36.3 29L36.3 55M40.7 29L40.7 55M59.9 17.9L82.5 30.9M62.1 14.1L84.7 27.1"/></svg><span>Isoprene, C<sub>5</sub>H<sub>8</sub></span></div>
+      <b aria-hidden="true">× 2</b>
+      <div><svg class="mol" viewBox="0 0 189.6 71" width="189.6" height="71" role="img" aria-label="Myrcene drawn as two isoprene units joined by one bond"><path class="uj" d="M106.1 29L83.6 16"/><path class="u0" d="M106.1 29L128.6 16M128.6 16L151.1 29M129.1 21.1L146.4 31.1M151.1 29L173.6 16M151.1 29L151.1 55"/><path class="u1" d="M83.6 16L61 29M61 29L38.5 16M58.8 29L58.8 55M63.2 29L63.2 55M37.4 14.1L14.9 27.1M39.6 17.9L17.1 30.9"/></svg><span>Myrcene, C<sub>10</sub>H<sub>16</sub></span></div>
+    </div>
+    <figcaption>Myrcene is two isoprene units joined head to tail. One unit is highlighted.</figcaption>
+  </figure>
+  <figure class="isomers">
+    <ul><li><a href="#limonene"><svg class="mol" viewBox="0 0 56.9 109.5" width="56.9" height="109.5" aria-hidden="true"><path d="M28.5 40.5L12 50M28.5 40.5L44.9 50M12 50L12 69M44.9 50L44.9 69M12 69L28.5 78.5M28.5 78.5L44.9 69M29 73.4L40.2 66.9M28.5 78.5L28.5 97.5M28.5 21.5L44.9 12M29.6 19.6L13.1 10.1M27.4 23.4L10.9 13.9"/><path class="mol-w" d="M28.5 40.5L31.1 21.5L25.9 21.5Z"/></svg><span>Limonene</span></a></li><li><a href="#alpha-pinene"><svg class="mol" viewBox="0 0 106 96.5" width="106" height="96.5" aria-hidden="true"><path d="M77.5 48.9L55.9 30.7M77.5 48.9L51 49M77.5 48.9L87 65.3M77.5 48.9L94 39.4M55.9 30.7L41.9 12M55.9 30.7L17.2 36.6M51 49L41.9 12M51 49L27.8 65.5M17.2 36.6L12 54.8M27.8 65.5L12 54.8M27.6 60.3L16.8 53M27.8 65.5L28.4 84.5"/></svg><span>α-Pinene</span></a></li><li><a href="#beta-pinene"><svg class="mol" viewBox="0 0 106 96.5" width="106" height="96.5" aria-hidden="true"><path d="M77.5 48.9L55.9 30.7M77.5 48.9L51 49M77.5 48.9L87 65.3M77.5 48.9L94 39.4M55.9 30.7L41.9 12M55.9 30.7L17.2 36.6M51 49L41.9 12M51 49L27.8 65.5M17.2 36.6L12 54.8M27.8 65.5L12 54.8M25.6 65.5L26.2 84.5M29.9 65.4L30.6 84.4"/></svg><span>β-Pinene</span></a></li><li><a href="#myrcene"><svg class="mol" viewBox="0 0 139.2 52.5" width="139.2" height="52.5" aria-hidden="true"><path d="M77.8 21.5L61.4 12M77.8 21.5L94.3 12M61.4 12L44.9 21.5M94.3 12L110.7 21.5M94.8 17.1L106 23.6M110.7 21.5L127.2 12M110.7 21.5L110.7 40.5M44.9 21.5L28.5 12M42.7 21.5L42.7 40.5M47.1 21.5L47.1 40.5M27.4 10.1L10.9 19.6M29.6 13.9L13.1 23.4"/></svg><span>Myrcene</span></a></li><li><a href="#phellandrene"><svg class="mol" viewBox="0 0 56.9 109.5" width="56.9" height="109.5" aria-hidden="true"><path d="M28.5 40.5L28.5 21.5M28.5 40.5L12 50M28.5 40.5L44.9 50M28.5 21.5L44.9 12M28.5 21.5L12 12M12 50L12 69M44.9 50L44.9 69M40.7 53L40.7 66M12 69L28.5 78.5M16.7 66.9L28 73.4M28.5 78.5L44.9 69M28.5 78.5L28.5 97.5"/></svg><span>α-Phellandrene</span></a></li><li><a href="#terpinolene"><svg class="mol" viewBox="0 0 56.9 109.5" width="56.9" height="109.5" aria-hidden="true"><path d="M12 50L28.5 40.5M12 50L12 69M28.5 40.5L44.9 50M28.5 40.5L28.5 21.5M32.7 37.5L32.7 24.5M12 69L28.5 78.5M44.9 50L44.9 69M28.5 78.5L44.9 69M29 73.4L40.2 66.9M28.5 78.5L28.5 97.5M28.5 21.5L44.9 12M28.5 21.5L12 12"/></svg><span>Terpinolene</span></a></li></ul>
+    <figcaption><b>Same atoms, six smells.</b> Six of the eleven share one formula, C<sub>10</sub>H<sub>16</sub>: ten carbons and sixteen hydrogens joined six different ways. They smell different because they are shaped differently.</figcaption>
+  </figure>
+</section>
+
+<section class="eleven" id="eleven">
+  <div class="eleven-head">
+    <h2>The eleven</h2>
+    <div class="filters" role="group" aria-label="Show">
+      <button type="button" data-show="all" aria-pressed="true">All <span>11</span></button>
+      <button type="button" data-show="mono" aria-pressed="false">Monoterpenes <span>6</span></button>
+      <button type="button" data-show="alcohol" aria-pressed="false">Monoterpene alcohols <span>3</span></button>
+      <button type="button" data-show="sesqui" aria-pressed="false">Sesquiterpenes <span>2</span></button>
+      <span class="sep" aria-hidden="true"></span>
+      <button type="button" data-show="sunshine" aria-pressed="false"><i class="b-sunshine"></i>In Sunshine <span>8</span></button>
+      <button type="button" data-show="berry" aria-pressed="false"><i class="b-berry"></i>In Soothing Berry <span>7</span></button>
+      <button type="button" data-show="rest" aria-pressed="false"><i class="b-rest"></i>In Grounding Rest <span>7</span></button>
+    </div>
+    <p class="key"><span class="key-item"><i class="b-sunshine"></i><i class="b-berry"></i><i class="b-rest"></i> blends that contain it: Sunshine, Soothing Berry, Grounding Rest</span> <span class="key-item"><span class="pips"><i class="on"></i><i class="on"></i><i></i><i></i></span> how far the research has reached: cells, animals, people, trials</span></p>
+    <p class="sr" aria-live="polite" id="shown"></p>
+  </div>
+  <ul class="cards">
+      <li class="entry" id="limonene" data-family="mono" data-blends="sunshine berry" style="--vt: e-limonene"><details name="compound">
+        <summary class="card">
+          <svg class="mol" viewBox="0 0 62.6 118" width="62.6" height="118" aria-hidden="true"><path d="M31.3 44L14 54M31.3 44L48.6 54M14 54L14 74M48.6 54L48.6 74M14 74L31.3 84M31.3 84L48.6 74M31.8 78.9L43.9 71.9M31.3 84L31.3 104M31.3 24L48.6 14M32.4 22.1L15.1 12.1M30.2 25.9L12.9 15.9"/><path class="mol-w" d="M31.3 44L33.9 24L28.7 24Z"/></svg>
+          <span class="card-name">Limonene</span>
+          <span class="card-meta"><span>C<sub>10</sub>H<sub>16</sub></span><span>monoterpene</span></span>
+          <span class="card-scent"><span>bright</span><span>citrus</span><span>fresh</span></span>
+          <span class="card-foot"><span class="dots"><i class="b-sunshine" title="Sunshine"></i><i class="b-berry" title="Soothing Berry"></i><i></i><span class="sr">In Sunshine, Soothing Berry</span></span><span class="pips" role="img" aria-label="Evidence: people, small"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></span>
+          <span class="card-close">Close <span aria-hidden="true">×</span></span>
+        </summary>
+    <article class="dossier">
+      <figure class="plate">
+        <img src="./plates/limonene.webp" width="900" height="1130" loading="lazy" decoding="async" alt="Botanical plate of lemon, Citrus × limon.">
+        <figcaption><i>Citrus × limon</i>, lemon. Printed as “Citrus Limonum Risso”. Köhler’s Medizinal-Pflanzen, Gera, 1887.</figcaption>
+      </figure>
+      <div class="dossier-body">
+        <header class="dossier-head" data-ground="wood">
+          <div>
+            <h3>Limonene</h3>
+            <p class="formula">C<sub>10</sub>H<sub>16</sub> <span>Monoterpene</span></p>
+          </div>
+          <svg class="mol" viewBox="0 0 78.8 153.5" width="78.8" height="153.5" role="img" aria-label="Skeletal structure of Limonene"><path d="M39.4 56.5L16 70M39.4 56.5L62.8 70M16 70L16 97M62.8 70L62.8 97M16 97L39.4 110.5M39.4 110.5L62.8 97M39.9 105.4L58.1 94.9M39.4 110.5L39.4 137.5M39.4 29.5L62.8 16M40.5 27.6L17.1 14.1M38.3 31.4L14.9 17.9"/><path class="mol-w" d="M39.4 56.5L42 29.5L36.8 29.5Z"/></svg>
+        </header>
+        <p class="shape">After the lemon, Citrus limon. One six-membered ring with a tail. The molecule exists in two mirror-image forms; citrus peel makes almost only this one.</p>
+        <dl class="sheet">
+          <div><dt>Scent</dt><dd>bright, citrus, fresh, lightly sweet <span class="src">Reference description: “citrus odor” (HSDB)</span></dd></div>
+          <div><dt>Found in</dt><dd>lemon, orange, grapefruit and lime peel, juniper berries, peppermint, rosemary, fennel, dill, caraway and celery seed.</dd></div>
+          <div><dt>In High Forest</dt><dd><span class="blend"><i class="b-sunshine"></i>Sunshine</span> <span class="blend"><i class="b-berry"></i>Soothing Berry</span> <span class="src">as a flavouring ingredient; amount not published</span></dd></div>
+        </dl>
+        <dl class="facts">
+          <div><dt>Molar mass</dt><dd>136.23 g/mol</dd></div>
+          <div><dt>Boiling point</dt><dd>175–177 °C <span class="src">JECFA</span></dd></div>
+          <div><dt>CAS number</dt><dd>5989-27-5</dd></div>
+          <div><dt>FEMA number</dt><dd>2633</dd></div>
+          <div><dt>Record</dt><dd><a href="https://pubchem.ncbi.nlm.nih.gov/compound/440917">PubChem 440917</a></dd></div>
+          <div class="wide"><dt>Systematic name</dt><dd>(4R)-1-methyl-4-prop-1-en-2-ylcyclohexene <span class="src">D-limonene, the (R)-(+) form of citrus peel</span></dd></div>
+        </dl>
+        <section class="studied">
+          <h4>What has been studied <span class="pips" role="img" aria-label="Evidence: people, small"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span> <span class="src">highest rung: people, small</span></h4>
+          <ul>
+            <li><span class="grade g-human">People</span><span>People absorb it. A 1998 dose-finding study gave patients with advanced cancer 0.5 to 12 g per square metre of body surface a day by mouth and followed it through the blood.<sup class="cite"><a href="#ref-9">9</a></sup></span></li>
+            <li><span class="grade g-human">People</span><span>In a 2013 pilot study, women with early-stage breast cancer took 2 g a day for two to six weeks; limonene collected in breast tissue.<sup class="cite"><a href="#ref-10">10</a></sup></span></li>
+            <li><span class="grade g-human">People</span><span>In a 2024 laboratory study of 20 adults, vaporized limonene on its own (1 or 5 mg) could not be told from placebo. Inhaled at 15 mg together with 30 mg of THC, it reduced the anxiety THC caused.<sup class="cite"><a href="#ref-11">11</a></sup></span></li>
+            <li class="unknown"><span class="grade">Not known</span><span>Whether the small amounts used to flavour food do anything beyond flavour. The studies in which people swallowed it used grams.</span></li>
+          </ul>
+          <p class="own"><a href="./limonene/">Limonene on its own page</a></p>
+        </section>
+      </div>
+    </article>
+      </details></li>
+      <li class="entry" id="alpha-pinene" data-family="mono" data-blends="sunshine berry" style="--vt: e-alpha-pinene"><details name="compound">
+        <summary class="card">
+          <svg class="mol" viewBox="0 0 114.3 104.3" width="114.3" height="104.3" aria-hidden="true"><path d="M83 52.8L60.2 33.7M83 52.8L55 53M83 52.8L93 70.1M83 52.8L100.3 42.8M60.2 33.7L45.4 14M60.2 33.7L19.5 39.9M55 53L45.4 14M55 53L30.6 70.3M19.5 39.9L14 59.1M30.6 70.3L14 59.1M30.4 65.1L18.8 57.3M30.6 70.3L31.3 90.3"/></svg>
+          <span class="card-name"><span class="gr">α</span>-Pinene</span>
+          <span class="card-meta"><span>C<sub>10</sub>H<sub>16</sub></span><span>monoterpene</span></span>
+          <span class="card-scent"><span>fresh</span><span>coniferous</span><span>resinous</span></span>
+          <span class="card-foot"><span class="dots"><i class="b-sunshine" title="Sunshine"></i><i class="b-berry" title="Soothing Berry"></i><i></i><span class="sr">In Sunshine, Soothing Berry</span></span><span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span></span>
+          <span class="card-close">Close <span aria-hidden="true">×</span></span>
+        </summary>
+    <article class="dossier">
+      <figure class="plate">
+        <img src="./plates/alpha-pinene.webp" width="900" height="1167" loading="lazy" decoding="async" alt="Botanical plate of Scots pine, Pinus sylvestris.">
+        <figcaption><i>Pinus sylvestris</i>, Scots pine. Printed as “Pinus silvestris L.”. Köhler’s Medizinal-Pflanzen, Gera, 1887.</figcaption>
+      </figure>
+      <div class="dossier-body">
+        <header class="dossier-head" data-ground="wood">
+          <div>
+            <h3><span class="gr">α</span>-Pinene</h3>
+            <p class="formula">C<sub>10</sub>H<sub>16</sub> <span>Monoterpene</span></p>
+          </div>
+          <svg class="mol" viewBox="0 0 148.5 135" width="148.5" height="135" role="img" aria-label="Skeletal structure of Alpha-pinene"><path d="M109.1 68.4L78.3 42.5M109.1 68.4L71.4 68.6M109.1 68.4L122.6 91.8M109.1 68.4L132.5 54.9M78.3 42.5L58.5 16M78.3 42.5L23.4 50.9M71.4 68.6L58.5 16M71.4 68.6L38.4 92M23.4 50.9L16 76.9M38.4 92L16 76.9M38.2 86.8L20.8 75.1M38.4 92L39.3 119"/></svg>
+        </header>
+        <p class="shape">After the pine, Pinus. It is the main component of turpentine. Two fused rings, one of them a strained four-carbon square. The double bond sits inside the ring.</p>
+        <dl class="sheet">
+          <div><dt>Scent</dt><dd>fresh, coniferous, resinous, herbaceous <span class="src">Reference description: “characteristic odor of pine” (HSDB)</span></dd></div>
+          <div><dt>Found in</dt><dd>pine, spruce and fir, rosemary, juniper, sage, eucalyptus, basil, dill and parsley, frankincense.</dd></div>
+          <div><dt>In High Forest</dt><dd><span class="blend"><i class="b-sunshine"></i>Sunshine</span> <span class="blend"><i class="b-berry"></i>Soothing Berry</span> <span class="src">as a flavouring ingredient; amount not published</span></dd></div>
+        </dl>
+        <dl class="facts">
+          <div><dt>Molar mass</dt><dd>136.23 g/mol</dd></div>
+          <div><dt>Boiling point</dt><dd>155–156 °C <span class="src">JECFA, HSDB</span></dd></div>
+          <div><dt>CAS number</dt><dd>80-56-8</dd></div>
+          <div><dt>FEMA number</dt><dd>2902</dd></div>
+          <div><dt>Record</dt><dd><a href="https://pubchem.ncbi.nlm.nih.gov/compound/6654">PubChem 6654</a></dd></div>
+          <div class="wide"><dt>Systematic name</dt><dd>2,6,6-trimethylbicyclo[3.1.1]hept-2-ene</dd></div>
+        </dl>
+        <section class="studied">
+          <h4>What has been studied <span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span> <span class="src">highest rung: animals</span></h4>
+          <ul>
+            <li><span class="grade g-animal">Animals</span><span>In a 2017 study, mice given 10 mg per kg did better on learning and memory tests after their memory had been impaired with the drug scopolamine.<sup class="cite"><a href="#ref-7">7</a></sup></span></li>
+            <li><span class="grade g-review">Review</span><span>A 2019 review summarizes cell and animal work on inflammation, microbes and nerve cells, and notes how few studies there are.<sup class="cite"><a href="#ref-6">6</a></sup></span></li>
+            <li class="unknown"><span class="grade">Not known</span><span>Any effect on memory or attention in people. No human trial of the isolated compound is cited here.</span></li>
+          </ul>
+          <p class="own"><a href="./alpha-pinene/">α-Pinene on its own page</a></p>
+        </section>
+      </div>
+    </article>
+      </details></li>
+      <li class="entry" id="beta-pinene" data-family="mono" data-blends="sunshine berry" style="--vt: e-beta-pinene"><details name="compound">
+        <summary class="card">
+          <svg class="mol" viewBox="0 0 114.3 104.3" width="114.3" height="104.3" aria-hidden="true"><path d="M83 52.8L60.2 33.7M83 52.8L55 53M83 52.8L93 70.1M83 52.8L100.3 42.8M60.2 33.7L45.4 14M60.2 33.7L19.5 39.9M55 53L45.4 14M55 53L30.6 70.3M19.5 39.9L14 59.1M30.6 70.3L14 59.1M28.4 70.4L29.1 90.3M32.8 70.2L33.5 90.2"/></svg>
+          <span class="card-name"><span class="gr">β</span>-Pinene</span>
+          <span class="card-meta"><span>C<sub>10</sub>H<sub>16</sub></span><span>monoterpene</span></span>
+          <span class="card-scent"><span>green</span><span>woody</span><span>resinous</span></span>
+          <span class="card-foot"><span class="dots"><i class="b-sunshine" title="Sunshine"></i><i class="b-berry" title="Soothing Berry"></i><i></i><span class="sr">In Sunshine, Soothing Berry</span></span><span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span></span>
+          <span class="card-close">Close <span aria-hidden="true">×</span></span>
+        </summary>
+    <article class="dossier">
+      <figure class="plate">
+        <img src="./plates/beta-pinene.webp" width="900" height="1167" loading="lazy" decoding="async" alt="Botanical plate of silver fir, Abies alba.">
+        <figcaption><i>Abies alba</i>, silver fir. Printed as “Abies alba Miller”. Köhler’s Medizinal-Pflanzen, Gera, 1887.</figcaption>
+      </figure>
+      <div class="dossier-body">
+        <header class="dossier-head" data-ground="wood">
+          <div>
+            <h3><span class="gr">β</span>-Pinene</h3>
+            <p class="formula">C<sub>10</sub>H<sub>16</sub> <span>Monoterpene</span></p>
+          </div>
+          <svg class="mol" viewBox="0 0 148.5 135" width="148.5" height="135" role="img" aria-label="Skeletal structure of Beta-pinene"><path d="M109.1 68.4L78.3 42.5M109.1 68.4L71.4 68.6M109.1 68.4L122.6 91.8M109.1 68.4L132.5 54.9M78.3 42.5L58.5 16M78.3 42.5L23.4 50.9M71.4 68.6L58.5 16M71.4 68.6L38.4 92M23.4 50.9L16 76.9M38.4 92L16 76.9M36.2 92.1L37.1 119M40.6 91.9L41.5 118.9"/></svg>
+        </header>
+        <p class="shape">The second pinene, made of the same atoms as α-pinene. It has the same two fused rings, with the double bond outside the ring instead of inside it.</p>
+        <dl class="sheet">
+          <div><dt>Scent</dt><dd>green, woody, resinous, pine-like <span class="src">Reference description: “dry, woody or resinous aroma” (HSDB)</span></dd></div>
+          <div><dt>Found in</dt><dd>fir, spruce and pine needles, rosemary, basil, dill and parsley, nutmeg.</dd></div>
+          <div><dt>In High Forest</dt><dd><span class="blend"><i class="b-sunshine"></i>Sunshine</span> <span class="blend"><i class="b-berry"></i>Soothing Berry</span> <span class="src">as a flavouring ingredient; amount not published</span></dd></div>
+        </dl>
+        <dl class="facts">
+          <div><dt>Molar mass</dt><dd>136.23 g/mol</dd></div>
+          <div><dt>Boiling point</dt><dd>163–166 °C <span class="src">JECFA</span></dd></div>
+          <div><dt>CAS number</dt><dd>127-91-3</dd></div>
+          <div><dt>FEMA number</dt><dd>2903</dd></div>
+          <div><dt>Record</dt><dd><a href="https://pubchem.ncbi.nlm.nih.gov/compound/14896">PubChem 14896</a></dd></div>
+          <div class="wide"><dt>Systematic name</dt><dd>6,6-dimethyl-2-methylidenebicyclo[3.1.1]heptane</dd></div>
+        </dl>
+        <section class="studied">
+          <h4>What has been studied <span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span> <span class="src">highest rung: animals</span></h4>
+          <ul>
+            <li><span class="grade g-animal">Animals</span><span>A 2007 rodent study of two eucalyptus-oil compounds found pain relief from cineole. β-Pinene worked weakly, in rats only, and reversed morphine’s pain relief about as much as the blocking drug naloxone does.<sup class="cite"><a href="#ref-8">8</a></sup></span></li>
+            <li><span class="grade g-review">Review</span><span>Reviewed together with α-pinene for antimicrobial and anti-inflammatory activity in cells and animals.<sup class="cite"><a href="#ref-6">6</a></sup></span></li>
+            <li class="unknown"><span class="grade">Not known</span><span>Any effect in people. This atlas cites one animal study of the compound itself.</span></li>
+          </ul>
+          <p class="own"><a href="./beta-pinene/">β-Pinene on its own page</a></p>
+        </section>
+      </div>
+    </article>
+      </details></li>
+      <li class="entry" id="myrcene" data-family="mono" data-blends="berry rest" style="--vt: e-myrcene"><details name="compound">
+        <summary class="card">
+          <svg class="mol" viewBox="0 0 149.2 58" width="149.2" height="58" aria-hidden="true"><path d="M83.3 24L66 14M83.3 24L100.6 14M66 14L48.6 24M100.6 14L117.9 24M101.1 19.1L113.2 26.1M117.9 24L135.2 14M117.9 24L117.9 44M48.6 24L31.3 14M46.4 24L46.4 44M50.8 24L50.8 44M30.2 12.1L12.9 22.1M32.4 15.9L15.1 25.9"/></svg>
+          <span class="card-name">Myrcene</span>
+          <span class="card-meta"><span>C<sub>10</sub>H<sub>16</sub></span><span>monoterpene</span></span>
+          <span class="card-scent"><span>earthy</span><span>herbal</span><span>balsamic</span></span>
+          <span class="card-foot"><span class="dots"><i></i><i class="b-berry" title="Soothing Berry"></i><i class="b-rest" title="Grounding Rest"></i><span class="sr">In Soothing Berry, Grounding Rest</span></span><span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span></span>
+          <span class="card-close">Close <span aria-hidden="true">×</span></span>
+        </summary>
+    <article class="dossier">
+      <figure class="plate">
+        <img src="./plates/myrcene.webp" width="900" height="1013" loading="lazy" decoding="async" alt="Botanical plate of hops, Humulus lupulus.">
+        <figcaption><i>Humulus lupulus</i>, hops. Printed as “Humulus Lupulus L.”. Köhler’s Medizinal-Pflanzen, Gera, 1887.</figcaption>
+      </figure>
+      <div class="dossier-body">
+        <header class="dossier-head" data-ground="wood">
+          <div>
+            <h3>Myrcene</h3>
+            <p class="formula">C<sub>10</sub>H<sub>16</sub> <span>Monoterpene</span></p>
+          </div>
+          <svg class="mol" viewBox="0 0 195.7 72.5" width="195.7" height="72.5" role="img" aria-label="Skeletal structure of Beta-myrcene"><path d="M109.5 29.5L86.1 16M109.5 29.5L132.9 16M86.1 16L62.8 29.5M132.9 16L156.3 29.5M133.4 21.1L151.6 31.6M156.3 29.5L179.7 16M156.3 29.5L156.3 56.5M62.8 29.5L39.4 16M60.6 29.5L60.6 56.5M65 29.5L65 56.5M38.3 14.1L14.9 27.6M40.5 17.9L17.1 31.4"/></svg>
+        </header>
+        <p class="shape">After Myrcia, a genus of the myrtle family. It has no ring. Its ten carbons form an open, branched chain with three double bonds: two isoprene units joined head to tail.</p>
+        <dl class="sheet">
+          <div><dt>Scent</dt><dd>earthy, herbal, balsamic, hop-like, gently fruity <span class="src">Reference description: “pleasant; terpene odor” (HSDB)</span></dd></div>
+          <div><dt>Found in</dt><dd>hops, mango, lemongrass, thyme, bay laurel, basil, parsley, cardamom.</dd></div>
+          <div><dt>In High Forest</dt><dd><span class="blend"><i class="b-berry"></i>Soothing Berry</span> <span class="blend"><i class="b-rest"></i>Grounding Rest</span> <span class="src">as a flavouring ingredient; amount not published</span></dd></div>
+        </dl>
+        <dl class="facts">
+          <div><dt>Molar mass</dt><dd>136.23 g/mol</dd></div>
+          <div><dt>Boiling point</dt><dd>166–167 °C <span class="src">JECFA</span></dd></div>
+          <div><dt>CAS number</dt><dd>123-35-3</dd></div>
+          <div><dt>FEMA number</dt><dd>2762</dd></div>
+          <div><dt>Record</dt><dd><a href="https://pubchem.ncbi.nlm.nih.gov/compound/31253">PubChem 31253</a></dd></div>
+          <div class="wide"><dt>Systematic name</dt><dd>7-methyl-3-methylideneocta-1,6-diene</dd></div>
+        </dl>
+        <section class="studied">
+          <h4>What has been studied <span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span> <span class="src">highest rung: animals</span></h4>
+          <ul>
+            <li><span class="grade g-animal">Animals</span><span>Its sleepy reputation comes from rodents given large doses. A 2021 review found animal results for pain, inflammation and sedation, and no human studies.<sup class="cite"><a href="#ref-15">15</a></sup></span></li>
+            <li><span class="grade g-safety">Safety</span><span>In a two-year study, male rats given very large amounts by stomach tube developed kidney tumours, and male mice liver tumours (US National Toxicology Program, 2010). The International Agency for Research on Cancer classed myrcene in 2019 as possibly carcinogenic to humans, group 2B.<sup class="cite"><a href="#ref-20">20</a> <a href="#ref-25">25</a></sup></span></li>
+            <li><span class="grade g-safety">Safety</span><span>In 2018 the US FDA removed synthetic myrcene from its list of flavourings. The law requires this for any additive that causes cancer in animals at any dose; the FDA stated that it poses no risk to public health at the amounts used in food. Myrcene occurs naturally in hops, mango and thyme.<sup class="cite"><a href="#ref-21">21</a></sup></span></li>
+            <li class="unknown"><span class="grade">Not known</span><span>Whether it sedates people at all. No human trial exists.</span></li>
+          </ul>
+          <p class="own"><a href="./myrcene/">Myrcene on its own page</a></p>
+        </section>
+      </div>
+    </article>
+      </details></li>
+      <li class="entry" id="phellandrene" data-family="mono" data-blends="sunshine rest" style="--vt: e-phellandrene"><details name="compound">
+        <summary class="card">
+          <svg class="mol" viewBox="0 0 62.6 118" width="62.6" height="118" aria-hidden="true"><path d="M31.3 44L31.3 24M31.3 44L14 54M31.3 44L48.6 54M31.3 24L48.6 14M31.3 24L14 14M14 54L14 74M48.6 54L48.6 74M44.4 57L44.4 71M14 74L31.3 84M18.7 71.9L30.8 78.9M31.3 84L48.6 74M31.3 84L31.3 104"/></svg>
+          <span class="card-name"><span class="gr">α</span>-Phellandrene</span>
+          <span class="card-meta"><span>C<sub>10</sub>H<sub>16</sub></span><span>monoterpene</span></span>
+          <span class="card-scent"><span>fresh</span><span>green</span><span>citrus-like</span></span>
+          <span class="card-foot"><span class="dots"><i class="b-sunshine" title="Sunshine"></i><i></i><i class="b-rest" title="Grounding Rest"></i><span class="sr">In Sunshine, Grounding Rest</span></span><span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span></span>
+          <span class="card-close">Close <span aria-hidden="true">×</span></span>
+        </summary>
+    <article class="dossier">
+      <figure class="plate">
+        <img src="./plates/phellandrene.webp" width="900" height="1122" loading="lazy" decoding="async" alt="Botanical plate of fennel, Foeniculum vulgare.">
+        <figcaption><i>Foeniculum vulgare</i>, fennel. Printed as “Foeniculum capillaceum Gilib.”. Köhler’s Medizinal-Pflanzen, Gera, 1887.</figcaption>
+      </figure>
+      <div class="dossier-body">
+        <header class="dossier-head" data-ground="wood">
+          <div>
+            <h3><span class="gr">α</span>-Phellandrene</h3>
+            <p class="formula">C<sub>10</sub>H<sub>16</sub> <span>Monoterpene</span></p>
+          </div>
+          <svg class="mol" viewBox="0 0 78.8 153.5" width="78.8" height="153.5" role="img" aria-label="Skeletal structure of Alpha-phellandrene"><path d="M39.4 56.5L39.4 29.5M39.4 56.5L16 70M39.4 56.5L62.8 70M39.4 29.5L62.8 16M39.4 29.5L16 16M16 70L16 97M62.8 70L62.8 97M58.6 73L58.6 94M16 97L39.4 110.5M20.7 94.9L38.9 105.4M39.4 110.5L62.8 97M39.4 110.5L39.4 137.5"/></svg>
+        </header>
+        <p class="shape">A six-membered ring carrying two double bonds side by side.</p>
+        <dl class="sheet">
+          <div><dt>Scent</dt><dd>fresh, green, citrus-like, lightly peppery</dd></div>
+          <div><dt>Found in</dt><dd>dill, fennel, eucalyptus, black pepper, cinnamon leaf, parsley, star anise, elemi.</dd></div>
+          <div><dt>In High Forest</dt><dd><span class="blend"><i class="b-sunshine"></i>Sunshine</span> <span class="blend"><i class="b-rest"></i>Grounding Rest</span> <span class="src">as a flavouring ingredient; amount not published</span></dd></div>
+        </dl>
+        <dl class="facts">
+          <div><dt>Molar mass</dt><dd>136.23 g/mol</dd></div>
+          <div><dt>Boiling point</dt><dd>175 °C <span class="src">JECFA</span></dd></div>
+          <div><dt>CAS number</dt><dd>99-83-2</dd></div>
+          <div><dt>FEMA number</dt><dd>2856</dd></div>
+          <div><dt>Record</dt><dd><a href="https://pubchem.ncbi.nlm.nih.gov/compound/7460">PubChem 7460</a></dd></div>
+          <div class="wide"><dt>Systematic name</dt><dd>2-methyl-5-propan-2-ylcyclohexa-1,3-diene</dd></div>
+        </dl>
+        <section class="studied">
+          <h4>What has been studied <span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span> <span class="src">highest rung: animals</span></h4>
+          <ul>
+            <li><span class="grade g-review">Review</span><span>A 2022 systematic review found twelve studies of the pure compound, in cells and animals, on pain, tumour cells and microbes. It points out that toxicology and human data are missing.<sup class="cite"><a href="#ref-19">19</a></sup></span></li>
+            <li class="unknown"><span class="grade">Not known</span><span>Its toxicology, which the review says is missing, and any effect in people.</span></li>
+          </ul>
+          <p class="own"><a href="./phellandrene/">α-Phellandrene on its own page</a></p>
+        </section>
+      </div>
+    </article>
+      </details></li>
+      <li class="entry" id="terpinolene" data-family="mono" data-blends="rest" style="--vt: e-terpinolene"><details name="compound">
+        <summary class="card">
+          <svg class="mol" viewBox="0 0 62.6 118" width="62.6" height="118" aria-hidden="true"><path d="M14 54L31.3 44M14 54L14 74M31.3 44L48.6 54M31.3 44L31.3 24M35.5 41L35.5 27M14 74L31.3 84M48.6 54L48.6 74M31.3 84L48.6 74M31.8 78.9L43.9 71.9M31.3 84L31.3 104M31.3 24L48.6 14M31.3 24L14 14"/></svg>
+          <span class="card-name">Terpinolene</span>
+          <span class="card-meta"><span>C<sub>10</sub>H<sub>16</sub></span><span>monoterpene</span></span>
+          <span class="card-scent"><span>fresh</span><span>herbal</span><span>softly pine-like</span></span>
+          <span class="card-foot"><span class="dots"><i></i><i></i><i class="b-rest" title="Grounding Rest"></i><span class="sr">In Grounding Rest</span></span><span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span></span>
+          <span class="card-close">Close <span aria-hidden="true">×</span></span>
+        </summary>
+    <article class="dossier">
+      <figure class="plate">
+        <img src="./plates/terpinolene.webp" width="900" height="978" loading="lazy" decoding="async" alt="Botanical plate of nutmeg, Myristica fragrans.">
+        <figcaption><i>Myristica fragrans</i>, nutmeg. Printed as “Myristica fragrans Houtt.”. Köhler’s Medizinal-Pflanzen, Gera, 1887.</figcaption>
+      </figure>
+      <div class="dossier-body">
+        <header class="dossier-head" data-ground="wood">
+          <div>
+            <h3>Terpinolene</h3>
+            <p class="formula">C<sub>10</sub>H<sub>16</sub> <span>Monoterpene</span></p>
+          </div>
+          <svg class="mol" viewBox="0 0 78.8 153.5" width="78.8" height="153.5" role="img" aria-label="Skeletal structure of Terpinolene"><path d="M16 70L39.4 56.5M16 70L16 97M39.4 56.5L62.8 70M39.4 56.5L39.4 29.5M43.6 53.5L43.6 32.5M16 97L39.4 110.5M62.8 70L62.8 97M39.4 110.5L62.8 97M39.9 105.4L58.1 94.9M39.4 110.5L39.4 137.5M39.4 29.5L62.8 16M39.4 29.5L16 16"/></svg>
+        </header>
+        <p class="shape">Limonene’s close relative: the same ring, with the tail’s double bond turned toward it.</p>
+        <dl class="sheet">
+          <div><dt>Scent</dt><dd>fresh, herbal, softly pine-like, lightly floral <span class="src">Reference description: “sweet, pine odor” (HSDB)</span></dd></div>
+          <div><dt>Found in</dt><dd>nutmeg, tea tree, apple, cumin, lilac, sage and rosemary, pine and fir, marjoram.</dd></div>
+          <div><dt>In High Forest</dt><dd><span class="blend"><i class="b-rest"></i>Grounding Rest</span> <span class="src">as a flavouring ingredient; amount not published</span></dd></div>
+        </dl>
+        <dl class="facts">
+          <div><dt>Molar mass</dt><dd>136.23 g/mol</dd></div>
+          <div><dt>Boiling point</dt><dd>183–185 °C <span class="src">JECFA</span></dd></div>
+          <div><dt>CAS number</dt><dd>586-62-9</dd></div>
+          <div><dt>FEMA number</dt><dd>3046</dd></div>
+          <div><dt>Record</dt><dd><a href="https://pubchem.ncbi.nlm.nih.gov/compound/11463">PubChem 11463</a></dd></div>
+          <div class="wide"><dt>Systematic name</dt><dd>1-methyl-4-propan-2-ylidenecyclohexene</dd></div>
+        </dl>
+        <section class="studied">
+          <h4>What has been studied <span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span> <span class="src">highest rung: animals</span></h4>
+          <ul>
+            <li><span class="grade g-animal">Animals</span><span>In a 2013 study, mice breathing air that carried terpinolene moved about less, which the authors read as sedation.<sup class="cite"><a href="#ref-16">16</a></sup></span></li>
+            <li class="unknown"><span class="grade">Not known</span><span>Whether the mouse result means anything for people. There are no human data.</span></li>
+          </ul>
+          <p class="own"><a href="./terpinolene/">Terpinolene on its own page</a></p>
+        </section>
+      </div>
+    </article>
+      </details></li>
+      <li class="entry" id="linalool" data-family="alcohol" data-blends="rest" style="--vt: e-linalool"><details name="compound">
+        <summary class="card">
+          <svg class="mol" viewBox="0 0 131.9 82.6" width="131.9" height="82.6" aria-hidden="true"><path d="M21.4 54.4L31.3 48.6M31.3 48.6L48.6 38.6M31.3 48.6L41.3 66M31.3 48.6L21.3 31.3M48.6 38.6L66 48.6M66 48.6L83.3 38.6M23.2 32.4L33.2 15.1M19.4 30.2L29.4 12.9M83.3 38.6L100.6 48.6M83.8 43.8L95.9 50.8M100.6 48.6L117.9 38.6M100.6 48.6L100.6 68.6"/><text x="19" y="63.2" text-anchor="end">HO</text></svg>
+          <span class="card-name">Linalool</span>
+          <span class="card-meta"><span>C<sub>10</sub>H<sub>18</sub>O</span><span>monoterpene alcohol</span></span>
+          <span class="card-scent"><span>soft</span><span>floral</span><span>lavender-like</span></span>
+          <span class="card-foot"><span class="dots"><i></i><i></i><i class="b-rest" title="Grounding Rest"></i><span class="sr">In Grounding Rest</span></span><span class="pips" role="img" aria-label="Evidence: animals; trials of a related preparation"><i class="on"></i><i class="on"></i><i></i><i class="half"></i></span></span>
+          <span class="card-close">Close <span aria-hidden="true">×</span></span>
+        </summary>
+    <article class="dossier">
+      <figure class="plate">
+        <img src="./plates/linalool.webp" width="900" height="1297" loading="lazy" decoding="async" alt="Botanical plate of lavender, Lavandula angustifolia.">
+        <figcaption><i>Lavandula angustifolia</i>, lavender. Printed as “Lavandula vera D.C.”. Köhler’s Medizinal-Pflanzen, Gera, 1887.</figcaption>
+      </figure>
+      <div class="dossier-body">
+        <header class="dossier-head" data-ground="wood">
+          <div>
+            <h3>Linalool</h3>
+            <p class="formula">C<sub>10</sub>H<sub>18</sub>O <span>Monoterpene alcohol</span></p>
+          </div>
+          <svg class="mol" viewBox="0 0 172.3 105.8" width="172.3" height="105.8" role="img" aria-label="Skeletal structure of Linalool"><path d="M23.4 72L39.4 62.8M39.4 62.8L62.8 49.3M39.4 62.8L52.9 86.1M39.4 62.8L25.9 39.4M62.8 49.3L86.1 62.8M86.1 62.8L109.5 49.3M27.8 40.5L41.3 17.1M24 38.3L37.5 14.9M109.5 49.3L132.9 62.8M110 54.4L128.2 64.9M132.9 62.8L156.3 49.3M132.9 62.8L132.9 89.8"/><text x="21" y="80.9" text-anchor="end">HO</text></svg>
+        </header>
+        <p class="shape">After linaloe, a fragrant Mexican wood. An open chain with an –OH group on the third carbon.</p>
+        <dl class="sheet">
+          <div><dt>Scent</dt><dd>soft, floral, lavender-like, gently woody <span class="src">Reference description: “odor similar to that of bergamot oil and French lavender” (HSDB)</span></dd></div>
+          <div><dt>Found in</dt><dd>lavender, coriander, basil, thyme, bergamot, rosewood, jasmine, neroli, mint.</dd></div>
+          <div><dt>In High Forest</dt><dd><span class="blend"><i class="b-rest"></i>Grounding Rest</span> <span class="src">as a flavouring ingredient; amount not published</span></dd></div>
+        </dl>
+        <dl class="facts">
+          <div><dt>Molar mass</dt><dd>154.25 g/mol</dd></div>
+          <div><dt>Boiling point</dt><dd>198 °C <span class="src">HSDB</span></dd></div>
+          <div><dt>CAS number</dt><dd>78-70-6</dd></div>
+          <div><dt>FEMA number</dt><dd>2635</dd></div>
+          <div><dt>Record</dt><dd><a href="https://pubchem.ncbi.nlm.nih.gov/compound/6549">PubChem 6549</a></dd></div>
+          <div class="wide"><dt>Systematic name</dt><dd>3,7-dimethylocta-1,6-dien-3-ol</dd></div>
+        </dl>
+        <section class="studied">
+          <h4>What has been studied <span class="pips" role="img" aria-label="Evidence: animals; trials of a related preparation"><i class="on"></i><i class="on"></i><i></i><i class="half"></i></span> <span class="src">highest rung: animals</span></h4>
+          <ul>
+            <li><span class="grade g-animal">Animals</span><span>In a 2018 study, mice that smelled linalool behaved less anxiously. Mice that had lost their sense of smell did not respond, so the effect travelled through the nose.<sup class="cite"><a href="#ref-13">13</a></sup></span></li>
+            <li><span class="grade g-related">People, related preparation</span><span>Five randomized trials of Silexan, an 80 mg daily capsule of a standardized lavender oil, found less anxiety than with placebo. Silexan contains linalool and many other compounds; the trials tested the capsule, not linalool.<sup class="cite"><a href="#ref-14">14</a></sup></span></li>
+            <li><span class="grade g-review">Review</span><span>A 2021 review summarizes cell and animal findings on sedation, pain and inflammation.<sup class="cite"><a href="#ref-12">12</a></sup></span></li>
+            <li class="unknown"><span class="grade">Not known</span><span>The effect of isolated linalool in people, by mouth or by nose.</span></li>
+          </ul>
+          <p class="own"><a href="./linalool/">Linalool on its own page</a></p>
+        </section>
+      </div>
+    </article>
+      </details></li>
+      <li class="entry" id="geraniol" data-family="alcohol" data-blends="sunshine berry" style="--vt: e-geraniol"><details name="compound">
+        <summary class="card">
+          <svg class="mol" viewBox="0 0 166.6 58" width="166.6" height="58" aria-hidden="true"><path d="M21.4 18.2L31.3 24M83.3 14L100.6 24M83.3 14L66 24M100.6 24L117.9 14M66 24L66 44M66 24L48.6 14M61.3 26.1L49.1 19.1M117.9 14L135.2 24M118.4 19.1L130.5 26.1M135.2 24L152.6 14M135.2 24L135.2 44M48.6 14L31.3 24"/><text x="19" y="18.6" text-anchor="end">HO</text></svg>
+          <span class="card-name">Geraniol</span>
+          <span class="card-meta"><span>C<sub>10</sub>H<sub>18</sub>O</span><span>monoterpene alcohol</span></span>
+          <span class="card-scent"><span>floral</span><span>rose-like</span><span>softly citrus</span></span>
+          <span class="card-foot"><span class="dots"><i class="b-sunshine" title="Sunshine"></i><i class="b-berry" title="Soothing Berry"></i><i></i><span class="sr">In Sunshine, Soothing Berry</span></span><span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span></span>
+          <span class="card-close">Close <span aria-hidden="true">×</span></span>
+        </summary>
+    <article class="dossier">
+      <figure class="plate">
+        <img src="./plates/geraniol.webp" width="900" height="1233" loading="lazy" decoding="async" alt="Botanical plate of cabbage rose, Rosa × centifolia.">
+        <figcaption><i>Rosa × centifolia</i>, cabbage rose. Printed as “Rosa centifolia L.”. Köhler’s Medizinal-Pflanzen, Gera, 1887.</figcaption>
+      </figure>
+      <div class="dossier-body">
+        <header class="dossier-head" data-ground="wood">
+          <div>
+            <h3>Geraniol</h3>
+            <p class="formula">C<sub>10</sub>H<sub>18</sub>O <span>Monoterpene alcohol</span></p>
+          </div>
+          <svg class="mol" viewBox="0 0 219.1 72.5" width="219.1" height="72.5" role="img" aria-label="Skeletal structure of Geraniol"><path d="M23.4 20.2L39.4 29.5M109.5 16L132.9 29.5M109.5 16L86.1 29.5M132.9 29.5L156.3 16M86.1 29.5L86.1 56.5M86.1 29.5L62.8 16M81.5 31.6L63.3 21.1M156.3 16L179.7 29.5M156.8 21.1L175 31.6M179.7 29.5L203.1 16M179.7 29.5L179.7 56.5M62.8 16L39.4 29.5"/><text x="21" y="20.6" text-anchor="end">HO</text></svg>
+        </header>
+        <p class="shape">After the geranium. An open chain ending in an –OH group. Bees make it too: it is part of the scent they use to mark the hive entrance.</p>
+        <dl class="sheet">
+          <div><dt>Scent</dt><dd>floral, rose-like, softly citrus, sweet <span class="src">Reference description: “sweet rose odor” (HSDB)</span></dd></div>
+          <div><dt>Found in</dt><dd>rose, geranium, palmarosa, lemongrass, citronella, neroli, coriander, blueberry.</dd></div>
+          <div><dt>In High Forest</dt><dd><span class="blend"><i class="b-sunshine"></i>Sunshine</span> <span class="blend"><i class="b-berry"></i>Soothing Berry</span> <span class="src">as a flavouring ingredient; amount not published</span></dd></div>
+        </dl>
+        <dl class="facts">
+          <div><dt>Molar mass</dt><dd>154.25 g/mol</dd></div>
+          <div><dt>Boiling point</dt><dd>229–230 °C <span class="src">HSDB, HMDB</span></dd></div>
+          <div><dt>CAS number</dt><dd>106-24-1</dd></div>
+          <div><dt>FEMA number</dt><dd>2507</dd></div>
+          <div><dt>Record</dt><dd><a href="https://pubchem.ncbi.nlm.nih.gov/compound/637566">PubChem 637566</a></dd></div>
+          <div class="wide"><dt>Systematic name</dt><dd>(2E)-3,7-dimethylocta-2,6-dien-1-ol</dd></div>
+        </dl>
+        <section class="studied">
+          <h4>What has been studied <span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span> <span class="src">highest rung: animals</span></h4>
+          <ul>
+            <li><span class="grade g-review">Review</span><span>A 2019 pharmacology review summarizes cell and animal work on inflammation, oxidation and microbes.<sup class="cite"><a href="#ref-17">17</a></sup></span></li>
+            <li class="unknown"><span class="grade">Not known</span><span>What eating it does. No trial of swallowed geraniol is cited here.</span></li>
+          </ul>
+          <p class="own"><a href="./geraniol/">Geraniol on its own page</a></p>
+        </section>
+      </div>
+    </article>
+      </details></li>
+      <li class="entry" id="citronellol" data-family="alcohol" data-blends="sunshine rest" style="--vt: e-citronellol"><details name="compound">
+        <summary class="card">
+          <svg class="mol" viewBox="0 0 166.6 58" width="166.6" height="58" aria-hidden="true"><path d="M21.4 18.2L31.3 24M66 24L83.3 14M66 24L48.6 14M66 24L66 44M83.3 14L100.6 24M48.6 14L31.3 24M100.6 24L117.9 14M117.9 14L135.2 24M118.4 19.1L130.5 26.1M135.2 24L152.6 14M135.2 24L135.2 44"/><text x="19" y="18.6" text-anchor="end">HO</text></svg>
+          <span class="card-name">Citronellol</span>
+          <span class="card-meta"><span>C<sub>10</sub>H<sub>20</sub>O</span><span>monoterpene alcohol</span></span>
+          <span class="card-scent"><span>rosy</span><span>citrus-like</span><span>fresh</span></span>
+          <span class="card-foot"><span class="dots"><i class="b-sunshine" title="Sunshine"></i><i></i><i class="b-rest" title="Grounding Rest"></i><span class="sr">In Sunshine, Grounding Rest</span></span><span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span></span>
+          <span class="card-close">Close <span aria-hidden="true">×</span></span>
+        </summary>
+    <article class="dossier">
+      <figure class="plate">
+        <img src="./plates/citronellol.webp" width="900" height="973" loading="lazy" decoding="async" alt="Botanical plate of lemon balm, Melissa officinalis.">
+        <figcaption><i>Melissa officinalis</i>, lemon balm. Printed as “Melissa officinalis L.”. Köhler’s Medizinal-Pflanzen, Gera, 1887.</figcaption>
+      </figure>
+      <div class="dossier-body">
+        <header class="dossier-head" data-ground="wood">
+          <div>
+            <h3>Citronellol</h3>
+            <p class="formula">C<sub>10</sub>H<sub>20</sub>O <span>Monoterpene alcohol</span></p>
+          </div>
+          <svg class="mol" viewBox="0 0 219.1 72.5" width="219.1" height="72.5" role="img" aria-label="Skeletal structure of Citronellol"><path d="M23.4 20.2L39.4 29.5M86.1 29.5L109.5 16M86.1 29.5L62.8 16M86.1 29.5L86.1 56.5M109.5 16L132.9 29.5M62.8 16L39.4 29.5M132.9 29.5L156.3 16M156.3 16L179.7 29.5M156.8 21.1L175 31.6M179.7 29.5L203.1 16M179.7 29.5L179.7 56.5"/><text x="21" y="20.6" text-anchor="end">HO</text></svg>
+        </header>
+        <p class="shape">After citronella grass. Geraniol with one double bond filled in by two extra hydrogens.</p>
+        <dl class="sheet">
+          <div><dt>Scent</dt><dd>rosy, citrus-like, fresh, softly green <span class="src">Reference description: “fresh rosy odor” (HSDB)</span></dd></div>
+          <div><dt>Found in</dt><dd>rose, geranium, citronella, lemongrass, lemon balm, eucalyptus, mint.</dd></div>
+          <div><dt>In High Forest</dt><dd><span class="blend"><i class="b-sunshine"></i>Sunshine</span> <span class="blend"><i class="b-rest"></i>Grounding Rest</span> <span class="src">as a flavouring ingredient; amount not published</span></dd></div>
+        </dl>
+        <dl class="facts">
+          <div><dt>Molar mass</dt><dd>156.26 g/mol</dd></div>
+          <div><dt>Boiling point</dt><dd>224–225 °C <span class="src">HSDB, JECFA</span></dd></div>
+          <div><dt>CAS number</dt><dd>106-22-9</dd></div>
+          <div><dt>FEMA number</dt><dd>2309</dd></div>
+          <div><dt>Record</dt><dd><a href="https://pubchem.ncbi.nlm.nih.gov/compound/8842">PubChem 8842</a></dd></div>
+          <div class="wide"><dt>Systematic name</dt><dd>3,7-dimethyloct-6-en-1-ol</dd></div>
+        </dl>
+        <section class="studied">
+          <h4>What has been studied <span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span> <span class="src">highest rung: animals</span></h4>
+          <ul>
+            <li><span class="grade g-animal">Animals</span><span>In a 2010 study, citronellol injected into the veins of rats (1 to 20 mg per kg) lowered blood pressure, and it relaxed isolated artery tissue.<sup class="cite"><a href="#ref-18">18</a></sup></span></li>
+            <li class="unknown"><span class="grade">Not known</span><span>Whether any of this happens when it is eaten, and at what amount.</span></li>
+          </ul>
+          <p class="own"><a href="./citronellol/">Citronellol on its own page</a></p>
+        </section>
+      </div>
+    </article>
+      </details></li>
+      <li class="entry" id="caryophyllene" data-family="sesqui" data-blends="sunshine berry rest" style="--vt: e-caryophyllene"><details name="compound">
+        <summary class="card">
+          <svg class="mol" viewBox="0 0 101.2 103.5" width="101.2" height="103.5" aria-hidden="true"><path d="M35.6 33.3L30.4 52.8M35.6 33.3L55 38.5M35.6 33.3L40.7 14M35.6 33.3L16.2 28.2M30.4 52.8L49.7 58M30.4 52.8L25.3 72.1M29 51.5L28.5 53.2M27.4 50.7L26.7 53.2M25.8 49.9L24.9 53.1M24.2 49.1L23.1 53M22.6 48.2L21.4 52.9M21 47.4L19.6 52.8M49.7 58L55 38.5M49.7 58L67.1 48M25.3 72.1L35.3 89.5M67.1 48L84.4 58M69.3 48L69.3 28M64.9 48L64.9 28M35.3 89.5L52.6 79.5M84.4 58L87.2 79.5M52.6 79.5L69.9 89.5M57.3 77.3L69.4 84.3M52.6 79.5L52.6 59.5M87.2 79.5L69.9 89.5"/><path class="mol-w" d="M49.7 58L48.5 68.8L53.7 68.1Z"/><text x="14" y="53.1" text-anchor="middle">H</text><text x="52" y="79.5" text-anchor="middle">H</text></svg>
+          <span class="card-name"><span class="gr">β</span>-Caryophyllene</span>
+          <span class="card-meta"><span>C<sub>15</sub>H<sub>24</sub></span><span>sesquiterpene</span></span>
+          <span class="card-scent"><span>peppery</span><span>woody</span><span>warm</span></span>
+          <span class="card-foot"><span class="dots"><i class="b-sunshine" title="Sunshine"></i><i class="b-berry" title="Soothing Berry"></i><i class="b-rest" title="Grounding Rest"></i><span class="sr">In Sunshine, Soothing Berry, Grounding Rest</span></span><span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span></span>
+          <span class="card-close">Close <span aria-hidden="true">×</span></span>
+        </summary>
+    <article class="dossier">
+      <figure class="plate">
+        <img src="./plates/caryophyllene.webp" width="900" height="1266" loading="lazy" decoding="async" alt="Botanical plate of clove, Syzygium aromaticum.">
+        <figcaption><i>Syzygium aromaticum</i>, clove. Printed as “Caryophyllus aromaticus L.”. Köhler’s Medizinal-Pflanzen, Gera, 1887.</figcaption>
+      </figure>
+      <div class="dossier-body">
+        <header class="dossier-head" data-ground="wood">
+          <div>
+            <h3><span class="gr">β</span>-Caryophyllene</h3>
+            <p class="formula">C<sub>15</sub>H<sub>24</sub> <span>Sesquiterpene</span></p>
+          </div>
+          <svg class="mol" viewBox="0 0 130.8 133.9" width="130.8" height="133.9" role="img" aria-label="Skeletal structure of Beta-caryophyllene"><path d="M45.1 42.1L38.2 68.4M45.1 42.1L71.4 49.1M45.1 42.1L52.1 16M45.1 42.1L19 35.2M38.2 68.4L64.3 75.4M38.2 68.4L31.2 94.5M35.8 66.9L35.3 68.6M33.2 65.8L32.6 68.2M30.7 64.7L29.8 67.9M28.1 63.6L27.1 67.6M25.6 62.6L24.3 67.2M23 61.5L21.6 66.9M64.3 75.4L71.4 49.1M64.3 75.4L87.6 61.9M31.2 94.5L44.7 117.9M87.6 61.9L111 75.4M89.8 61.9L89.8 34.9M85.4 61.9L85.4 34.9M44.7 117.9L68.1 104.4M111 75.4L114.8 104.4M68.1 104.4L91.5 117.9M72.8 102.2L91 112.7M68.1 104.4L68.1 77.4M114.8 104.4L91.5 117.9"/><path class="mol-w" d="M64.3 75.4L63.8 92.1L69 91.4Z"/><text x="16" y="67.1" text-anchor="middle">H</text><text x="67.3" y="102.8" text-anchor="middle">H</text></svg>
+        </header>
+        <p class="shape">After the clove tree, once called Caryophyllus aromaticus. The old name is printed on the plate. A nine-membered ring fused to a four-membered one, a rare arrangement in nature.</p>
+        <dl class="sheet">
+          <div><dt>Scent</dt><dd>peppery, woody, warm, gently spicy</dd></div>
+          <div><dt>Found in</dt><dd>clove, black pepper, hops, basil, oregano, rosemary, lavender, cinnamon leaf, copaiba.</dd></div>
+          <div><dt>In High Forest</dt><dd><span class="blend"><i class="b-sunshine"></i>Sunshine</span> <span class="blend"><i class="b-berry"></i>Soothing Berry</span> <span class="blend"><i class="b-rest"></i>Grounding Rest</span> <span class="src">as a flavouring ingredient; amount not published</span></dd></div>
+        </dl>
+        <dl class="facts">
+          <div><dt>Molar mass</dt><dd>204.35 g/mol</dd></div>
+          <div><dt>Boiling point</dt><dd>256 °C <span class="src">JECFA</span></dd></div>
+          <div><dt>CAS number</dt><dd>87-44-5</dd></div>
+          <div><dt>FEMA number</dt><dd>2252</dd></div>
+          <div><dt>Record</dt><dd><a href="https://pubchem.ncbi.nlm.nih.gov/compound/5281515">PubChem 5281515</a></dd></div>
+          <div class="wide"><dt>Systematic name</dt><dd>(1R,4E,9S)-4,11,11-trimethyl-8-methylidenebicyclo[7.2.0]undec-4-ene</dd></div>
+        </dl>
+        <section class="studied">
+          <h4>What has been studied <span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span> <span class="src">highest rung: animals</span></h4>
+          <ul>
+            <li><span class="grade g-animal">Animals</span><span>It binds the CB2 receptor, part of the body’s own cannabinoid system, without the intoxicating effects linked to the CB1 receptor. In a 2014 study, mice fed caryophyllene showed less inflammatory and nerve pain, and the effect depended on CB2.<sup class="cite"><a href="#ref-4">4</a></sup></span></li>
+            <li><span class="grade g-review">Review</span><span>A 2020 review summarizes mostly preclinical work on chronic inflammation.<sup class="cite"><a href="#ref-3">3</a></sup></span></li>
+            <li class="unknown"><span class="grade">Not known</span><span>Whether this holds in people. The work cited here was done in mice and in cells.</span></li>
+          </ul>
+          <p class="own"><a href="./caryophyllene/">β-Caryophyllene on its own page</a></p>
+        </section>
+      </div>
+    </article>
+      </details></li>
+      <li class="entry" id="humulene" data-family="sesqui" data-blends="sunshine berry rest" style="--vt: e-humulene"><details name="compound">
+        <summary class="card">
+          <svg class="mol" viewBox="0 0 111 121.2" width="111" height="121.2" aria-hidden="true"><path d="M78 51.9L66 34M78 51.9L68 69.2M78 51.9L92.1 37.7M78 51.9L97 58M66 34L48.6 44M68 69.2L78 86.5M65.8 73.9L72.8 86M48.6 44L31.3 34M48.1 38.9L36 31.9M31.3 34L14 44M31.3 34L31.3 14M14 44L14 64M78 86.5L60.6 96.5M14 64L31.3 74M60.6 96.5L41.3 91.3M41.3 91.3L31.3 74M36.2 90.8L29.2 78.7M41.3 91.3L29.1 107.2"/></svg>
+          <span class="card-name">Humulene</span>
+          <span class="card-meta"><span>C<sub>15</sub>H<sub>24</sub></span><span>sesquiterpene</span></span>
+          <span class="card-scent"><span>woody</span><span>dry</span><span>herbal</span></span>
+          <span class="card-foot"><span class="dots"><i class="b-sunshine" title="Sunshine"></i><i class="b-berry" title="Soothing Berry"></i><i class="b-rest" title="Grounding Rest"></i><span class="sr">In Sunshine, Soothing Berry, Grounding Rest</span></span><span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span></span>
+          <span class="card-close">Close <span aria-hidden="true">×</span></span>
+        </summary>
+    <article class="dossier">
+      <figure class="plate">
+        <img src="./plates/humulene.webp" width="900" height="1452" loading="lazy" decoding="async" alt="Botanical plate of hops, Humulus lupulus.">
+        <figcaption><i>Humulus lupulus</i>, hops. Printed as “Humulus Lupulus L.”. O. W. Thomé, Flora von Deutschland, Österreich und der Schweiz, Gera, 1885.</figcaption>
+      </figure>
+      <div class="dossier-body">
+        <header class="dossier-head" data-ground="wood">
+          <div>
+            <h3>Humulene</h3>
+            <p class="formula">C<sub>15</sub>H<sub>24</sub> <span>Sesquiterpene</span></p>
+          </div>
+          <svg class="mol" viewBox="0 0 144.1 157.8" width="144.1" height="157.8" role="img" aria-label="Skeletal structure of Alpha-humulene"><path d="M102.3 67.1L86.1 43M102.3 67.1L88.8 90.5M102.3 67.1L121.4 48M102.3 67.1L128.1 75.3M86.1 43L62.8 56.5M88.8 90.5L102.3 113.9M86.7 95.2L97.2 113.4M62.8 56.5L39.4 43M62.3 51.4L44.1 40.9M39.4 43L16 56.5M39.4 43L39.4 16M16 56.5L16 83.5M102.3 113.9L79 127.4M16 83.5L39.4 97M79 127.4L52.9 120.4M52.9 120.4L39.4 97M47.7 119.9L37.2 101.7M52.9 120.4L36.4 141.8"/></svg>
+        </header>
+        <p class="shape">After the hop plant, Humulus lupulus. One large ring of eleven carbons. It has the same formula as caryophyllene; opening caryophyllene’s small ring gives humulene’s outline.</p>
+        <dl class="sheet">
+          <div><dt>Scent</dt><dd>woody, dry, herbal, hop-like</dd></div>
+          <div><dt>Found in</dt><dd>hops, sage, ginger, cloves, basil, black pepper.</dd></div>
+          <div><dt>In High Forest</dt><dd><span class="blend"><i class="b-sunshine"></i>Sunshine</span> <span class="blend"><i class="b-berry"></i>Soothing Berry</span> <span class="blend"><i class="b-rest"></i>Grounding Rest</span> <span class="src">as a flavouring ingredient; amount not published</span></dd></div>
+        </dl>
+        <dl class="facts">
+          <div><dt>Molar mass</dt><dd>204.35 g/mol</dd></div>
+          <div><dt>Boiling point</dt><dd>99–100 °C at 3 mm Hg <span class="src">HMDB</span></dd></div>
+          <div><dt>CAS number</dt><dd>6753-98-6</dd></div>
+          <div><dt>FEMA number</dt><dd><span class="src">none listed in PubChem</span></dd></div>
+          <div><dt>Record</dt><dd><a href="https://pubchem.ncbi.nlm.nih.gov/compound/5281520">PubChem 5281520</a></dd></div>
+          <div class="wide"><dt>Systematic name</dt><dd>(1E,4E,8E)-2,6,6,9-tetramethylcycloundeca-1,4,8-triene</dd></div>
+        </dl>
+        <section class="studied">
+          <h4>What has been studied <span class="pips" role="img" aria-label="Evidence: animals"><i class="on"></i><i class="on"></i><i></i><i></i></span> <span class="src">highest rung: animals</span></h4>
+          <ul>
+            <li><span class="grade g-review">Review</span><span>A 2024 scoping review covered 340 papers. It found consistent anti-inflammatory effects in rodents and effects on tumour cells in dishes, and no clinical study of isolated humulene.<sup class="cite"><a href="#ref-5">5</a></sup></span></li>
+            <li class="unknown"><span class="grade">Not known</span><span>Everything in people.</span></li>
+          </ul>
+          <p class="own"><a href="./humulene/">Humulene on its own page</a></p>
+        </section>
+      </div>
+    </article>
+      </details></li>
+  </ul>
+</section>
+
+<section class="blends" id="blends">
+  <div class="prose">
+    <h2>What is in each honey</h2>
+    <p>High Forest has not published the amounts.</p>
+  </div>
+  <ul class="blend-list">
+    <li>
+      <h3><i class="b-sunshine"></i>Sunshine</h3>
+      <p class="label">summer wildflower honey, 8 of the eleven</p>
+      <ul>
+        <li><a href="#limonene">Limonene</a> <span>bright, citrus</span> <span class="src">found in lemon, orange, grapefruit and lime peel</span></li>
+        <li><a href="#alpha-pinene">α-Pinene</a> <span>fresh, coniferous</span> <span class="src">found in pine, spruce and fir</span></li>
+        <li><a href="#beta-pinene">β-Pinene</a> <span>green, woody</span> <span class="src">found in fir, spruce and pine needles</span></li>
+        <li><a href="#phellandrene">α-Phellandrene</a> <span>fresh, green</span> <span class="src">found in dill</span></li>
+        <li><a href="#geraniol">Geraniol</a> <span>floral, rose-like</span> <span class="src">found in rose</span></li>
+        <li><a href="#citronellol">Citronellol</a> <span>rosy, citrus-like</span> <span class="src">found in rose</span></li>
+        <li><a href="#caryophyllene">β-Caryophyllene</a> <span>peppery, woody</span> <span class="src">found in clove</span></li>
+        <li><a href="#humulene">Humulene</a> <span>woody, dry</span> <span class="src">found in hops</span></li>
+      </ul>
+      <p><a href="/sunshine-tea">Sunshine in the shop</a></p>
+    </li>
+    <li>
+      <h3><i class="b-berry"></i>Soothing Berry</h3>
+      <p class="label">wild-blueberry-blossom honey, 7 of the eleven</p>
+      <ul>
+        <li><a href="#limonene">Limonene</a> <span>bright, citrus</span> <span class="src">found in lemon, orange, grapefruit and lime peel</span></li>
+        <li><a href="#alpha-pinene">α-Pinene</a> <span>fresh, coniferous</span> <span class="src">found in pine, spruce and fir</span></li>
+        <li><a href="#beta-pinene">β-Pinene</a> <span>green, woody</span> <span class="src">found in fir, spruce and pine needles</span></li>
+        <li><a href="#myrcene">Myrcene</a> <span>earthy, herbal</span> <span class="src">found in hops</span></li>
+        <li><a href="#geraniol">Geraniol</a> <span>floral, rose-like</span> <span class="src">found in rose</span></li>
+        <li><a href="#caryophyllene">β-Caryophyllene</a> <span>peppery, woody</span> <span class="src">found in clove</span></li>
+        <li><a href="#humulene">Humulene</a> <span>woody, dry</span> <span class="src">found in hops</span></li>
+      </ul>
+      <p><a href="/soothing-berry-fr">Soothing Berry in the shop</a></p>
+    </li>
+    <li>
+      <h3><i class="b-rest"></i>Grounding Rest</h3>
+      <p class="label">buckwheat honey, 7 of the eleven</p>
+      <ul>
+        <li><a href="#myrcene">Myrcene</a> <span>earthy, herbal</span> <span class="src">found in hops</span></li>
+        <li><a href="#phellandrene">α-Phellandrene</a> <span>fresh, green</span> <span class="src">found in dill</span></li>
+        <li><a href="#terpinolene">Terpinolene</a> <span>fresh, herbal</span> <span class="src">found in nutmeg</span></li>
+        <li><a href="#linalool">Linalool</a> <span>soft, floral</span> <span class="src">found in lavender</span></li>
+        <li><a href="#citronellol">Citronellol</a> <span>rosy, citrus-like</span> <span class="src">found in rose</span></li>
+        <li><a href="#caryophyllene">β-Caryophyllene</a> <span>peppery, woody</span> <span class="src">found in clove</span></li>
+        <li><a href="#humulene">Humulene</a> <span>woody, dry</span> <span class="src">found in hops</span></li>
+      </ul>
+      <p><a href="/grounding-rest-fr">Grounding Rest in the shop</a></p>
+    </li>
+  </ul>
+</section>
+
+<section class="next">
+  <a href="./boiling-points/">
+    <h2>Boiling points</h2>
+    <p>All eleven, each with the source that reported it, as a chart, a table and a CSV file.</p>
+  </a>
+  <a href="./do-terpenes-do-anything/">
+    <h2>Do terpenes do anything?</h2>
+    <p>How far the research has reached for each compound, what doses the human studies gave, and four mistakes about terpenes.</p>
+  </a>
+</section>
+
+<section class="sources" id="sources">
+  <h2>Sources</h2>
+  <ol>
+    <li id="ref-1" value="1">Câmara et al. <a href="https://doi.org/10.3390/molecules29163861">Plant-Derived Terpenoids: A Plethora of Bioactive Compounds with Several Health Functions and Industrial Applications</a>. Molecules 29:3861, 2024.</li>
+    <li id="ref-2" value="2">Gershenzon &amp; Dudareva. <a href="https://doi.org/10.1038/nchembio.2007.5">The Function of Terpene Natural Products in the Natural World</a>. Nature Chemical Biology 3:408, 2007.</li>
+    <li id="ref-3" value="3">Scandiffio et al. <a href="https://doi.org/10.3390/nu12113273">Protective Effects of (E)-β-Caryophyllene in Chronic Inflammation</a>. Nutrients 12:3273, 2020.</li>
+    <li id="ref-4" value="4">Klauke et al. <a href="https://doi.org/10.1016/j.euroneuro.2013.10.008">The Cannabinoid CB2 Receptor-Selective Phytocannabinoid Beta-Caryophyllene Exerts Analgesic Effects in Mouse Models of Inflammatory and Neuropathic Pain</a>. European Neuropsychopharmacology 24:608, 2014.</li>
+    <li id="ref-5" value="5">Dalavaye et al. <a href="https://doi.org/10.1055/a-2307-8183">The Clinical Translation of α-Humulene: A Scoping Review</a>. Planta Medica 90:664, 2024.</li>
+    <li id="ref-6" value="6">Salehi et al. <a href="https://doi.org/10.3390/biom9110738">Therapeutic Potential of α- and β-Pinene: A Miracle Gift of Nature</a>. Biomolecules 9:738, 2019.</li>
+    <li id="ref-7" value="7">Lee et al. <a href="https://doi.org/10.1155/2017/4926815">Amelioration of Scopolamine-Induced Learning and Memory Impairment by α-Pinene in C57BL/6 Mice</a>. Evidence-Based Complementary and Alternative Medicine, 2017.</li>
+    <li id="ref-8" value="8">Liapi et al. <a href="https://doi.org/10.1055/s-2007-990224">Antinociceptive Properties of 1,8-Cineole and β-Pinene, from the Essential Oil of Eucalyptus camaldulensis Leaves, in Rodents</a>. Planta Medica 73:1247, 2007.</li>
+    <li id="ref-9" value="9">Vigushin et al. <a href="https://doi.org/10.1007/s002800050793">Phase I and Pharmacokinetic Study of D-Limonene in Patients with Advanced Cancer</a>. Cancer Chemotherapy and Pharmacology 42:111, 1998.</li>
+    <li id="ref-10" value="10">Miller et al. <a href="https://doi.org/10.1158/1940-6207.CAPR-12-0452">Human Breast Tissue Disposition and Bioactivity of Limonene in Women with Early-Stage Breast Cancer</a>. Cancer Prevention Research 6:577, 2013.</li>
+    <li id="ref-11" value="11">Spindle et al. <a href="https://doi.org/10.1016/j.drugalcdep.2024.111267">Vaporized D-Limonene Selectively Mitigates the Acute Anxiogenic Effects of Δ9-Tetrahydrocannabinol in Healthy Adults Who Intermittently Use Cannabis</a>. Drug and Alcohol Dependence 257:111267, 2024.</li>
+    <li id="ref-12" value="12">An et al. <a href="https://doi.org/10.1039/D1FO02120F">Recent Updates on Bioactive Properties of Linalool</a>. Food &amp; Function 12:10370, 2021.</li>
+    <li id="ref-13" value="13">Harada et al. <a href="https://doi.org/10.3389/fnbeh.2018.00241">Linalool Odor-Induced Anxiolytic Effects in Mice</a>. Frontiers in Behavioral Neuroscience 12:241, 2018.</li>
+    <li id="ref-14" value="14"><a href="https://doi.org/10.1007/s00406-022-01547-w">Efficacy of Silexan in Patients with Anxiety Disorders: A Meta-Analysis of Randomized, Placebo-Controlled Trials</a>. European Archives of Psychiatry and Clinical Neuroscience 273:1615, 2023.</li>
+    <li id="ref-15" value="15">Surendran et al. <a href="https://doi.org/10.3389/fnut.2021.699666">Myrcene: What Are the Potential Health Benefits of This Flavouring and Aroma Agent?</a>. Frontiers in Nutrition 8:699666, 2021.</li>
+    <li id="ref-16" value="16">Ito &amp; Ito. <a href="https://doi.org/10.1007/s11418-012-0732-1">The Sedative Effect of Inhaled Terpinolene in Mice and Its Structure–Activity Relationships</a>. Journal of Natural Medicines 67:833, 2013.</li>
+    <li id="ref-17" value="17">Lei et al. <a href="https://doi.org/10.1055/a-0750-6907">Pharmacological Properties of Geraniol: A Review</a>. Planta Medica 85:48, 2019.</li>
+    <li id="ref-18" value="18">Bastos et al. <a href="https://doi.org/10.1111/j.1742-7843.2009.00492.x">Hypotensive and Vasorelaxant Effects of Citronellol, a Monoterpene Alcohol, in Rats</a>. Basic &amp; Clinical Pharmacology &amp; Toxicology 106:331, 2010.</li>
+    <li id="ref-19" value="19">Radice et al. <a href="https://doi.org/10.3390/life12101602">α-Phellandrene and α-Phellandrene-Rich Essential Oils: A Systematic Review of Biological Activities, Pharmaceutical and Food Applications</a>. Life 12:1602, 2022.</li>
+    <li id="ref-20" value="20">US National Toxicology Program. <a href="https://ntp.niehs.nih.gov/go/tr557">Toxicology and Carcinogenesis Studies of β-Myrcene in F344/N Rats and B6C3F1 Mice (Gavage Studies)</a>. Technical Report 557, 2010.</li>
+    <li id="ref-21" value="21">US Food and Drug Administration. <a href="https://www.fda.gov/food/hfp-constituent-updates/fda-removes-7-synthetic-flavoring-substances-food-additives-list">FDA Removes 7 Synthetic Flavoring Substances from Food Additives List</a>. 2018.</li>
+    <li id="ref-25" value="25">International Agency for Research on Cancer. <a href="https://publications.iarc.who.int/575">Some Chemicals That Cause Tumours of the Urinary Tract in Rodents</a>. IARC Monographs Volume 119, 2019.</li>
+  </ol>
+</section>
+</main>
+
+<footer class="colophon" data-ground="wood">
+  <p><b>How this atlas was made.</b> Structures are drawn from PubChem two-dimensional records (US National Library of Medicine). Identity data come from PubChem; the contributing source is named beside each boiling point and reference scent description. Scent words and plant lists are High Forest’s own. The plates are from Köhler’s Medizinal-Pflanzen, Gera, 1887, and O. W. Thomé, Flora von Deutschland, Österreich und der Schweiz, Gera, 1885; both are in the public domain and were taken from Wikimedia Commons and cut out of their paper.</p>
+  <p><b>What this atlas is not.</b> It is not medical advice and makes no claim about the effects of High Forest products. If you find an error, write to <a href="mailto:info@highforest.world">info@highforest.world</a>.</p>
+  <p><b>The honeys.</b> <a href="/sunshine-tea">Sunshine</a>, <a href="/soothing-berry-fr">Soothing Berry</a>, <a href="/grounding-rest-fr">Grounding Rest</a>.</p>
+  <p class="src">Last revised 11 November 2026.</p>
+</footer>
+
+<dialog class="viewer">
+  <div class="viewer-panel">
+    <div class="viewer-bar">
+      <div><button type="button" class="viewer-prev"></button><button type="button" class="viewer-next"></button></div>
+      <button type="button" class="viewer-close">Close <span aria-hidden="true">×</span></button>
+    </div>
+    <div class="viewer-body"></div>
+  </div>
+</dialog>
+
+<nav class="proto-picker" aria-label="Prototype variants">
+  <span class="proto-picker-highlight" aria-hidden="true"></span>
+  <button class="proto-picker-item">Inline</button>
+  <button class="proto-picker-item">Modal</button>
+  <button class="proto-picker-item">Sheet</button>
+</nav>
+</body>
+</html>

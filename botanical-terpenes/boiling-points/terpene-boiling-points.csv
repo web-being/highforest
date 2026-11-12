@@ -1,0 +1,12 @@
+compound,cas,formula,family,boiling_point_c_low,boiling_point_c_high,pressure,reported_by,pubchem_cid
+Limonene,5989-27-5,C10H16,monoterpene,175,177,atmospheric,JECFA,440917
+Alpha-pinene,80-56-8,C10H16,monoterpene,155,156,atmospheric,"JECFA, HSDB",6654
+Beta-pinene,127-91-3,C10H16,monoterpene,163,166,atmospheric,JECFA,14896
+Beta-myrcene,123-35-3,C10H16,monoterpene,166,167,atmospheric,JECFA,31253
+Alpha-phellandrene,99-83-2,C10H16,monoterpene,175,175,atmospheric,JECFA,7460
+Terpinolene,586-62-9,C10H16,monoterpene,183,185,atmospheric,JECFA,11463
+Linalool,78-70-6,C10H18O,monoterpene alcohol,198,198,atmospheric,HSDB,6549
+Geraniol,106-24-1,C10H18O,monoterpene alcohol,229,230,atmospheric,"HSDB, HMDB",637566
+Citronellol,106-22-9,C10H20O,monoterpene alcohol,224,225,atmospheric,"HSDB, JECFA",8842
+Beta-caryophyllene,87-44-5,C15H24,sesquiterpene,256,256,atmospheric,JECFA,5281515
+Alpha-humulene,6753-98-6,C15H24,sesquiterpene,99,100,3 mm Hg,HMDB,5281520

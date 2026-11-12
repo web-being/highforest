@@ -1,0 +1,91 @@
+/* High Forest · design tokens · the Boreal direction
+ * Two grounds. Daylight is the reading ground and the default: a cool near-white with
+ * forest-green ink. The wood is the dark ground of the hero, of name bands and of the footer;
+ * an element marked data-ground="wood" re-reads the same colour tokens as light on dark.
+ * Type: Barlow Condensed, upper case, for names and labels; Barlow for reading. */
+:root {
+  color-scheme: light;
+
+  /* daylight */
+  --color-paper: oklch(97.4% 0.006 165);
+  --color-paper-2: oklch(93.6% 0.014 168);
+  --color-rule: oklch(85% 0.018 165);
+  --color-rule-strong: oklch(60% 0.03 165);
+  --color-muted: oklch(42% 0.03 165);
+  --color-ink: oklch(21% 0.03 165);
+  --color-accent: oklch(46% 0.1 68);
+  --color-note: oklch(93% 0.06 92);
+
+  /* the wood */
+  --wood: oklch(16.5% 0.022 165);
+  --wood-ink: oklch(94% 0.012 95);
+  --wood-muted: oklch(76% 0.025 150);
+  --wood-rule: oklch(48% 0.03 160);
+  --gold: oklch(81% 0.135 84);
+  --veil: oklch(16.5% 0.022 165 / 0.72);
+  --veil-0: oklch(16.5% 0.022 165 / 0);
+  --shade: oklch(8% 0.02 165 / 0.75);
+  --scrim: oklch(16.5% 0.022 165 / 0.62);
+  --scrim-flat: color-mix(in srgb, var(--wood) 62%, var(--color-paper)); /* the scrim over daylight, opaque */
+  --bar: oklch(97.4% 0.006 165 / 0.9);
+
+  /* data: the three terpene families, the three blends (from the jar labels) */
+  --color-mono: oklch(21% 0.03 165);
+  --color-alcohol: oklch(62% 0.14 70);
+  --color-sesqui: oklch(58% 0.09 195);
+  --color-sunshine: oklch(55% 0.15 250);
+  --color-berry: oklch(46% 0.17 322);
+  --color-rest: oklch(52% 0.13 152);
+
+  --font-text: "Barlow", system-ui, sans-serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-label: "Barlow Condensed", "Arial Narrow", sans-serif;
+
+  --text-xs: 0.8125rem;
+  --text-s: 0.9375rem;
+  --text-m: 1.125rem;
+  --text-l: 1.375rem;
+  --text-xl: 1.75rem;
+  --text-2xl: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);
+  --text-display: clamp(3.25rem, 1.2rem + 8.2vw, 8.5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  --measure: 62ch;
+  --page: 80rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  /* side padding of a full-width band whose content stays on the page column.
+     In viewport units so it means the same wherever it is used; as padding it cannot cause overflow. */
+  --inset: max(var(--gutter), calc((100vw - var(--page)) / 2 + var(--gutter)));
+  --tap: 2.75rem;
+  --radius: 0.5rem;
+  --round: 1rem;
+  --z-nav: 10;
+  --z-sheet: 20;
+
+  /* motion: curves from Emil Kowalski's set; UI stays under 300ms, drawers may take 500ms */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur: 150ms;
+  --dur-modal: 250ms;
+  --dur-morph: 300ms;
+  --dur-drawer: 500ms;
+}
+
+[data-ground="wood"] {
+  --color-paper: var(--wood);
+  --color-ink: var(--wood-ink);
+  --color-muted: var(--wood-muted);
+  --color-rule: var(--wood-rule);
+  --color-rule-strong: var(--wood-rule);
+  --color-accent: var(--gold);
+  color: var(--color-ink);
+}

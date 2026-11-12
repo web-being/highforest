@@ -1,0 +1,462 @@
+/* Atlas of botanical terpenes · Boreal. One stylesheet for the index, the compound pages,
+ * the boiling-point page and the evidence page.
+ * Every page opens on the wood: on the index a conifer forest before the light reaches the
+ * floor, elsewhere a plain band, both with trail-sign lettering and the gold of the jar lids.
+ * Below it the page is daylight, for reading. The wood returns as the name band of a
+ * compound and as the colophon. Colour, type and motion values come from ../tokens.css.
+ * The plates are cut out of their paper (tools/cut-plate.py) and sit on any ground.
+ * The photograph is a stand-in until one is taken in Quebec. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  overflow-x: clip;
+  scrollbar-gutter: stable;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--tap) + var(--space-5));
+  -webkit-text-size-adjust: 100%;
+}
+/* a modal layer holds the page still. The gutter the page keeps for its scrollbar lies outside
+   the backdrop, so it takes the backdrop's tint. */
+html:has(.viewer:modal) { overflow: hidden; background: var(--scrim-flat); }
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font: 400 var(--text-m) / 1.55 var(--font-text);
+  font-variant-numeric: lining-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); font-weight: 600; text-wrap: balance; overflow-wrap: anywhere; min-width: 0; }
+h1, h2, h3, .card-name, .rungs b, .mistakes dt { text-transform: uppercase; letter-spacing: 0.005em; }
+p, dl, dd, ol, ul, figure { margin: 0; }
+p { text-wrap: pretty; }
+ol, ul { padding: 0; list-style: none; }
+sub { font-size: 0.72em; line-height: 0; }
+b { font-weight: 600; }
+.gr { text-transform: none; }
+button { font: inherit; color: inherit; }
+
+a { color: inherit; text-decoration-line: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; text-decoration-color: var(--color-rule-strong); }
+a:hover { text-decoration-color: var(--color-accent); }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip { position: absolute; left: var(--gutter); top: -4rem; z-index: var(--z-sheet); padding: var(--space-3) var(--space-4); background: var(--color-ink); color: var(--color-paper); }
+.skip:focus { top: var(--space-2); }
+
+/* the label voice: names of things, units, controls */
+.label, dt, thead th, .grade, .card-meta, .mast nav a, .sections a, .formula span, .val, .axis, .legend, .filters button, .strength button, .viewer-bar button, .units span, .isomers span, .blend, .credit, .card-close, .pager a {
+  font: 500 var(--text-s) / 1.2 var(--font-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.label, dt, thead th, .card-meta, .formula span, .axis, .legend, .units span, .credit { color: var(--color-muted); }
+.src { font: italic 400 var(--text-xs) / 1.4 var(--font-text); color: var(--color-muted); letter-spacing: 0; text-transform: none; }
+
+/* full-width bands; the content keeps to the page column */
+.mast, main > section, .colophon { padding-inline: var(--inset); }
+
+/* ── masthead, over the wood that opens every page ────── */
+.mast { position: absolute; inset: 0 0 auto; z-index: 3; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; column-gap: var(--space-5); padding-block: var(--space-2); }
+.wordmark { display: inline-flex; align-items: center; min-height: var(--tap); font: 500 var(--text-l) / 1 var(--font-label); letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; }
+.wordmark b { font-weight: 700; }
+.mast nav { display: flex; gap: var(--space-2); margin-inline: calc(var(--space-3) * -1); }
+.mast nav a { display: inline-flex; align-items: center; min-height: var(--tap); padding-inline: var(--space-3); text-decoration: none; white-space: nowrap; color: inherit; }
+.mast nav a:hover { color: var(--color-accent); }
+
+/* ── index hero: the wood ─────────────────────────────── */
+.hero {
+  position: relative; isolation: isolate;
+  display: grid;
+  grid-template: "text first" minmax(min(50rem, 96svh), auto) ". credit" auto / minmax(0, 7fr) minmax(0, 5fr);
+  column-gap: clamp(1.5rem, 5vw, 5rem);
+}
+/* the photograph, bled to the viewport edges, darkening to the forest floor */
+.hero::before {
+  content: ""; grid-area: 1 / 1 / 2 / -1; z-index: -1;
+  margin-inline: calc(var(--inset) * -1);
+  background:
+    linear-gradient(to top, var(--wood) 0, var(--veil) 15%, var(--veil-0) 52%),
+    linear-gradient(to right, var(--veil), var(--veil-0) 58%),
+    url(../assets/forest-stand-in.webp) 50% 56% / cover var(--wood);
+}
+.hero-text { grid-area: text; align-self: end; padding-block: calc(var(--tap) + var(--space-8)) var(--space-8); }
+.hero h1 { font-size: var(--text-display); line-height: 0.86; }
+.hero h1 em { display: block; font-style: inherit; color: var(--color-accent); }
+.lead { max-width: 40ch; margin-top: var(--space-5); font-size: var(--text-l); line-height: 1.42; }
+
+/* what to know before reading: in the first screen of the index, and above the research on a compound's page */
+.first { max-width: 46ch; padding: var(--space-5); border-radius: var(--round); }
+.first h2 { font: 600 var(--text-s) / 1.2 var(--font-label); letter-spacing: 0.1em; color: var(--color-accent); }
+.first p { margin-top: var(--space-2); }
+.hero .first { grid-area: first; align-self: end; margin-bottom: var(--space-8); background: var(--veil); }
+.dossier .first { margin-top: var(--space-6); background: var(--color-note); }
+.credit { grid-area: credit; justify-self: end; margin-top: var(--space-4); font-size: var(--text-xs); letter-spacing: 0.06em; }
+
+/* ── the head of every other page: a plain band of the wood ── */
+.band { padding-block: calc(var(--tap) + var(--space-8)) var(--space-7); background: var(--wood); container-type: inline-size; }
+.band h1, .dossier-head h3 { font-size: clamp(2.5rem, 1.2rem + 6cqi, 6rem); line-height: 0.9; }
+.band .lead { max-width: 52ch; }
+.band .dossier-head { padding: 0; border-radius: 0; }
+figcaption { margin-top: var(--space-3); font-size: var(--text-s); line-height: 1.4; color: var(--color-muted); }
+
+/* ── the atlas's pages ────────────────────────────────── */
+.sections { position: sticky; top: 0; z-index: var(--z-nav); display: flex; gap: var(--space-5); padding-inline: var(--inset); overflow-x: auto; scrollbar-width: none; background: var(--bar); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-block: 1px solid var(--color-rule); }
+.sections::-webkit-scrollbar { display: none; }
+.sections a { display: inline-flex; align-items: center; flex: none; min-height: var(--tap); text-decoration: none; white-space: nowrap; color: var(--color-muted); }
+.sections a:hover { color: var(--color-ink); }
+.sections a[aria-current] { color: var(--color-ink); box-shadow: inset 0 -2px var(--color-accent); }
+
+/* ── sections ─────────────────────────────────────────── */
+main > section:not(.hero, .band) { padding-block: var(--space-9) 0; }
+h2 { font-size: var(--text-2xl); line-height: 0.95; }
+.prose { max-width: var(--measure); }
+.prose h2 { margin-bottom: var(--space-5); }
+.prose h3 { margin: var(--space-8) 0 var(--space-3); font-size: var(--text-xl); line-height: 1.15; }
+.prose p + p { margin-top: var(--space-4); }
+
+.cite { margin-left: 0.12em; font: 500 0.72em / 0 var(--font-label); letter-spacing: 0.02em; }
+.cite a { padding: 0.35em 0.12em; color: var(--color-accent); text-decoration: none; }
+.cite a:hover { text-decoration: underline; }
+
+/* ── structures ───────────────────────────────────────── */
+.mol { display: block; max-width: 100%; height: auto; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.mol text { fill: currentColor; stroke: none; font: 500 14px var(--font-label); }
+.mol .mol-w { fill: currentColor; stroke-width: 0.6; }
+.mol .u0 { stroke: var(--color-accent); stroke-width: 2; }
+.mol .uj { stroke-dasharray: 1 4; }
+
+/* ── what a terpene is ────────────────────────────────── */
+.what { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-7) clamp(1.5rem, 5vw, 5rem); align-items: end; }
+.units-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) var(--space-5); }
+.units-row > div { display: grid; gap: var(--space-2); justify-items: start; }
+.units-row > b { font: 500 var(--text-xl) / 1 var(--font-label); color: var(--color-muted); }
+.units span { text-transform: none; letter-spacing: 0.02em; }
+.isomers { grid-column: 1 / -1; padding-top: var(--space-6); border-top: 1px solid var(--color-rule); }
+.isomers ul { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-5) var(--space-4); }
+.isomers a { display: grid; gap: var(--space-2); justify-items: center; align-content: end; height: 100%; text-decoration: none; }
+.isomers .mol { width: auto; height: 5.5rem; }
+.isomers span { font: 400 var(--text-s) / 1.2 var(--font-text); letter-spacing: 0; text-transform: none; }
+.isomers a:hover span { color: var(--color-accent); }
+.isomers figcaption { max-width: var(--measure); margin-top: var(--space-5); font-size: var(--text-m); color: var(--color-ink); }
+
+/* ── the eleven: index ────────────────────────────────── */
+.eleven-head { display: grid; gap: var(--space-5); }
+.filters, .strength { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.filters button, .strength button {
+  display: inline-flex; align-items: center; gap: 0.45em;
+  min-height: var(--tap); padding: 0 var(--space-3);
+  border: 1px solid var(--color-rule-strong); border-radius: var(--radius);
+  background: var(--color-paper); color: var(--color-ink); cursor: pointer; white-space: nowrap;
+  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+}
+.filters button span { color: var(--color-muted); }
+.filters button:hover, .strength button:hover { border-color: var(--color-ink); background: var(--color-paper-2); }
+.filters button:active, .strength button:active { transform: translateY(1px); }
+.filters button[aria-pressed="true"], .strength button[aria-pressed="true"] { border-color: var(--color-ink); background: var(--color-ink); color: var(--color-paper); }
+.filters button[aria-pressed="true"] span { color: inherit; opacity: 0.7; }
+.filters .sep { width: 1px; height: var(--space-5); margin-inline: var(--space-2); background: var(--color-rule-strong); }
+.key { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); font-size: var(--text-s); color: var(--color-muted); }
+.key-item { display: inline-flex; align-items: center; gap: var(--space-2); }
+.key i { flex: none; }
+
+.dots, .pips { display: inline-flex; flex: none; vertical-align: middle; }
+.dots { gap: 3px; }
+.dots i, .key-item > i, .blend i, .filters i, .blend-list h3 i { flex: none; width: 0.6rem; height: 0.6rem; border: 1px solid var(--color-rule-strong); border-radius: 50%; }
+i.b-sunshine { background: var(--color-sunshine); border-color: var(--color-sunshine); }
+i.b-berry { background: var(--color-berry); border-color: var(--color-berry); }
+i.b-rest { background: var(--color-rest); border-color: var(--color-rest); }
+.key-item > i + i { margin-left: -5px; }
+.pips { gap: 2px; }
+.pips i { width: 0.5rem; height: 0.5rem; border: 1px solid currentColor; }
+.pips .on { background: currentColor; }
+.pips .half { border-style: dotted; background: var(--color-rule); }
+
+/* each compound is a tile that opens its dossier. The dossier is laid out by the width of
+   whatever holds it (a row of the grid, a modal, a side sheet), so each holder is a container. */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); grid-auto-flow: dense; gap: var(--space-3); margin-top: var(--space-6); }
+.entry { min-width: 0; container-type: inline-size; }
+.entry > details { height: 100%; }
+.card { position: relative; display: grid; grid-template-rows: auto auto auto 1fr auto; gap: var(--space-1); height: 100%; padding: var(--space-5); border-radius: var(--round); background: var(--color-paper-2); cursor: pointer; list-style: none; transition: transform var(--dur) var(--ease-out); }
+.card::-webkit-details-marker { display: none; }
+.card::after { content: "+"; position: absolute; top: var(--space-4); right: var(--space-5); font: 400 var(--text-xl) / 1 var(--font-label); color: var(--color-muted); }
+.card:active { transform: scale(0.99); }
+.card .mol { width: auto; height: 5.5rem; margin-bottom: var(--space-4); }
+.card-name { font: 600 var(--text-xl) / 1 var(--font-display); }
+.card-meta { display: flex; flex-wrap: wrap; gap: 0 var(--space-3); margin-top: var(--space-1); }
+.card-scent { font-size: var(--text-s); color: var(--color-muted); }
+.card-scent span + span::before { content: ", "; }
+.card-foot { display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-4); }
+.card-close { display: none; }
+
+/* ── a dossier ────────────────────────────────────────── */
+.dossier { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: clamp(1.5rem, 5cqi, 5rem); padding-bottom: var(--space-7); }
+.dossier-body { display: contents; }
+.dossier-body > * { grid-column: 2; }
+/* a band of the wood for the name; a long name keeps its line and a wide structure drops below it */
+.dossier-head { grid-column: 1 / -1; grid-row: 1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4) var(--space-5); padding: var(--space-5) var(--space-6); border-radius: var(--round); background: var(--wood); }
+.dossier-head > div { flex: 1 0 auto; max-width: 100%; }
+.formula { margin-top: var(--space-3); font-size: var(--text-l); color: var(--color-accent); }
+.formula span { margin-left: var(--space-2); }
+.dossier-head .mol { flex: none; width: auto; height: 7rem; max-width: 45%; color: var(--color-muted); }
+.plate { grid-column: 1; grid-row: 2 / span 6; position: sticky; top: calc(var(--tap) + var(--space-5)); align-self: start; margin-top: var(--space-6); }
+.plate figcaption { max-width: 40ch; }
+.shape { max-width: 46ch; margin-top: var(--space-6); font-size: var(--text-l); line-height: 1.4; }
+
+.sheet { margin-top: var(--space-6); border-top: 1px solid var(--color-rule); }
+.sheet > div, .studied li { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: var(--space-4); align-items: baseline; padding-block: var(--space-3); border-bottom: 1px solid var(--color-rule); }
+.sheet .src { display: block; margin-top: var(--space-1); }
+.blend { display: inline-flex; align-items: center; gap: 0.4em; margin-right: var(--space-4); color: var(--color-ink); white-space: nowrap; }
+.blend + .src { display: block; }
+
+.facts { display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-6); padding-block: var(--space-4); border-bottom: 1px solid var(--color-rule); font-variant-numeric: tabular-nums lining-nums; }
+.facts > div { display: grid; gap: var(--space-1); align-content: start; }
+.facts dd { font-size: var(--text-s); }
+.facts a, .rungs em a { padding-block: 0.35em; }
+.facts .wide { flex-basis: 100%; }
+.facts .wide dd { overflow-wrap: anywhere; }
+
+.studied { margin-top: var(--space-7); }
+.studied :is(h2, h4) { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-rule-strong); font: 500 var(--text-l) / 1.2 var(--font-text); letter-spacing: 0; text-transform: none; }
+.own { margin-top: var(--space-4); font-size: var(--text-s); }
+.own a { display: inline-flex; align-items: center; min-height: var(--tap); }
+.grade { color: var(--color-muted); }
+.g-human, .g-related { color: var(--color-ink); }
+.g-safety { color: var(--color-accent); }
+.unknown span + span { font-style: italic; }
+
+/* on its own page the name is the page head, so the plate starts beside the first line */
+main > section.compound { padding-top: var(--space-2); container-type: inline-size; }
+.compound .plate { grid-row: 1 / span 6; }
+.pager { display: flex; justify-content: space-between; gap: var(--space-4); border-top: 1px solid var(--color-rule); }
+.pager a { display: inline-flex; align-items: center; gap: 0.4em; min-height: var(--tap); text-decoration: none; }
+.pager a:hover { color: var(--color-accent); }
+
+@container (max-width: 44rem) {
+  /* one column, in reading order: the name, the plate, the sheet */
+  .dossier { display: flex; flex-direction: column; }
+  .dossier-head { order: -1; padding: var(--space-4) var(--space-5); }
+  .dossier-head .mol { max-width: 100%; height: 6rem; }
+  .plate { position: static; max-width: min(100%, 22rem); margin-top: var(--space-5); }
+  .sheet > div, .studied li { grid-template-columns: minmax(0, 1fr); gap: var(--space-1); }
+}
+
+/* ── opening a dossier: three ways under comparison (prototype) ─────────────────────────
+   <html data-dossier> names the way. When one is chosen, delete the other two here and in
+   atlas.js, and delete proto.js and the picker.
+
+   1 inline · the tile grows into its dossier across the row; the other tiles move aside.
+     A View Transition, because the grid reflows and would otherwise teleport.
+   2 modal  · a layer over the dimmed page. The layer scrolls, so the dossier keeps its full height.
+   3 sheet  · a panel from the right; the page stays live and the panel pages through the eleven.
+   On a narrow screen 2 rises from the bottom edge and 3 is a drawer there. */
+
+/* 1 · inline: opened, the entry takes the row and the tile becomes a bar that closes it */
+.entry:has(> details[open]) { grid-column: 1 / -1; }
+details[open] > .card { display: flex; justify-content: flex-end; height: auto; padding: 0; background: none; transform: none; }
+details[open] > .card::after { content: none; }
+details[open] > .card > :not(.card-close, .card-name) { display: none; }
+details[open] > .card > .card-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+details[open] > .card > .card-close { display: inline-flex; align-items: center; gap: 0.4em; min-height: var(--tap); color: var(--color-muted); }
+details[open] > .card:hover > .card-close { color: var(--color-accent); }
+
+[data-dossier="inline"] .entry { view-transition-name: var(--vt); }
+::view-transition-group(*) { animation-duration: var(--dur-morph); animation-timing-function: var(--ease-out); }
+/* snapshots keep their own size and are revealed by the growing box, so text never stretches */
+::view-transition-old(*), ::view-transition-new(*) { height: 100%; object-fit: none; object-position: top left; overflow: clip; animation-duration: var(--dur-morph); }
+
+/* 2 and 3 · the layer that holds a copy of the dossier */
+.viewer { position: fixed; padding: 0; border: 0; max-width: none; background: var(--color-paper); color: var(--color-ink); overflow: auto; overscroll-behavior: contain; }
+.viewer-panel { min-height: 100%; }
+.viewer::backdrop { background: var(--scrim); transition: opacity var(--viewer-dur) var(--ease-out), overlay var(--viewer-dur) allow-discrete, display var(--viewer-dur) allow-discrete; }
+.viewer:not([open])::backdrop { opacity: 0; }
+.viewer-bar { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-1) var(--space-4); background: var(--bar); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-rule); }
+.viewer-bar div { display: flex; flex-wrap: wrap; }
+.viewer-bar button { display: inline-flex; align-items: center; gap: 0.4em; min-height: var(--tap); padding: 0 var(--space-3); border: 0; background: none; color: var(--color-muted); cursor: pointer; white-space: nowrap; }
+.viewer-bar button:hover { color: var(--color-accent); }
+.viewer-body { padding: var(--space-5) var(--space-5) 0; container-type: inline-size; }
+.viewer .plate { top: calc(var(--tap) + var(--space-6)); }
+
+/* 2 · modal: the layer covers the window and is the thing that scrolls, as the page does.
+   The space above the dossier is its margin, not the layer's padding, so the bar sticks to the
+   very top. Opacity and a slight scale. */
+.viewer[data-form="modal"] {
+  --viewer-dur: var(--dur-modal);
+  inset: 0; width: 100%; height: 100%; max-height: none; margin: 0; padding: 0 var(--gutter) var(--space-6);
+  background: none; scrollbar-gutter: stable; scrollbar-color: var(--wood-muted) transparent;
+  transition: opacity var(--dur-modal) var(--ease-out), transform var(--dur-modal) var(--ease-out), overlay var(--dur-modal) allow-discrete, display var(--dur-modal) allow-discrete;
+}
+.viewer[data-form="modal"]:not([open]) { opacity: 0; transform: scale(0.96); }
+.viewer[data-form="modal"] .viewer-panel { width: min(74rem, 100%); min-height: 0; margin: var(--space-6) auto 0; border-radius: var(--round); background: var(--color-paper); box-shadow: 0 2rem 4rem -1.5rem var(--shade); overflow: clip; }
+
+/* 3 · sheet: a drawer from the right edge, not modal */
+.viewer[data-form="side"] {
+  --viewer-dur: var(--dur-drawer);
+  inset: 0 0 0 auto; z-index: var(--z-sheet); margin: 0; width: min(44rem, 100%); height: 100dvh; max-height: none;
+  border-left: 1px solid var(--color-rule); box-shadow: -1.5rem 0 3rem -2rem var(--shade);
+  transition: transform var(--dur-drawer) var(--ease-drawer), display var(--dur-drawer) allow-discrete;
+}
+.viewer[data-form="side"]:not([open]) { transform: translateX(100%); }
+
+/* 3 on a narrow screen: a drawer from the bottom edge */
+.viewer[data-form="bottom"] {
+  --viewer-dur: var(--dur-drawer);
+  inset: auto 0 0; margin: 0; width: 100%; max-height: calc(100dvh - var(--space-7));
+  border-radius: var(--round) var(--round) 0 0;
+  transition: transform var(--dur-drawer) var(--ease-drawer), overlay var(--dur-drawer) allow-discrete, display var(--dur-drawer) allow-discrete;
+}
+.viewer[data-form="bottom"]:not([open]) { transform: translateY(100%); }
+
+@starting-style {
+  .viewer[open]::backdrop { opacity: 0; }
+  .viewer[data-form="modal"][open] { opacity: 0; transform: scale(0.96); }
+  .viewer[data-form="side"][open] { transform: translateX(100%); }
+  .viewer[data-form="bottom"][open] { transform: translateY(100%); }
+}
+
+/* ── dot plots ────────────────────────────────────────── */
+.cup { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-6) clamp(1.5rem, 5vw, 5rem); align-items: start; }
+.plot { --label-w: 10rem; --val-w: 4.5rem; --pad: 0.75rem; }
+.dose { --label-w: 23rem; --val-w: 5rem; max-width: 62rem; margin-top: var(--space-5); }
+.plot figcaption { margin: 0 0 var(--space-4); }
+.legend { display: inline-flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); margin-left: var(--space-2); }
+.legend span { display: inline-flex; align-items: center; gap: 0.4em; white-space: nowrap; }
+.legend i, .track i { width: 0.75rem; height: 0.75rem; border-radius: 50%; background: var(--color-mono); }
+i.f-alcohol { background: var(--color-alcohol); }
+i.f-sesqui { background: var(--color-sesqui); }
+.axis { position: relative; display: block; height: var(--space-5); margin: 0 calc(var(--val-w) + var(--pad)) 0 calc(var(--label-w) + var(--pad)); font-size: var(--text-xs); }
+.axis i { position: absolute; left: var(--p); bottom: var(--space-1); font-style: normal; white-space: nowrap; transform: translateX(-50%); }
+.rows li { display: grid; grid-template-columns: var(--label-w) minmax(0, 1fr) var(--val-w); align-items: center; min-height: var(--tap); padding-block: var(--space-2); border-top: 1px solid var(--color-rule); line-height: 1.3; }
+.rows li:last-child { border-bottom: 1px solid var(--color-rule); }
+.rows li > a { display: flex; align-items: center; align-self: stretch; min-height: var(--tap); text-decoration: none; }
+.rows li > a:hover { text-decoration: underline; text-decoration-color: var(--color-accent); }
+.dose .rows li > span:first-child { font-size: var(--text-s); padding-right: var(--space-4); }
+.track { position: relative; align-self: stretch; min-height: var(--space-5); margin-inline: var(--pad); background: linear-gradient(var(--color-rule), var(--color-rule)) center / 100% 1px no-repeat; }
+.track i { position: absolute; left: var(--p); top: 50%; transform: translate(-50%, -50%); transition: left var(--dur-morph) var(--ease-out); }
+.val { text-align: right; font-variant-numeric: tabular-nums; }
+.spoon .track i { width: 1rem; height: 1rem; background: var(--color-accent); }
+.spoon .val { color: var(--color-accent); }
+.plot > .src { display: block; margin-top: var(--space-3); }
+.strength { margin-bottom: var(--space-5); }
+.todo { margin-top: var(--space-4); padding: var(--space-3) var(--space-4); border: 1px dashed var(--color-rule-strong); border-radius: var(--round); background: var(--color-note); font-size: var(--text-s); }
+
+/* ── evidence ─────────────────────────────────────────── */
+.rungs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: var(--space-6); border-top: 1px solid var(--color-rule-strong); }
+.rungs li { display: grid; gap: var(--space-2); align-content: start; padding: var(--space-4) var(--space-4) var(--space-4) 0; }
+.rungs li + li { padding-left: var(--space-4); border-left: 1px solid var(--color-rule); }
+.rungs b { font: 600 var(--text-l) / 1.1 var(--font-display); }
+.rungs li > span:not(.pips) { font-size: var(--text-s); line-height: 1.45; }
+.rungs em { padding-top: var(--space-2); border-top: 1px solid var(--color-rule); font-size: var(--text-s); font-style: normal; line-height: 1.5; color: var(--color-muted); }
+
+/* ── mistakes ─────────────────────────────────────────── */
+.mistakes dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6) clamp(1.5rem, 5vw, 5rem); margin-top: var(--space-6); }
+.mistakes dl > div { padding-top: var(--space-4); border-top: 1px solid var(--color-rule-strong); }
+.mistakes dt { font: 600 var(--text-xl) / 1.05 var(--font-display); letter-spacing: 0.005em; color: var(--color-ink); text-wrap: balance; }
+.mistakes dd { max-width: 52ch; margin-top: var(--space-3); }
+
+/* ── what each honey holds ────────────────────────────── */
+.blend-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6) clamp(1.5rem, 5vw, 5rem); margin-top: var(--space-6); }
+.blend-list > li { display: grid; gap: var(--space-3); align-content: start; padding-top: var(--space-4); border-top: 1px solid var(--color-rule-strong); }
+.blend-list h3 { display: flex; align-items: center; gap: 0.4em; font-size: var(--text-xl); line-height: 1.05; }
+.blend-list ul li { padding-bottom: var(--space-2); border-bottom: 1px solid var(--color-rule); line-height: 1.35; }
+.blend-list ul li:first-child { border-top: 1px solid var(--color-rule); }
+.blend-list ul span { font-size: var(--text-s); color: var(--color-muted); }
+.blend-list ul .src { display: block; }
+.blend-list a, tbody a { display: inline-flex; align-items: center; min-height: var(--tap); }
+
+/* ── the way on to the other two pages ────────────────── */
+.next { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+.next a { position: relative; display: grid; gap: var(--space-4); align-content: start; padding: var(--space-6); border-radius: var(--round); background: var(--color-paper-2); text-decoration: none; transition: transform var(--dur) var(--ease-out); }
+.next a::after { content: "→"; position: absolute; top: var(--space-5); right: var(--space-6); font: 400 var(--text-xl) / 1 var(--font-label); color: var(--color-muted); }
+.next a:active { transform: scale(0.99); }
+.next h2 { padding-right: var(--space-7); }
+.next p { max-width: 44ch; }
+
+/* ── the boiling points as a table ────────────────────── */
+.table { max-width: 56rem; margin-top: var(--space-5); overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums lining-nums; }
+th, td { padding: var(--space-3) var(--space-4) var(--space-3) 0; border-bottom: 1px solid var(--color-rule); text-align: left; vertical-align: baseline; }
+thead th { border-bottom-color: var(--color-rule-strong); }
+tbody th { padding-block: 0; font-weight: 400; white-space: nowrap; }
+.figures > .src { display: block; max-width: var(--measure); margin-top: var(--space-3); }
+
+/* ── sources and colophon ─────────────────────────────── */
+.sources ol { columns: 2; column-gap: clamp(1.5rem, 5vw, 5rem); margin-top: var(--space-6); font-size: var(--text-s); line-height: 1.45; }
+.sources li { position: relative; break-inside: avoid; padding: var(--space-2) var(--space-2) var(--space-2) 2.25rem; overflow-wrap: anywhere; }
+.sources li::before { content: attr(value); position: absolute; left: var(--space-2); font: 500 var(--text-s) / 1.6 var(--font-label); color: var(--color-accent); }
+.sources li:target { background: var(--color-note); }
+.colophon { display: grid; gap: var(--space-4); margin-top: var(--space-9); padding-block: var(--space-7) calc(var(--space-9) + var(--space-5)); background: var(--wood); font-size: var(--text-s); }
+.colophon p { max-width: 78ch; }
+
+[hidden] { display: none !important; }
+
+/* a hover that moves something is for a pointer that can hover */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover { transform: translateY(-3px); }
+  .card:hover::after { color: var(--color-accent); }
+  .next a:hover { transform: translateY(-3px); }
+  .next a:hover::after { color: var(--color-accent); }
+  details[open] > .card:hover { transform: none; }
+}
+
+/* ── narrower ─────────────────────────────────────────── */
+@media (max-width: 62rem) {
+  .dose { --label-w: 15rem; }
+  .rungs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rungs li:nth-child(3) { padding-left: 0; border-left: 0; }
+  .rungs li:nth-child(n + 3) { border-top: 1px solid var(--color-rule); }
+}
+
+@media (max-width: 48rem) {
+  .hero { grid-template: "text" auto "first" auto "credit" auto / minmax(0, 1fr); }
+  .hero::before { grid-area: 1 / 1 / 3 / -1; background: linear-gradient(to top, var(--wood) 0, var(--veil) 20%, var(--veil-0) 60%), linear-gradient(var(--veil), var(--veil-0) 70%), url(../assets/forest-stand-in.webp) 62% 50% / cover var(--wood); }
+  .hero-text { padding-block: calc(var(--tap) * 2 + var(--space-7)) var(--space-6); }
+  .hero .first { margin-bottom: var(--space-6); padding: var(--space-4); }
+  .credit { justify-self: start; }
+  .band { padding-block: calc(var(--tap) * 2 + var(--space-6)) var(--space-6); }
+  .what, .cup, .blend-list, .next { grid-template-columns: minmax(0, 1fr); }
+  th, td { padding-right: var(--space-3); font-size: var(--text-s); }
+  main > section:not(.hero, .band, .compound) { padding-top: var(--space-8); }
+  .isomers ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mistakes dl { grid-template-columns: minmax(0, 1fr); }
+  .sources ol { columns: 1; }
+  .plot, .dose { --label-w: 0rem; --pad: 0.5rem; }
+  .axis { margin-inline: var(--pad); }
+  .rows li { grid-template-columns: minmax(0, 1fr) auto; }
+  .rows .track { grid-column: 1 / -1; grid-row: 2; }
+  .dose .rows li > span:first-child { padding-right: var(--space-3); }
+  .legend { display: flex; margin: var(--space-2) 0 0; }
+  .viewer-body { padding-inline: var(--space-4); }
+  /* the modal fills the width under a strip of the dimmed page and rises from the bottom edge */
+  .viewer[data-form="modal"] { --viewer-dur: var(--dur-drawer); padding: 0; transition: opacity var(--dur-modal) var(--ease-out), transform var(--dur-drawer) var(--ease-drawer), overlay var(--dur-drawer) allow-discrete, display var(--dur-drawer) allow-discrete; }
+  .viewer[data-form="modal"]:not([open]) { transform: translateY(100%); }
+  @starting-style { .viewer[data-form="modal"][open] { transform: translateY(100%); } }
+  .viewer[data-form="modal"] .viewer-panel { min-height: calc(100dvh - var(--space-7)); margin-top: var(--space-7); border-radius: var(--round) var(--round) 0 0; }
+}
+
+@media (max-width: 30rem) {
+  .rungs { grid-template-columns: minmax(0, 1fr); }
+  .rungs li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--color-rule); }
+  .axis i:nth-child(even) { display: none; }
+  th, td { padding-right: var(--space-2); font-size: var(--text-xs); }
+}
+
+/* fewer and gentler, not none: a layer still fades in so its arrival is seen; nothing travels.
+   The script skips the View Transition under this setting. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  .viewer, .viewer::backdrop { transition-property: opacity, overlay, display !important; transition-duration: 200ms !important; }
+  .viewer:not([open]) { opacity: 0; transform: none !important; }
+  @starting-style { .viewer[open] { opacity: 0; transform: none !important; } }
+}
+
+@media print {
+  .sections, .filters, .strength, .skip, .proto-picker, .viewer, .card-close, .pager { display: none; }
+  .plate { position: static; }
+}
