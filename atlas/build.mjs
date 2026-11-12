@@ -155,6 +155,8 @@ const toF = c => Math.round(c * 9 / 5 + 32)
 
 // ── the frame every page shares ────────────────────────────────────────────
 const site = 'https://highforest.ca/botanical-terpenes'
+// the shop and the guide are pages of the live site: full addresses, so they also work from a staging host
+const live = 'https://highforest.ca'
 const atlas = [['', 'The eleven'], ['boiling-points/', 'Boiling points'], ['do-terpenes-do-anything/', 'Do terpenes do anything?']]
 const nav = (root, here) => `
 <nav class="sections" aria-label="Atlas">${atlas.map(([dir, label]) => `
@@ -199,11 +201,11 @@ const page = ({ dir = '', title, desc, body, scripts = [], head = '', tail = '',
 <a class="skip" href="#content">Skip to content</a>
 
 <header class="mast" data-ground="wood">
-  <a class="wordmark" href="/"><b>High</b>Forest</a>
+  <a class="wordmark" href="${root}../prototypes/home.html"><b>High</b>Forest</a>
   <nav aria-label="Site">
-    <a href="/shop-wellness-honey">Shop</a>
-    <a href="/unpasteurized-honey">The honey</a>
-    <a href="/highforest-product-guide">Make a cup</a>
+    <a href="${live}/shop-wellness-honey">Shop</a>
+    <a href="${live}/unpasteurized-honey">The honey</a>
+    <a href="${live}/highforest-product-guide">Make a cup</a>
   </nav>
 </header>
 
@@ -214,7 +216,7 @@ ${sources(main)}
 <footer class="colophon" data-ground="wood">
   <p><b>How this atlas was made.</b> Structures are drawn from PubChem two-dimensional records (US National Library of Medicine). Identity data come from PubChem; the contributing source is named beside each boiling point and reference scent description. Scent words and plant lists are High Forest’s own. The plates are from ${e(books.kohler)}, and ${e(books.thome)}; both are in the public domain and were taken from Wikimedia Commons and cut out of their paper.</p>
   <p><b>What this atlas is not.</b> It is not medical advice and makes no claim about the effects of High Forest products. If you find an error, write to <a href="mailto:info@highforest.world">info@highforest.world</a>.</p>
-  <p><b>The honeys.</b> ${Object.values(blends).map(b => `<a href="${b.url}">${e(b.name)}</a>`).join(', ')}.</p>
+  <p><b>The honeys.</b> ${Object.values(blends).map(b => `<a href="${live}${b.url}">${e(b.name)}</a>`).join(', ')}.</p>
   <p class="src">Last revised ${e(revised)}.</p>
 </footer>${tail}
 </body>
@@ -291,7 +293,7 @@ ${nav(root, '')}
       <ul>${inBlend(k).map(t => `
         <li><a href="#${t.id}">${e(t.name)}</a> <span>${t.scent.slice(0, 2).map(e).join(', ')}</span> <span class="src">found in ${e(t.plants[0])}</span></li>`).join('')}
       </ul>
-      <p><a href="${b.url}">${e(b.name)} in the shop</a></p>
+      <p><a href="${live}${b.url}">${e(b.name)} in the shop</a></p>
     </li>`).join('')}
   </ul>
 </section>
@@ -335,7 +337,7 @@ ${nav(root, 'boiling-points/')}
   <div class="prose">
     <h2>In the cup</h2>
     <p>None of these molecules boils in a cup of warm water; they evaporate from it. Boiling point is a rough guide to how readily: the lower it is, the more easily a compound evaporates. How fast each one leaves a cup also depends on how well it dissolves, and that has not been measured for these honeys.</p>
-    <p>High Forest <a href="/highforest-product-guide">suggests</a> water at about 50&nbsp;°C, not boiling. Hotter water drives aroma off faster, so more of it is gone before you drink.</p>
+    <p>High Forest <a href="${live}/highforest-product-guide">suggests</a> water at about 50&nbsp;°C, not boiling. Hotter water drives aroma off faster, so more of it is gone before you drink.</p>
   </div>
   <figure class="plot">
     <figcaption>Boiling point at atmospheric pressure. Lower means more volatile. <span class="legend">${Object.entries(families).map(([k, v]) => `<span><i class="f-${k}"></i>${e(v.toLowerCase())}</span>`).join('')}</span></figcaption>
