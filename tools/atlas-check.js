@@ -11,7 +11,7 @@ async (page) => {
   }
   // the index with a compound's dossier opened from its tile
   const opened = async (id, w, h) => { await fresh('', w, h); await page.locator(`#${id} .card`).click(); await page.waitForTimeout(700) }
-  const at = () => page.evaluate(() => ({ y: Math.round(scrollY), open: !!document.querySelector('.viewer')?.open, where: location.pathname + location.hash }))
+  const at = () => page.evaluate(() => ({ y: scrollY, open: !!document.querySelector('.viewer')?.open, where: location.pathname + location.hash }))
   const box = sel => page.evaluate(s => { const r = document.querySelector(s).getBoundingClientRect(); return { x: Math.round(r.left), y: Math.round(r.top), h: r.height } }, sel)
 
   // 0. The hero's three figures: they stand in one line, each label right beside its figure, its last line
@@ -49,7 +49,7 @@ async (page) => {
   // 1. An open dossier has the address of the compound's own page, and that address leads there; under it
   //    the dossier's own relative addresses still mean what they meant (its plate loads, its link to the
   //    page leads to the page). Closing it leaves the reader where they were, however it is closed, also
-  //    when an anchor (the hero's figure that leads to the eleven) was still in the address; Forward
+  //    when an anchor (the hero's figure that leads to the terpenes) was still in the address; Forward
   //    opens it again.
   const ways = {
     Escape: () => page.keyboard.press('Escape'),
@@ -59,7 +59,8 @@ async (page) => {
   }
   for (const [name, close] of Object.entries(ways)) {
     await fresh('')
-    await page.locator('.hero-facts a[href="#eleven"]').click(); await page.waitForTimeout(900)
+    await page.locator('.hero-facts a[href="#terpenes"]').click()
+    await page.waitForFunction(() => new Promise(done => { const y = scrollY; setTimeout(() => done(y > 0 && scrollY === y), 250) })) // the page has come to rest at the section
     await page.locator('#caryophyllene .card').click(); await page.waitForTimeout(600)
     const before = await at()
     check(before.where === `${index}caryophyllene`, `an open dossier has the address ${before.where}`)
@@ -75,7 +76,7 @@ async (page) => {
     await close(); await page.waitForTimeout(1200)
     const after = await at()
     check(before.open && !after.open, `closing by ${name}: the dossier did not open and close`)
-    check(after.y === before.y, `closing by ${name}: the page moved from ${before.y} to ${after.y}`)
+    check(Math.abs(after.y - before.y) < 1, `closing by ${name}: the page moved from ${before.y} to ${after.y}`) // half a pixel is the browser's rounding, not a move
     check(after.where === index, `closing by ${name}: the address is ${after.where}`)
     if (name === 'Back') {
       await page.goForward(); await page.waitForTimeout(800)
@@ -352,11 +353,11 @@ async (page) => {
   await page.mouse.move(tile.x + 100, tile.y + 150); await page.waitForTimeout(500)
   check((await box('#alpha-pinene .card')).y === tile.y, 'a tile moved under the pointer')
 
-  // 5b. The index goes from the honeys to the compounds to their chemistry, and ends on the questions; an
+  // 5b. The index goes from what a terpene is to the terpenes, the six that share a formula and the honeys, and ends on the questions; an
   //     answer there runs to four lines at most where there are two columns of them.
   await fresh('')
   const order = await page.evaluate(() => ({ heads: [...document.querySelectorAll('main > section > h2, main > section > .head > h2')].map(h => h.textContent).join(' | '), long: [...document.querySelectorAll('#faq dd')].map(dd => { const r = document.createRange(); r.selectNodeContents(dd); return [dd.previousElementSibling.textContent, new Set([...r.getClientRects()].filter(q => q.height > 14).map(q => Math.round(q.top / 6))).size] }).filter(([, n]) => n > 4).map(([q, n]) => `${q} (${n} lines)`).join(', ') }))
-  check(order.heads.startsWith('What is in each honey | The eleven | What a terpene is | Same atoms, six smells | Common questions'), `the index runs: ${order.heads}`)
+  check(order.heads.startsWith('What a terpene is | The terpenes in our honeys | Same atoms, six smells | What is in each honey | Common questions'), `the index runs: ${order.heads}`)
   check(!order.long, `common questions: too long an answer to ${order.long}`)
 
   // 6. In running text a name that begins with a Greek letter keeps its letter and what follows the hyphen

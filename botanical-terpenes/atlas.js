@@ -62,7 +62,7 @@ const select = id => {
   if (!id) return open && history.back()
   if (open) history.replaceState({ ...history.state, dossier: id }, '', id)
   else {
-    // an anchor still in the address (#eleven, #ref-9) has done its work: left there, closing the dossier
+    // an anchor still in the address (#terpenes, #ref-9) has done its work: left there, closing the dossier
     // would take the reader back to the anchor and not to where they were
     if (location.hash) history.replaceState(history.state, '', location.pathname + location.search)
     history.pushState({ dossier: id, from: location.pathname + location.search }, '', id)

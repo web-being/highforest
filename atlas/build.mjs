@@ -328,7 +328,7 @@ const live = 'https://highforest.ca'
 // the cut-out photographs of the jars in assets/jars/, and in small/ the same 96 px high for a tooltip
 // (cwebp -q 80 -alpha_q 90 -resize 0 96)
 const jars = { sunshine: 'sunshine', berry: 'soothing-berry', rest: 'grounding-rest' }
-const atlas = [['', 'The eleven'], ['boiling-points/', 'Boiling points'], ['do-terpenes-do-anything/', 'Do terpenes do anything?']]
+const atlas = [['', 'What are terpenes?'], ['boiling-points/', 'Boiling points'], ['do-terpenes-do-anything/', 'Do terpenes do anything?']]
 const nav = (root, here) => `
 <nav class="sections" aria-label="Terpenes">${atlas.map(([dir, label]) => `
   <a href="${root}${dir}"${dir === here ? ' aria-current="page"' : ''}>${label}</a>`).join('')}
@@ -414,26 +414,12 @@ const index = root => `
   <h1>What are <em>botanical terpenes?</em></h1>
   <p class="lead">The molecules that make a lemon smell of lemon and a pine wood of pine. We scent our honeys with eleven of them. Here is each one: the plant it is known from, how it smells, and which honey it is in.</p>
   <ul class="hero-facts">
-    <li><a href="#eleven"><b>${terpenes.length}</b><span>aroma<br>compounds</span>${tip('The terpenes in our honeys, each shown with the plant it is best known from.')}</a></li>
+    <li><a href="#terpenes"><b>${terpenes.length}</b><span>aroma<br>compounds</span>${tip('The terpenes in our honeys, each shown with the plant it is best known from.')}</a></li>
     <li><a href="${root}do-terpenes-do-anything/#flavourings"><b>${judged.length}</b><span>reviewed<br>flavourings</span>${tip('Ten of the eleven have been evaluated as food flavourings by JECFA, the FAO/WHO expert committee on food additives.')}</a></li>
     <li><a href="#same"><b>${isomers.length}</b><span>share one<br>formula</span><span class="tip">Six of the eleven are made of the same atoms, ${sub('C10H16')}, joined in six ways. Each smells different.</span></a></li>
   </ul>
 </section>
 ${nav(root, '')}
-
-<section class="blends" id="blends">
-  <header class="head">
-    <h2>What is in each honey</h2>
-    <p class="lead">Two compounds are in all three honeys, and neither Sunshine nor Soothing Berry has one to itself. We have not published the amounts.</p>
-  </header>
-  ${venn()}
-</section>
-
-<section class="eleven" id="eleven">
-  <h2>The eleven</h2>
-  <ul class="cards">${terpenes.map(entry).join('')}
-  </ul>
-</section>
 
 <section class="what" id="what">
   <header class="head">
@@ -466,6 +452,12 @@ ${nav(root, '')}
   </div>
 </section>
 
+<section id="terpenes">
+  <h2>The terpenes in our honeys</h2>
+  <ul class="cards">${terpenes.map(entry).join('')}
+  </ul>
+</section>
+
 <section class="same" id="same">
   <header class="head">
     <h2>Same atoms, six smells</h2>
@@ -476,12 +468,21 @@ ${nav(root, '')}
   </ul>
 </section>
 
+<section class="blends" id="blends">
+  <header class="head">
+    <h2>What is in each honey</h2>
+    <p class="lead">Two compounds are in all three honeys, and neither Sunshine nor Soothing Berry has one to itself.</p>
+  </header>
+  ${venn()}
+</section>
+
 <section class="qa" id="faq">
   <h2>Common questions</h2>
   <dl>
     <div><dt>Why add terpenes to honey?</dt><dd>For the aroma. Citrus and conifer make a morning honey, floral and berry notes an afternoon one, earthy and hop-like notes an evening one. You meet them when the jar is opened, when the honey is tasted, and when it is stirred into a drink.</dd></div>
     <div><dt>Is this a cannabis product?</dt><dd>No. Our honeys contain no cannabis, THC or CBD, and nothing intoxicating. Terpenes are not particular to cannabis: lemon peel, lavender, pine needles, hops and black pepper are full of them.${cite([1, 2])}</dd></div>
     <div><dt>Are terpenes safe to eat?</dt><dd>People have always eaten them in fruit, herbs and spices.${cite([1, 2])} As food flavourings, ten of the eleven have been evaluated by the FAO/WHO committee JECFA, with <a href="${root}do-terpenes-do-anything/#flavourings">no safety concern at current levels of intake</a> for eight.${cite([26])} Honey itself is not for infants under one year.${cite([24])}</dd></div>
+    <div><dt>How much is in a teaspoon, and is it from plants?</dt><dd>We have not published the amounts; each honey is made to a fixed recipe, so its terpenes keep their proportions from batch to batch. Our supplier sells them as botanical terpene isolates: in the trade, terpenes taken from plants other than cannabis.</dd></div>
     <div><dt>Where do the terpenes come from?</dt><dd>We buy them food-grade from True Terpenes, whose facilities are certified to ISO 9001:2015 and FSSC 22000. Each batch is tested for terpene content, solvents, pesticides and heavy metals, and comes with a certificate of analysis that we review.</dd></div>
     <div><dt>Does hot water drive the aroma off?</dt><dd>Some of it. None of these compounds boils in a cup, but all of them evaporate from it, faster the hotter the water. We suggest about 50&nbsp;°C. <a href="${root}boiling-points/">Boiling points</a>.</dd></div>
   </dl>
@@ -605,7 +606,7 @@ ${nav(root, 'do-terpenes-do-anything/')}
         <li class="spoon" style="--p:${f(logPos(spoonMg(0.1)) * 100)}%"><span>One teaspoon of honey, all terpenes together</span><span class="track"><i></i></span><span class="val" id="spoon-val">${mgText(spoonMg(0.1))}</span></li>${doses.map(d => `
         <li style="--p:${f(logPos(d.mg) * 100)}%"><span>${e(d.label)}${cite([d.ref])}</span><span class="track"><i></i></span><span class="val">${mgText(d.mg)}</span></li>`).join('')}
     </ol>
-    <p class="todo">We have not yet published the terpene content of our blends. When we do, that figure replaces the three assumptions above.</p>
+    <p class="todo">We have not published the terpene content of our blends. A published figure would replace the three assumptions above.</p>
   </figure>
   <div class="prose">
     <h3>By the nose, more likely than by the mouth</h3>
@@ -643,8 +644,8 @@ ${nav(root, 'do-terpenes-do-anything/')}
 const kB = n => (n / 1024).toFixed(1)
 const made = [
   ['index', page({
-    title: 'What are botanical terpenes? The eleven in our honeys',
-    desc: 'Botanical terpenes are the molecules that give plants their smell. The eleven in our honeys: the plant each is known from, how it smells, which honey it is in, and what research has and has not shown.',
+    title: 'What are botanical terpenes?',
+    desc: 'Botanical terpenes are the molecules that give plants their smell. We scent our honeys with eleven of them: the plant each is known from, how it smells, which honey it is in, and what research has and has not shown.',
     body: index, scripts: ['atlas.js', 'isomers.js'],
     tail: `
 

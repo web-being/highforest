@@ -214,7 +214,7 @@ h2 { font-size: var(--text-2xl); line-height: 0.95; }
 .picks[data-live="eased"] li { transition: flex-grow var(--dur-morph) var(--ease-out), flex-basis var(--dur-morph) var(--ease-out); }
 .picks[data-live="eased"] :is(.pick, .mol, b, .pick-scent, .pick-shape) { transition: color var(--dur-morph) var(--ease-out), scale var(--dur-morph) var(--ease-out), translate var(--dur-morph) var(--ease-out), opacity var(--dur-morph) var(--ease-out); }
 
-/* ── the eleven: index ────────────────────────────────── */
+/* ── the terpenes: index ──────────────────────────────── */
 .strength { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-bottom: var(--space-5); }
 .strength button {
   display: inline-flex; align-items: center; gap: 0.45em;
