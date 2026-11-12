@@ -9,6 +9,7 @@
   /* daylight */
   --color-paper: oklch(97.4% 0.006 165);
   --color-paper-2: oklch(93.6% 0.014 168);
+  --color-paper-3: oklch(90.5% 0.045 166); /* a tile under the pointer: the same green, fuller */
   --color-rule: oklch(85% 0.018 165);
   --color-rule-strong: oklch(60% 0.03 165);
   --color-muted: oklch(42% 0.03 165);
@@ -25,8 +26,6 @@
   --veil: oklch(16.5% 0.022 165 / 0.72);
   --veil-0: oklch(16.5% 0.022 165 / 0);
   --shade: oklch(8% 0.02 165 / 0.75);
-  --scrim: oklch(16.5% 0.022 165 / 0.62);
-  --scrim-flat: color-mix(in srgb, var(--wood) 62%, var(--color-paper)); /* the scrim over daylight, opaque */
   --bar: oklch(97.4% 0.006 165 / 0.9);
 
   /* data: the three terpene families, the three blends (from the jar labels) */

@@ -9,7 +9,7 @@ export const probe = () => {
   const vis = el => {
     const r = el.getBoundingClientRect(), s = getComputedStyle(el)
     return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.display !== 'none' && +s.opacity > 0 &&
-      (el.checkVisibility?.() ?? true) // false inside a closed <details>: its content is laid out but not rendered
+      (el.checkVisibility?.({ opacityProperty: true, checkOpacity: true }) ?? true) // false inside a closed <details>, whose content is laid out but not rendered, and inside anything transparent
   }
   const name = el => {
     const id = el.id ? '#' + el.id : ''
@@ -65,7 +65,9 @@ export const probe = () => {
       const tops = [...range.getClientRects()].filter(q => q.width > 1).map(q => Math.round(q.top + q.height / 2))
       const lines = tops.sort((a, b) => a - b).filter((v, i, a) => !i || v - a[i - 1] > parseFloat(s.fontSize) * 0.6).length
       const label = (el.innerText || '').trim()
-      if (lines > 1 && label && label.length < 40 && !el.querySelector('img, svg, picture, br, p, h1, h2, h3, h4, div'))
+      // a control laid out as a grid of several parts (a figure with its caption) is a small composition, not a label
+      const composed = s.display.endsWith('grid') && el.childElementCount > 1
+      if (lines > 1 && label && label.length < 40 && !composed && !el.querySelector('img, svg, picture, br, p, h1, h2, h3, h4, div'))
         add('error', 'wrapped-control', el, `label wraps to ${lines} lines`)
     }
     if (/^(INPUT|SELECT|TEXTAREA)$/.test(el.tagName) && parseFloat(s.fontSize) < 16)

@@ -11,16 +11,16 @@
 
 html {
   overflow-x: clip;
-  scrollbar-gutter: stable;
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--tap) + var(--space-5));
   -webkit-text-size-adjust: 100%;
 }
-/* a modal layer holds the page still. The gutter the page keeps for its scrollbar lies outside
-   the backdrop, so it takes the backdrop's tint. */
-html:has(.viewer:modal) { overflow: hidden; background: var(--scrim-flat); }
+/* an open dossier takes the page's scrollbar for its own layer: the page stops scrolling and pads
+   itself by the width that scrollbar had (--scrollbar, measured in atlas.js), so nothing behind it moves */
+html:has(.viewer[open]) { overflow: hidden; padding-right: var(--scrollbar, 0px); }
 
 body {
+  position: relative; /* the masthead is placed against the page, not the window */
   margin: 0;
   overflow-x: clip;
   background: var(--color-paper);
@@ -32,7 +32,7 @@ body {
 
 img { display: block; max-width: 100%; height: auto; }
 h1, h2, h3, h4 { margin: 0; font-family: var(--font-display); font-weight: 600; text-wrap: balance; overflow-wrap: anywhere; min-width: 0; }
-h1, h2, h3, .card-name, .rungs b, .mistakes dt { text-transform: uppercase; letter-spacing: 0.005em; }
+h1, h2, h3, .card-name, .rungs b, .qa dt { text-transform: uppercase; letter-spacing: 0.005em; }
 p, dl, dd, ol, ul, figure { margin: 0; }
 p { text-wrap: pretty; }
 ol, ul { padding: 0; list-style: none; }
@@ -50,12 +50,14 @@ a:hover { text-decoration-color: var(--color-accent); }
 .skip:focus { top: var(--space-2); }
 
 /* the label voice: names of things, units, controls */
-.label, dt, thead th, .grade, .card-meta, .mast nav a, .sections a, .formula span, .val, .axis, .legend, .filters button, .strength button, .viewer-bar button, .units span, .isomers span, .blend, .credit, .card-close, .pager a {
+.label, dt, thead th, .grade, .card-meta, .mast nav a, .sections a, .formula span, .val, .axis, .legend, .strength button, .viewer button, .turn-key, .num, .reach, .blend, .pager a, .hero-facts b + span, .foot-honeys a > span {
   font: 500 var(--text-s) / 1.2 var(--font-label);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
-.label, dt, thead th, .card-meta, .formula span, .axis, .legend, .units span, .credit { color: var(--color-muted); }
+.label, dt, thead th, .card-meta, .formula span, .axis, .legend, .num, .reach { color: var(--color-muted); }
+/* a line icon (Lucide), in the colour and at the size of the words beside it */
+.icon { flex: none; width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .src { font: italic 400 var(--text-xs) / 1.4 var(--font-text); color: var(--color-muted); letter-spacing: 0; text-transform: none; }
 
 /* full-width bands; the content keeps to the page column */
@@ -69,34 +71,45 @@ a:hover { text-decoration-color: var(--color-accent); }
 .mast nav a { display: inline-flex; align-items: center; min-height: var(--tap); padding-inline: var(--space-3); text-decoration: none; white-space: nowrap; color: inherit; }
 .mast nav a:hover { color: var(--color-accent); }
 
-/* ── index hero: the wood ─────────────────────────────── */
+/* ── index hero: the wood ───────────────────────────────
+   The title and the sentence under it in the first column. In the second, at the foot, three figures
+   about the eleven, each a way to the thing it counts. */
 .hero {
   position: relative; isolation: isolate;
   display: grid;
-  grid-template: "text first" minmax(min(50rem, 96svh), auto) ". credit" auto / minmax(0, 7fr) minmax(0, 5fr);
+  grid-template: "title ." auto "lead facts" auto / minmax(0, 7fr) minmax(0, 5fr);
+  align-content: end;
   column-gap: clamp(1.5rem, 5vw, 5rem);
+  min-height: min(50rem, 96svh);
+  padding-block: calc(var(--tap) + var(--space-8)) var(--space-8);
 }
-/* the photograph, bled to the viewport edges, darkening to the forest floor */
+/* the photograph, darkening to the forest floor */
 .hero::before {
-  content: ""; grid-area: 1 / 1 / 2 / -1; z-index: -1;
-  margin-inline: calc(var(--inset) * -1);
+  content: ""; position: absolute; inset: 0; z-index: -1;
   background:
     linear-gradient(to top, var(--wood) 0, var(--veil) 15%, var(--veil-0) 52%),
     linear-gradient(to right, var(--veil), var(--veil-0) 58%),
     url(../assets/forest-stand-in.webp) 50% 56% / cover var(--wood);
 }
-.hero-text { grid-area: text; align-self: end; padding-block: calc(var(--tap) + var(--space-8)) var(--space-8); }
-.hero h1 { font-size: var(--text-display); line-height: 0.86; }
+.hero h1 { grid-area: title; font-size: var(--text-display); line-height: 0.86; }
 .hero h1 em { display: block; font-style: inherit; color: var(--color-accent); }
 .lead { max-width: 40ch; margin-top: var(--space-5); font-size: var(--text-l); line-height: 1.42; }
-
-/* what to know before reading: in the first screen of the index, and above the research on a compound's page */
-.first { max-width: 46ch; padding: var(--space-5); border-radius: var(--round); }
-.first h2 { font: 600 var(--text-s) / 1.2 var(--font-label); letter-spacing: 0.1em; color: var(--color-accent); }
-.first p { margin-top: var(--space-2); }
-.hero .first { grid-area: first; align-self: end; margin-bottom: var(--space-8); background: var(--veil); }
-.dossier .first { margin-top: var(--space-6); background: var(--color-note); }
-.credit { grid-area: credit; justify-self: end; margin-top: var(--space-4); font-size: var(--text-xs); letter-spacing: 0.06em; }
+.hero .lead { grid-area: lead; }
+/* three figures in a line, each with what it counts right beside it, in the label voice, the label's last
+   line on the figure's own; they end on the line the sentence ends on. A label's lines are set in the page (atlas/build.mjs), so it is as wide as
+   its longest line and no narrower window can leave a small word alone on a line; when the line is too
+   short for the three, a whole figure goes to the next line. */
+.hero-facts { grid-area: 1 / 2 / -1 / -1; align-self: end; display: flex; flex-wrap: wrap; gap: var(--space-3) clamp(1rem, 2vw, 2rem); }
+.hero-facts li { flex: none; }
+.hero-facts a { position: relative; display: flex; align-items: end; align-items: last baseline; gap: var(--space-2); min-height: var(--tap); text-decoration: none; }
+/* what a figure counts, in a sentence, for the pointer that rests on it: above the figure, clear of the bar under the hero */
+.hero-facts .tip { top: auto; bottom: calc(100% + var(--space-2)); }
+.hero-facts li:last-child .tip { left: auto; right: 0; }
+.hero-facts b { font: 600 var(--text-2xl) / 0.85 var(--font-display); letter-spacing: -0.01em; color: var(--color-accent); }
+.hero-facts b + span { font-size: var(--text-xs); white-space: nowrap; transition: color var(--dur) var(--ease-out); }
+.hero-facts a:hover b + span { color: var(--color-accent); }
+/* the second column is too narrow for the three in a line: they go under the sentence */
+@media (max-width: 70rem) { .hero-facts { grid-area: 3 / 1 / 4 / -1; align-self: start; margin-top: var(--space-6); } }
 
 /* ── the head of every other page: a plain band of the wood ── */
 .band { padding-block: calc(var(--tap) + var(--space-8)) var(--space-7); background: var(--wood); container-type: inline-size; }
@@ -128,71 +141,128 @@ h2 { font-size: var(--text-2xl); line-height: 0.95; }
 .mol { display: block; max-width: 100%; height: auto; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .mol text { fill: currentColor; stroke: none; font: 500 14px var(--font-label); }
 .mol .mol-w { fill: currentColor; stroke-width: 0.6; }
-.mol .u0 { stroke: var(--color-accent); stroke-width: 2; }
+.mol :is(.u0, .u2) { stroke: var(--color-accent); stroke-width: 2; }
 .mol .uj { stroke-dasharray: 1 4; }
 
-/* ── what a terpene is ────────────────────────────────── */
-.what { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-7) clamp(1.5rem, 5vw, 5rem); align-items: end; }
-.units-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) var(--space-5); }
-.units-row > div { display: grid; gap: var(--space-2); justify-items: start; }
-.units-row > b { font: 500 var(--text-xl) / 1 var(--font-label); color: var(--color-muted); }
-.units span { text-transform: none; letter-spacing: 0.02em; }
-.isomers { grid-column: 1 / -1; padding-top: var(--space-6); border-top: 1px solid var(--color-rule); }
-.isomers ul { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-5) var(--space-4); }
-.isomers a { display: grid; gap: var(--space-2); justify-items: center; align-content: end; height: 100%; text-decoration: none; }
-.isomers .mol { width: auto; height: 5.5rem; }
-.isomers span { font: 400 var(--text-s) / 1.2 var(--font-text); letter-spacing: 0; text-transform: none; }
-.isomers a:hover span { color: var(--color-accent); }
-.isomers figcaption { max-width: var(--measure); margin-top: var(--space-5); font-size: var(--text-m); color: var(--color-ink); }
+/* ── a section's head: its name, then one sentence set large ──
+   Size, weight and leading are set together: the larger the type, the tighter its lines and letters. */
+.head { display: grid; gap: var(--space-5); }
+.head .lead { max-width: none; margin: 0; font-size: var(--text-xl); line-height: 1.22; letter-spacing: -0.012em; }
+
+/* the sentence may run longer than the name above it: to two thirds of the column where there are columns */
+@media (min-width: 72rem) { .head .lead { max-width: calc(200% / 3); } }
+
+/* ── what a terpene is: one unit, two, three ────────────
+   The pointer that rests on a tile is shown what every corner of its drawing is: the carbons it counts. */
+.units { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); margin-top: var(--space-7); }
+.units li { display: grid; grid-template-rows: 11rem auto auto 1fr; padding: var(--space-5) var(--space-5) var(--space-6); border-radius: var(--round); --ground: var(--color-paper-2); background: var(--ground); }
+.units .mol { align-self: center; justify-self: start; width: auto; height: auto; max-height: 100%; }
+.num b { margin-right: 0.12em; font: 600 var(--text-2xl) / 0.9 var(--font-display); letter-spacing: -0.01em; color: var(--color-ink); }
+.units h3 { margin-top: var(--space-4); font-size: var(--text-l); line-height: 1.1; }
+.units li > p:last-child { max-width: 34ch; margin-top: var(--space-2); font-size: var(--text-s); line-height: 1.5; color: var(--color-muted); }
+.more { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5) clamp(1.5rem, 5vw, 5rem); margin-top: var(--space-7); }
+.more p { max-width: 50ch; }
+
+/* ── same atoms, six smells: the six in a row ─────────────────────────────
+   A row that begins at the left edge of the page column, as the tiles under it do. One of the six is
+   picked: it is drawn full size, says what it smells of and how it is built, and names its atoms under
+   the pointer. The others stand small beside it, each with what it smells of, so that a wide window
+   shows all six and their smells at once; in a narrower one the row runs off to the right and scrolls
+   by hand: it fades out at an end that has more to show, and a dot for each of the six stands under it,
+   the picked one's longer. The picked one's drawing lifts off the page and turns (turn.js).
+   isomers.js makes each a button that picks it and marks the row live. Without it the six stand full
+   size, each saying everything. */
+@property --fade-start { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --fade-end { syntax: "<length>"; inherits: false; initial-value: 0px; }
+.picks { --big: min(21rem, 72vw); --slot: clamp(8.5rem, 12vw, 10.25rem); --name: clamp(2rem, 1.5rem + 1.4vw, 2.75rem); --full: 1; --less: 0.68; display: flex; margin: var(--space-6) calc(var(--inset) * -1) 0; padding: var(--space-4) var(--inset); overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; --fade: linear-gradient(to right, transparent, #000 var(--fade-start), #000 calc(100% - var(--fade-end)), transparent); -webkit-mask-image: var(--fade); mask-image: var(--fade); transition: --fade-start var(--dur-morph) var(--ease-out), --fade-end var(--dur-morph) var(--ease-out); }
+.picks::-webkit-scrollbar { display: none; }
+.picks[data-more~="start"] { --fade-start: var(--space-8); }
+.picks[data-more~="end"] { --fade-end: var(--space-8); }
+.pick-dots { display: none; gap: var(--space-2); margin-top: var(--space-2); }
+.picks:is([data-more~="start"], [data-more~="end"]) + .pick-dots { display: flex; }
+.pick-dots i { width: 0.5rem; height: 0.5rem; border-radius: 0.25rem; background: var(--color-rule-strong); transition: width var(--dur-morph) var(--ease-out), background-color var(--dur-morph) var(--ease-out); }
+.pick-dots i[data-on] { width: 1.5rem; background: var(--color-ink); }
+.picks li { flex: 0 0 var(--big); min-width: 0; }
+.pick { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: start; align-content: start; width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; }
+/* every drawing at the same scale, so a larger molecule is a larger drawing; all stand on one line */
+.pick-fig { display: grid; place-items: end start; height: 12.5rem; }
+.pick-fig .mol { width: auto; max-width: none; overflow: visible; scale: var(--full); transform-origin: 0 100%; }
+.pick b .plant { display: inline-block; width: auto; height: 0.86em; margin-right: 0.16em; vertical-align: -0.06em; }
+.pick b { margin-top: var(--space-5); font: 600 var(--name) / 1 var(--font-display); letter-spacing: 0.005em; text-transform: uppercase; white-space: nowrap; transform-origin: 0 0; }
+/* what it smells of. Its lines are set once, to the width a small one has when it is made smaller, so that
+   picking only changes its size and never its lines. */
+.pick-scent { width: calc((var(--slot) - var(--space-4)) / var(--less)); margin-top: var(--space-2); font-size: var(--text-l); line-height: 1.3; color: var(--color-accent); transform-origin: 0 0; }
+/* how it is built. The words are set to the width of a picked one whatever width theirs has now, and are
+   cut off at its edge: they keep their lines while it grows, and the row keeps its height whichever is picked. */
+.pick-shape { justify-self: stretch; display: grid; grid-template-columns: calc(var(--big) - var(--space-5)); margin-top: var(--space-2); overflow: hidden; font-size: var(--text-s); line-height: 1.5; color: var(--color-muted); }
+/* the names of the atoms: with the drawing all along, shown to the pointer that rests on a full-size one */
+:is(.pick, .units) .mol-names { opacity: 0; transition: opacity var(--dur) var(--ease-out); }
+:is(.pick:is(:hover, :focus-visible), .units li:hover) .mol-names { opacity: 1; }
+/* live: the picked one takes about two places of the others', which share what is left of the column */
+.picks[data-live] li { flex: 1 0 var(--slot); }
+.picks[data-live] li:has([aria-pressed="true"]) { flex: 2.2 0 var(--big); }
+.pick[aria-pressed="false"] { color: var(--color-muted); cursor: pointer; }
+.pick[aria-pressed="false"] .mol { scale: calc(var(--full) * 0.6); pointer-events: none; } /* only the picked one is turned by hand */
+.pick[aria-pressed="true"] .mol { cursor: grab; -webkit-user-select: none; user-select: none; }
+.pick[aria-pressed="true"] .mol:active { cursor: grabbing; }
+.pick[aria-pressed="false"] .mol-names { display: none; }
+.pick[aria-pressed="false"] b { scale: 0.45; }
+/* the smell moves up under the smaller name: by what the name lost, and by the smaller space between them */
+.pick[aria-pressed="false"] .pick-scent { scale: var(--less); translate: 0 calc(var(--name) * -0.55 - var(--space-1)); color: inherit; }
+.pick[aria-pressed="false"] .pick-shape { opacity: 0; }
+/* eased only once the row stands as it should: it does not shrink into place when the page arrives */
+.picks[data-live="eased"] li { transition: flex-grow var(--dur-morph) var(--ease-out), flex-basis var(--dur-morph) var(--ease-out); }
+.picks[data-live="eased"] :is(.pick, .mol, b, .pick-scent, .pick-shape) { transition: color var(--dur-morph) var(--ease-out), scale var(--dur-morph) var(--ease-out), translate var(--dur-morph) var(--ease-out), opacity var(--dur-morph) var(--ease-out); }
 
 /* ── the eleven: index ────────────────────────────────── */
-.eleven-head { display: grid; gap: var(--space-5); }
-.filters, .strength { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
-.filters button, .strength button {
+.strength { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-bottom: var(--space-5); }
+.strength button {
   display: inline-flex; align-items: center; gap: 0.45em;
   min-height: var(--tap); padding: 0 var(--space-3);
   border: 1px solid var(--color-rule-strong); border-radius: var(--radius);
   background: var(--color-paper); color: var(--color-ink); cursor: pointer; white-space: nowrap;
   transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
 }
-.filters button span { color: var(--color-muted); }
-.filters button:hover, .strength button:hover { border-color: var(--color-ink); background: var(--color-paper-2); }
-.filters button:active, .strength button:active { transform: translateY(1px); }
-.filters button[aria-pressed="true"], .strength button[aria-pressed="true"] { border-color: var(--color-ink); background: var(--color-ink); color: var(--color-paper); }
-.filters button[aria-pressed="true"] span { color: inherit; opacity: 0.7; }
-.filters .sep { width: 1px; height: var(--space-5); margin-inline: var(--space-2); background: var(--color-rule-strong); }
-.key { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); font-size: var(--text-s); color: var(--color-muted); }
-.key-item { display: inline-flex; align-items: center; gap: var(--space-2); }
-.key i { flex: none; }
+.strength button:hover { border-color: var(--color-ink); background: var(--color-paper-2); }
+.strength button:active { transform: translateY(1px); }
+.strength button[aria-pressed="true"] { border-color: var(--color-ink); background: var(--color-ink); color: var(--color-paper); }
 
-.dots, .pips { display: inline-flex; flex: none; vertical-align: middle; }
-.dots { gap: 3px; }
-.dots i, .key-item > i, .blend i, .filters i, .blend-list h3 i { flex: none; width: 0.6rem; height: 0.6rem; border: 1px solid var(--color-rule-strong); border-radius: 50%; }
-i.b-sunshine { background: var(--color-sunshine); border-color: var(--color-sunshine); }
-i.b-berry { background: var(--color-berry); border-color: var(--color-berry); }
-i.b-rest { background: var(--color-rest); border-color: var(--color-rest); }
-.key-item > i + i { margin-left: -5px; }
-.pips { gap: 2px; }
-.pips i { width: 0.5rem; height: 0.5rem; border: 1px solid currentColor; }
-.pips .on { background: currentColor; }
-.pips .half { border-style: dotted; background: var(--color-rule); }
+/* a honey's colour, on whatever is marked as that honey's: a dot, a circle */
+.b-sunshine { --honey: var(--color-sunshine); }
+.b-berry { --honey: var(--color-berry); }
+.b-rest { --honey: var(--color-rest); }
+.honeys i, .blend i, .in-honey i { flex: none; width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--honey); }
+/* the honeys a compound is in: larger, overlapping, each ringed in the ground it stands on */
+.honeys { position: relative; display: inline-flex; align-items: center; padding: 2px; }
+.honeys i { width: 1.125rem; height: 1.125rem; box-shadow: 0 0 0 2px var(--ground, var(--color-paper)); transition: box-shadow var(--dur-modal) var(--ease-out); }
+.honeys i + i { margin-left: -0.3rem; }
+/* how far the research on a compound has reached, at the head of what has been studied: the icon of the highest rung, and its name */
+.reach { display: inline-flex; align-items: center; gap: 0.45em; white-space: nowrap; }
+/* a word on a mark, for the pointer that rests on it: it hangs below the mark and may pass the tile's edge.
+   It is part of the text all along. */
+.tip { position: absolute; top: calc(100% + var(--space-2)); left: 0; z-index: 1; width: max-content; max-width: 15rem; padding: var(--space-2) var(--space-3); border-radius: var(--radius); background: var(--color-ink); color: var(--color-paper); font: 400 var(--text-xs) / 1.35 var(--font-text); letter-spacing: 0; text-transform: none; white-space: normal; opacity: 0; pointer-events: none; transition: opacity var(--dur) var(--ease-out); }
+/* the honeys, named by their jars */
+.tip-jars { display: grid; gap: var(--space-2); padding: var(--space-3); }
+.jar { display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap; }
+.jar img { flex: none; width: 2.5rem; }
+.tip-jars .jar { font: 500 var(--text-s) / 1.2 var(--font-label); letter-spacing: 0.1em; text-transform: uppercase; }
+:is(:hover, :focus) > .tip { opacity: 1; }
 
-/* each compound is a tile that opens its dossier. The dossier is laid out by the width of
-   whatever holds it (a row of the grid, a modal, a side sheet), so each holder is a container. */
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); grid-auto-flow: dense; gap: var(--space-3); margin-top: var(--space-6); }
-.entry { min-width: 0; container-type: inline-size; }
-.entry > details { height: 100%; }
-.card { position: relative; display: grid; grid-template-rows: auto auto auto 1fr auto; gap: var(--space-1); height: 100%; padding: var(--space-5); border-radius: var(--round); background: var(--color-paper-2); cursor: pointer; list-style: none; transition: transform var(--dur) var(--ease-out); }
-.card::-webkit-details-marker { display: none; }
-.card::after { content: "+"; position: absolute; top: var(--space-4); right: var(--space-5); font: 400 var(--text-xl) / 1 var(--font-label); color: var(--color-muted); }
+/* each compound is a tile: a link to its page. A dossier is laid out by the width of whatever
+   holds it (the layer over the index, or its own page), so each holder is a container. */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); gap: var(--space-3); margin-top: var(--space-6); }
+.entry { min-width: 0; }
+.card { position: relative; display: grid; grid-template-rows: auto auto auto 1fr auto; gap: var(--space-1); height: 100%; padding: var(--space-5); border-radius: var(--round); --ground: var(--color-paper-2); background: var(--ground); color: inherit; text-decoration: none; transition: background-color var(--dur-modal) var(--ease-out), box-shadow var(--dur-modal) var(--ease-out), transform var(--dur) var(--ease-out); }
 .card:active { transform: scale(0.99); }
-.card .mol { width: auto; height: 5.5rem; margin-bottom: var(--space-4); }
-.card-name { font: 600 var(--text-xl) / 1 var(--font-display); }
+/* the plant the compound is best known from, large in the corner, and the structure beside it */
+.card-plant { position: absolute; top: var(--space-3); right: var(--space-3); width: auto; height: 11rem; max-width: 56%; object-fit: contain; object-position: 100% 0; pointer-events: none; transform-origin: 100% 0; transition: transform var(--dur-morph) var(--ease-out); }
+.card-fig { display: flex; align-items: flex-start; max-width: 44%; height: 10rem; margin-bottom: var(--space-3); }
+.card-fig .mol { width: auto; height: auto; max-width: 100%; max-height: 5.5rem; }
+.card-name { justify-self: start; font: 600 var(--text-xl) / 1 var(--font-display); }
 .card-meta { display: flex; flex-wrap: wrap; gap: 0 var(--space-3); margin-top: var(--space-1); }
 .card-scent { font-size: var(--text-s); color: var(--color-muted); }
 .card-scent span + span::before { content: ", "; }
 .card-foot { display: flex; align-items: center; justify-content: space-between; margin-top: var(--space-4); }
-.card-close { display: none; }
 
 /* ── a dossier ────────────────────────────────────────── */
 .dossier { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: clamp(1.5rem, 5cqi, 5rem); padding-bottom: var(--space-7); }
@@ -203,7 +273,13 @@ i.b-rest { background: var(--color-rest); border-color: var(--color-rest); }
 .dossier-head > div { flex: 1 0 auto; max-width: 100%; }
 .formula { margin-top: var(--space-3); font-size: var(--text-l); color: var(--color-accent); }
 .formula span { margin-left: var(--space-2); }
-.dossier-head .mol { flex: none; width: auto; height: 7rem; max-width: 45%; color: var(--color-muted); }
+/* the structure stands on a square with room to turn it; turn.js adds the key and the drag */
+.dossier-head > .turn { flex: none; display: grid; justify-items: center; }
+.turn .mol { width: 16rem; height: 16rem; max-width: 100%; }
+/* what each atom is, written over the drawing while the pointer rests on it: ringed in the ground so the bonds do not cross it */
+.mol .mol-name { font: 500 1em var(--font-label); letter-spacing: 0.02em; text-anchor: middle; paint-order: stroke; stroke: var(--ground, var(--color-paper)); stroke-width: 0.3em; stroke-linejoin: round; }
+.turn:has(.turn-key) .mol { touch-action: pan-y; cursor: grab; -webkit-user-select: none; user-select: none; }
+.turn:has(.turn-key) .mol:active { cursor: grabbing; }
 .plate { grid-column: 1; grid-row: 2 / span 6; position: sticky; top: calc(var(--tap) + var(--space-5)); align-self: start; margin-top: var(--space-6); }
 .plate figcaption { max-width: 40ch; }
 .shape { max-width: 46ch; margin-top: var(--space-6); font-size: var(--text-l); line-height: 1.4; }
@@ -217,12 +293,12 @@ i.b-rest { background: var(--color-rest); border-color: var(--color-rest); }
 .facts { display: flex; flex-wrap: wrap; gap: var(--space-4) var(--space-6); padding-block: var(--space-4); border-bottom: 1px solid var(--color-rule); font-variant-numeric: tabular-nums lining-nums; }
 .facts > div { display: grid; gap: var(--space-1); align-content: start; }
 .facts dd { font-size: var(--text-s); }
-.facts a, .rungs em a { padding-block: 0.35em; }
+.facts a, .rungs em a, .sheet .src a { padding-block: 0.35em; }
 .facts .wide { flex-basis: 100%; }
 .facts .wide dd { overflow-wrap: anywhere; }
 
 .studied { margin-top: var(--space-7); }
-.studied :is(h2, h4) { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-rule-strong); font: 500 var(--text-l) / 1.2 var(--font-text); letter-spacing: 0; text-transform: none; }
+.studied :is(h2, h4) { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-3); padding-bottom: var(--space-3); border-bottom: 1px solid var(--color-rule-strong); font: 500 var(--text-l) / 1.2 var(--font-text); letter-spacing: 0; text-transform: none; }
 .own { margin-top: var(--space-4); font-size: var(--text-s); }
 .own a { display: inline-flex; align-items: center; min-height: var(--tap); }
 .grade { color: var(--color-muted); }
@@ -241,87 +317,70 @@ main > section.compound { padding-top: var(--space-2); container-type: inline-si
   /* one column, in reading order: the name, the plate, the sheet */
   .dossier { display: flex; flex-direction: column; }
   .dossier-head { order: -1; padding: var(--space-4) var(--space-5); }
-  .dossier-head .mol { max-width: 100%; height: 6rem; }
+  .turn .mol { width: 11rem; height: 11rem; }
   .plate { position: static; max-width: min(100%, 22rem); margin-top: var(--space-5); }
   .sheet > div, .studied li { grid-template-columns: minmax(0, 1fr); gap: var(--space-1); }
 }
 
-/* ── opening a dossier: three ways under comparison (prototype) ─────────────────────────
-   <html data-dossier> names the way. When one is chosen, delete the other two here and in
-   atlas.js, and delete proto.js and the picker.
-
-   1 inline · the tile grows into its dossier across the row; the other tiles move aside.
-     A View Transition, because the grid reflows and would otherwise teleport.
-   2 modal  · a layer over the dimmed page. The layer scrolls, so the dossier keeps its full height.
-   3 sheet  · a panel from the right; the page stays live and the panel pages through the eleven.
-   On a narrow screen 2 rises from the bottom edge and 3 is a drawer there. */
-
-/* 1 · inline: opened, the entry takes the row and the tile becomes a bar that closes it */
-.entry:has(> details[open]) { grid-column: 1 / -1; }
-details[open] > .card { display: flex; justify-content: flex-end; height: auto; padding: 0; background: none; transform: none; }
-details[open] > .card::after { content: none; }
-details[open] > .card > :not(.card-close, .card-name) { display: none; }
-details[open] > .card > .card-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-details[open] > .card > .card-close { display: inline-flex; align-items: center; gap: 0.4em; min-height: var(--tap); color: var(--color-muted); }
-details[open] > .card:hover > .card-close { color: var(--color-accent); }
-
-[data-dossier="inline"] .entry { view-transition-name: var(--vt); }
-::view-transition-group(*) { animation-duration: var(--dur-morph); animation-timing-function: var(--ease-out); }
-/* snapshots keep their own size and are revealed by the growing box, so text never stretches */
-::view-transition-old(*), ::view-transition-new(*) { height: 100%; object-fit: none; object-position: top left; overflow: clip; animation-duration: var(--dur-morph); }
-
-/* 2 and 3 · the layer that holds a copy of the dossier */
-.viewer { position: fixed; padding: 0; border: 0; max-width: none; background: var(--color-paper); color: var(--color-ink); overflow: auto; overscroll-behavior: contain; }
-.viewer-panel { min-height: 100%; }
-.viewer::backdrop { background: var(--scrim); transition: opacity var(--viewer-dur) var(--ease-out), overlay var(--viewer-dur) allow-discrete, display var(--viewer-dur) allow-discrete; }
-.viewer:not([open])::backdrop { opacity: 0; }
-.viewer-bar { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-1) var(--space-4); background: var(--bar); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--color-rule); }
-.viewer-bar div { display: flex; flex-wrap: wrap; }
-.viewer-bar button { display: inline-flex; align-items: center; gap: 0.4em; min-height: var(--tap); padding: 0 var(--space-3); border: 0; background: none; color: var(--color-muted); cursor: pointer; white-space: nowrap; }
-.viewer-bar button:hover { color: var(--color-accent); }
-.viewer-body { padding: var(--space-5) var(--space-5) 0; container-type: inline-size; }
-.viewer .plate { top: calc(var(--tap) + var(--space-6)); }
-
-/* 2 · modal: the layer covers the window and is the thing that scrolls, as the page does.
-   The space above the dossier is its margin, not the layer's padding, so the bar sticks to the
-   very top. Opacity and a slight scale. */
-.viewer[data-form="modal"] {
+/* ── a dossier over the index ─────────────────────────────
+   With the script a tile opens its dossier in a layer over the dimmed index. The layer covers the
+   window and is the thing that scrolls, in the page's place and with its scrollbar where the
+   page's stood, so the dossier keeps its full height. The dossier arrives by opacity and a slight scale;
+   the layer itself does not move, so the scrollbar stands still from the first frame. On a narrow
+   screen the layer rises from the foot as a sheet, scrollbar and all. */
+.viewer {
   --viewer-dur: var(--dur-modal);
-  inset: 0; width: 100%; height: 100%; max-height: none; margin: 0; padding: 0 var(--gutter) var(--space-6);
-  background: none; scrollbar-gutter: stable; scrollbar-color: var(--wood-muted) transparent;
-  transition: opacity var(--dur-modal) var(--ease-out), transform var(--dur-modal) var(--ease-out), overlay var(--dur-modal) allow-discrete, display var(--dur-modal) allow-discrete;
+  position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0 var(--gutter); border: 0;
+  background: none; color: var(--color-ink);
+  overflow: auto; overscroll-behavior: contain; scrollbar-gutter: stable; scrollbar-color: var(--wood-muted) transparent;
+  transition: overlay var(--viewer-dur) allow-discrete, display var(--viewer-dur) allow-discrete;
 }
-.viewer[data-form="modal"]:not([open]) { opacity: 0; transform: scale(0.96); }
-.viewer[data-form="modal"] .viewer-panel { width: min(74rem, 100%); min-height: 0; margin: var(--space-6) auto 0; border-radius: var(--round); background: var(--color-paper); box-shadow: 0 2rem 4rem -1.5rem var(--shade); overflow: clip; }
-
-/* 3 · sheet: a drawer from the right edge, not modal */
-.viewer[data-form="side"] {
-  --viewer-dur: var(--dur-drawer);
-  inset: 0 0 0 auto; z-index: var(--z-sheet); margin: 0; width: min(44rem, 100%); height: 100dvh; max-height: none;
-  border-left: 1px solid var(--color-rule); box-shadow: -1.5rem 0 3rem -2rem var(--shade);
-  transition: transform var(--dur-drawer) var(--ease-drawer), display var(--dur-drawer) allow-discrete;
-}
-.viewer[data-form="side"]:not([open]) { transform: translateX(100%); }
-
-/* 3 on a narrow screen: a drawer from the bottom edge */
-.viewer[data-form="bottom"] {
-  --viewer-dur: var(--dur-drawer);
-  inset: auto 0 0; margin: 0; width: 100%; max-height: calc(100dvh - var(--space-7));
-  border-radius: var(--round) var(--round) 0 0;
-  transition: transform var(--dur-drawer) var(--ease-drawer), overlay var(--dur-drawer) allow-discrete, display var(--dur-drawer) allow-discrete;
-}
-.viewer[data-form="bottom"]:not([open]) { transform: translateY(100%); }
-
+/* while it leaves, the page's scrollbar is back: reach under it, so the dossier does not step aside */
+.viewer:not([open]) { width: calc(100% + var(--scrollbar, 0px)); }
+.viewer:not([open]) .viewer-panel { opacity: 0; transform: scale(0.96); }
+.viewer::backdrop { background: var(--veil); transition: opacity var(--viewer-dur) var(--ease-out), overlay var(--viewer-dur) allow-discrete, display var(--viewer-dur) allow-discrete; }
+.viewer:not([open])::backdrop { opacity: 0; }
 @starting-style {
+  .viewer[open] .viewer-panel { opacity: 0; transform: scale(0.96); }
   .viewer[open]::backdrop { opacity: 0; }
-  .viewer[data-form="modal"][open] { opacity: 0; transform: scale(0.96); }
-  .viewer[data-form="side"][open] { transform: translateX(100%); }
-  .viewer[data-form="bottom"][open] { transform: translateY(100%); }
+}
+/* the space above and below the dossier is its margin, not the layer's padding, so what sticks, sticks to the window's edge */
+.viewer-panel { display: flex; flex-direction: column; width: min(74rem, 100%); margin: var(--space-6) auto; border-radius: var(--round); background: var(--color-paper); box-shadow: 0 2rem 4rem -1.5rem var(--shade); overflow: clip; transition: opacity var(--dur-modal) var(--ease-out), transform var(--dur-modal) var(--ease-out); }
+.viewer button, .turn-key { display: inline-flex; align-items: center; gap: 0.4em; min-width: 0; min-height: var(--tap); padding: 0 var(--space-3); border: 0; background: none; color: var(--color-muted); cursor: pointer; white-space: nowrap; transition: color var(--dur) var(--ease-out); }
+.viewer button:hover, .turn-key:hover { color: var(--color-accent); }
+.viewer-body { flex: 1 0 auto; padding-inline: var(--space-5); container-type: inline-size; }
+.viewer .dossier { padding-bottom: var(--space-6); }
+.viewer .plate { top: var(--space-5); }
+/* the way out, at the head of the dossier, and the way on to the compounds before and after, at its foot,
+   where it stays while the dossier scrolls */
+.viewer-top { display: flex; justify-content: flex-end; padding: var(--space-1) var(--space-2) 0; }
+.viewer-close .icon { width: 1.5rem; height: 1.5rem; }
+.viewer-nav { order: 1; position: sticky; bottom: 0; z-index: 1; display: flex; justify-content: space-between; gap: var(--space-4); padding: var(--space-2) var(--space-2) max(var(--space-2), env(safe-area-inset-bottom)); background: var(--bar); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-top: 1px solid var(--color-rule); }
+.viewer-nav [data-name] { overflow: hidden; text-overflow: ellipsis; }
+/* Where the window is wide, the same keys stand outside the dossier, on the dimmed page and in the wood's
+   light: the close at the top right, the compounds before and after at the two sides. Each row keeps its
+   place in the window by sticking, and takes no room in the dossier; the dossier lets them show past its edge. */
+@media (min-width: 72rem) {
+  .viewer { padding-inline: max(var(--gutter), 8.5rem); }
+  .viewer-panel { overflow: visible; }
+  .viewer-body { padding-top: var(--space-5); }
+  .viewer-top, .viewer-nav { order: -1; position: sticky; z-index: 2; display: block; height: 0; padding: 0; border: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .viewer-top { top: var(--space-6); }
+  .viewer-nav { top: 50%; }
+  .viewer-panel > * > button { position: absolute; justify-content: center; width: 8.5rem; padding: 0; color: var(--wood-ink); }
+  .viewer-close { top: calc(var(--space-3) * -1); left: 100%; height: var(--space-8); }
+  .viewer-close span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .viewer-close .icon { width: 2.75rem; height: 2.75rem; stroke-width: 1.25; }
+  .viewer-prev, .viewer-next { flex-direction: column; gap: var(--space-2); padding: var(--space-4) var(--space-2); translate: 0 -50%; white-space: normal; text-align: center; }
+  .viewer-prev { right: 100%; }
+  .viewer-next { left: 100%; flex-direction: column-reverse; }
+  .viewer-nav .icon { width: 3rem; height: 3rem; stroke-width: 1; }
+  .viewer-nav [data-name] { max-width: 100%; overflow-wrap: anywhere; font-size: var(--text-xs); }
 }
 
 /* ── dot plots ────────────────────────────────────────── */
 .cup { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--space-6) clamp(1.5rem, 5vw, 5rem); align-items: start; }
-.plot { --label-w: 10rem; --val-w: 4.5rem; --pad: 0.75rem; }
+.plot { --label-w: 12.5rem; --val-w: 4.5rem; --pad: 0.75rem; }
 .dose { --label-w: 23rem; --val-w: 5rem; max-width: 62rem; margin-top: var(--space-5); }
 .plot figcaption { margin: 0 0 var(--space-4); }
 .legend { display: inline-flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); margin-left: var(--space-2); }
@@ -342,7 +401,6 @@ i.f-sesqui { background: var(--color-sesqui); }
 .spoon .track i { width: 1rem; height: 1rem; background: var(--color-accent); }
 .spoon .val { color: var(--color-accent); }
 .plot > .src { display: block; margin-top: var(--space-3); }
-.strength { margin-bottom: var(--space-5); }
 .todo { margin-top: var(--space-4); padding: var(--space-3) var(--space-4); border: 1px dashed var(--color-rule-strong); border-radius: var(--round); background: var(--color-note); font-size: var(--text-s); }
 
 /* ── evidence ─────────────────────────────────────────── */
@@ -350,24 +408,63 @@ i.f-sesqui { background: var(--color-sesqui); }
 .rungs li { display: grid; gap: var(--space-2); align-content: start; padding: var(--space-4) var(--space-4) var(--space-4) 0; }
 .rungs li + li { padding-left: var(--space-4); border-left: 1px solid var(--color-rule); }
 .rungs b { font: 600 var(--text-l) / 1.1 var(--font-display); }
-.rungs li > span:not(.pips) { font-size: var(--text-s); line-height: 1.45; }
+.rungs .icon { width: 1.75rem; height: 1.75rem; color: var(--color-accent); }
+.rungs li > span { font-size: var(--text-s); line-height: 1.45; }
 .rungs em { padding-top: var(--space-2); border-top: 1px solid var(--color-rule); font-size: var(--text-s); font-style: normal; line-height: 1.5; color: var(--color-muted); }
 
-/* ── mistakes ─────────────────────────────────────────── */
-.mistakes dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6) clamp(1.5rem, 5vw, 5rem); margin-top: var(--space-6); }
-.mistakes dl > div { padding-top: var(--space-4); border-top: 1px solid var(--color-rule-strong); }
-.mistakes dt { font: 600 var(--text-xl) / 1.05 var(--font-display); letter-spacing: 0.005em; color: var(--color-ink); text-wrap: balance; }
-.mistakes dd { max-width: 52ch; margin-top: var(--space-3); }
+/* ── questions and answers: the common questions on the index, the four mistakes on the evidence page ── */
+.qa dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6) clamp(1.5rem, 5vw, 5rem); margin-top: var(--space-6); }
+.qa dl > div { padding-top: var(--space-4); border-top: 1px solid var(--color-rule-strong); }
+.qa dt { font: 600 var(--text-xl) / 1.05 var(--font-display); letter-spacing: 0.005em; color: var(--color-ink); text-wrap: balance; }
+.qa dd { max-width: 52ch; margin-top: var(--space-3); }
 
-/* ── what each honey holds ────────────────────────────── */
-.blend-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6) clamp(1.5rem, 5vw, 5rem); margin-top: var(--space-6); }
-.blend-list > li { display: grid; gap: var(--space-3); align-content: start; padding-top: var(--space-4); border-top: 1px solid var(--color-rule-strong); }
-.blend-list h3 { display: flex; align-items: center; gap: 0.4em; font-size: var(--text-xl); line-height: 1.05; }
-.blend-list ul li { padding-bottom: var(--space-2); border-bottom: 1px solid var(--color-rule); line-height: 1.35; }
-.blend-list ul li:first-child { border-top: 1px solid var(--color-rule); }
-.blend-list ul span { font-size: var(--text-s); color: var(--color-muted); }
-.blend-list ul .src { display: block; }
-.blend-list a, tbody a { display: inline-flex; align-items: center; min-height: var(--tap); }
+/* ── what is in each honey: a table, and the same as three circles ─────────
+   Half the column each where it is wide; narrower, the table at full width and the circles under it.
+   The circles wear the honeys' colours; the names wear ink. The two point at each other (atlas.js,
+   [data-on]): a compound under the pointer is marked in both, with the part of the circles it stands in. */
+.blends { display: grid; gap: var(--space-6) clamp(1.5rem, 5vw, 5rem); align-items: start; }
+/* the circles need about thirty rem to carry the names: narrower than that, the table says it alone */
+.venn { display: none; }
+@media (min-width: 40rem) { .venn { display: block; } }
+/* narrower than that a jar's word on its honey has no room beside the jar: it stands at the foot of the window */
+@media (max-width: 39.99rem) { .in-honey thead th .jar-key .tip { position: fixed; inset: auto var(--gutter) var(--space-4); z-index: var(--z-nav); width: auto; max-width: none; translate: none; } }
+@media (min-width: 72rem) {
+  .blends { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .blends .head { grid-column: 1 / -1; }
+}
+.venn svg { display: block; width: 100%; max-width: 38rem; height: auto; }
+.venn-set { fill: var(--honey); fill-opacity: 0.1; stroke: var(--honey); stroke-width: 2; }
+.venn-part { fill: var(--color-ink); fill-opacity: 0; pointer-events: none; transition: fill-opacity var(--dur) var(--ease-out); }
+.venn-part[data-on] { fill-opacity: 0.08; }
+.venn a:focus-visible rect { stroke: var(--color-accent); stroke-width: 2; }
+.venn text { fill: var(--color-ink); font: 400 var(--text-s) var(--font-text); text-anchor: middle; }
+.venn .venn-title { font: 600 var(--text-s) var(--font-label); letter-spacing: 0.1em; text-transform: uppercase; pointer-events: none; }
+.venn a { outline: none; text-decoration: none; }
+.venn a rect { fill: none; pointer-events: all; }
+.venn a text { font-weight: 500; transition: fill var(--dur) var(--ease-out); }
+.venn a:is(:hover, [data-on]) text { fill: var(--color-accent); }
+.venn figcaption { max-width: 38rem; }
+/* the table fills its place: the compounds' column is as wide as their names need, and the three honeys
+   share the rest equally, so the marks spread across the width. A jar heads each honey's column with the
+   honey's name under it, and says what honey it is to the pointer that rests on it. The three jars stand
+   on one line, at the top, whatever the names under them need. */
+.in-honey { table-layout: fixed; }
+.in-honey thead th:first-child { width: 13rem; }
+.in-honey :is(th, td) { padding-inline: var(--space-3); }
+.in-honey :is(thead th + th, td) { padding-inline: 0; text-align: center; }
+.in-honey thead th { padding-top: var(--space-2); vertical-align: top; }
+.jar-key { position: relative; display: flex; flex-direction: column; align-items: center; gap: var(--space-1); min-height: var(--tap); padding: 0 var(--space-2) var(--space-2); border-radius: var(--radius); }
+.jar-name { line-height: 1.2; } /* a name of two words takes two lines before it touches its neighbour's */
+.jar-key img { width: 3rem; }
+.jar-key .tip { left: 50%; translate: -50% 0; max-width: 20rem; text-align: left; }
+.in-honey th:last-child .tip { left: auto; right: 0; translate: none; }
+.in-honey i { display: inline-block; }
+.in-honey tbody i { width: 0.875rem; height: 0.875rem; }
+.in-honey tbody tr { transition: background-color var(--dur) var(--ease-out); }
+.in-honey tr[data-on] { background: var(--color-paper-2); }
+.in-honey tbody a { text-decoration: none; }
+.in-honey :is(a:hover, [data-on] a) { color: var(--color-accent); }
+@media (min-width: 48rem) { .in-honey tbody th { font-size: var(--text-m); } } /* narrower, the compounds are set in the table's own size */
 
 /* ── the way on to the other two pages ────────────────── */
 .next { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
@@ -377,12 +474,17 @@ i.f-sesqui { background: var(--color-sesqui); }
 .next h2 { padding-right: var(--space-7); }
 .next p { max-width: 44ch; }
 
+/* a compound named in a table or a chart: its plant, small, before its name */
+.named { gap: var(--space-2); }
+.named .plant { flex: none; width: 2rem; height: 2rem; object-fit: contain; }
+
 /* ── the boiling points as a table ────────────────────── */
 .table { max-width: 56rem; margin-top: var(--space-5); overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums lining-nums; }
 th, td { padding: var(--space-3) var(--space-4) var(--space-3) 0; border-bottom: 1px solid var(--color-rule); text-align: left; vertical-align: baseline; }
 thead th { border-bottom-color: var(--color-rule-strong); }
 tbody th { padding-block: 0; font-weight: 400; white-space: nowrap; }
+tbody a { display: inline-flex; align-items: center; min-height: var(--tap); }
 .figures > .src { display: block; max-width: var(--measure); margin-top: var(--space-3); }
 
 /* ── sources and colophon ─────────────────────────────── */
@@ -390,18 +492,33 @@ tbody th { padding-block: 0; font-weight: 400; white-space: nowrap; }
 .sources li { position: relative; break-inside: avoid; padding: var(--space-2) var(--space-2) var(--space-2) 2.25rem; overflow-wrap: anywhere; }
 .sources li::before { content: attr(value); position: absolute; left: var(--space-2); font: 500 var(--text-s) / 1.6 var(--font-label); color: var(--color-accent); }
 .sources li:target { background: var(--color-note); }
-.colophon { display: grid; gap: var(--space-4); margin-top: var(--space-9); padding-block: var(--space-7) calc(var(--space-9) + var(--space-5)); background: var(--wood); font-size: var(--text-s); }
-.colophon p { max-width: 78ch; }
+/* the page closes as it opened, in the wood, and the three honeys stand in it */
+.colophon { margin-top: var(--space-9); padding-bottom: var(--space-7); background: var(--wood); font-size: var(--text-s); }
+.foot-honeys { position: relative; isolation: isolate; margin-inline: calc(var(--inset) * -1); padding: var(--space-9) var(--inset) var(--space-8); }
+.foot-honeys::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, var(--wood) 0, var(--veil) 35%, var(--veil-0) 90%), linear-gradient(to right, var(--veil), var(--veil-0) 70%), url(../assets/forest-stand-in.webp) 50% 72% / cover var(--wood); }
+.foot-honeys h2 { font: 500 var(--text-s) / 1.2 var(--font-label); letter-spacing: 0.1em; color: var(--color-accent); }
+.foot-honeys > ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6) clamp(1.5rem, 4vw, 4rem); margin-top: var(--space-5); }
+.foot-honeys > ul > li > a { display: grid; justify-items: start; align-content: start; gap: var(--space-1); text-decoration: none; }
+/* studio light turned down to the wood's, and a shadow on the ground */
+.foot-honeys img { width: min(100%, 13rem); margin-bottom: var(--space-4); filter: brightness(0.86) saturate(0.9) contrast(1.04) drop-shadow(0 1.4rem 0.9rem var(--shade)); transition: transform var(--dur-morph) var(--ease-out), filter var(--dur-morph) var(--ease-out); }
+.foot-honeys b { font: 600 var(--text-xl) / 1 var(--font-display); letter-spacing: 0.005em; text-transform: uppercase; }
+.foot-honeys a > span { margin-top: var(--space-1); color: var(--color-muted); }
+/* what is in the jar, as a sentence: quiet, with the compounds in ink, each a way to its page */
+.with { max-width: 32ch; margin-top: var(--space-3); line-height: 1.6; color: var(--color-muted); }
+.with a { color: var(--color-ink); text-decoration-line: none; white-space: nowrap; }
+.with a:hover { text-decoration-line: underline; }
+.foot-base { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: var(--space-4) var(--space-7); padding-top: var(--space-6); border-top: 1px solid var(--color-rule); }
+.foot-base p { flex: 1 1 24rem; max-width: 76ch; line-height: 1.5; color: var(--color-muted); }
 
-[hidden] { display: none !important; }
-
-/* a hover that moves something is for a pointer that can hover */
+/* what answers a pointer that can hover. A tile stays where it is: its ground turns fuller in colour, a ring of
+   the wood's dark goes round it, and its plant grows from the corner. */
 @media (hover: hover) and (pointer: fine) {
-  .card:hover { transform: translateY(-3px); }
-  .card:hover::after { color: var(--color-accent); }
+  .card:hover { --ground: var(--color-paper-3); box-shadow: inset 0 0 0 2px var(--wood); }
+  .pick[aria-pressed="false"]:hover { color: var(--color-ink); }
+  .card:hover .card-plant { transform: scale(1.09); }
   .next a:hover { transform: translateY(-3px); }
   .next a:hover::after { color: var(--color-accent); }
-  details[open] > .card:hover { transform: none; }
+  .foot-honeys > ul > li > a:hover img { transform: translateY(-4px); filter: brightness(1) drop-shadow(0 1.6rem 1rem var(--shade)); }
 }
 
 /* ── narrower ─────────────────────────────────────────── */
@@ -413,17 +530,28 @@ tbody th { padding-block: 0; font-weight: 400; white-space: nowrap; }
 }
 
 @media (max-width: 48rem) {
-  .hero { grid-template: "text" auto "first" auto "credit" auto / minmax(0, 1fr); }
-  .hero::before { grid-area: 1 / 1 / 3 / -1; background: linear-gradient(to top, var(--wood) 0, var(--veil) 20%, var(--veil-0) 60%), linear-gradient(var(--veil), var(--veil-0) 70%), url(../assets/forest-stand-in.webp) 62% 50% / cover var(--wood); }
-  .hero-text { padding-block: calc(var(--tap) * 2 + var(--space-7)) var(--space-6); }
-  .hero .first { margin-bottom: var(--space-6); padding: var(--space-4); }
-  .credit { justify-self: start; }
+  .hero { grid-template: "title" auto "lead" auto / minmax(0, 1fr); padding-block: calc(var(--tap) * 2 + var(--space-7)) var(--space-7); }
+  .hero::before { background: linear-gradient(to top, var(--wood) 0, var(--veil) 20%, var(--veil-0) 60%), linear-gradient(var(--veil), var(--veil-0) 70%), url(../assets/forest-stand-in.webp) 62% 50% / cover var(--wood); }
   .band { padding-block: calc(var(--tap) * 2 + var(--space-6)) var(--space-6); }
-  .what, .cup, .blend-list, .next { grid-template-columns: minmax(0, 1fr); }
+  .cup, .next, .units, .more, .foot-honeys > ul { grid-template-columns: minmax(0, 1fr); }
+  .picks { --full: 0.8; }
+  .pick-fig { height: 10rem; }
+  .with { max-width: none; line-height: 2; } /* room for a finger between the lines */
+  .in-honey thead th:first-child { width: 9.5rem; }
+  .in-honey tbody th { padding-right: 0; }
+  .named { gap: 0.375rem; }
+  .named .plant { width: 1.5rem; height: 1.5rem; }
+  .in-honey :is(th, td) { padding-inline: var(--space-2); }
+  .jar-key img { width: 2.5rem; }
+  .foot-honeys > ul > li > a { grid-template-columns: 6.5rem minmax(0, 1fr); column-gap: var(--space-4); align-items: center; }
+  .foot-honeys > ul > li > a img { grid-row: span 2; margin-bottom: 0; }
+  .foot-honeys > ul > li > a b { align-self: end; }
+  .foot-honeys a > span { align-self: start; }
+  .foot-honeys b { font-size: var(--text-l); }
+  .head .lead { font-size: var(--text-l); line-height: 1.3; letter-spacing: 0; }
   th, td { padding-right: var(--space-3); font-size: var(--text-s); }
   main > section:not(.hero, .band, .compound) { padding-top: var(--space-8); }
-  .isomers ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .mistakes dl { grid-template-columns: minmax(0, 1fr); }
+  .qa dl { grid-template-columns: minmax(0, 1fr); }
   .sources ol { columns: 1; }
   .plot, .dose { --label-w: 0rem; --pad: 0.5rem; }
   .axis { margin-inline: var(--pad); }
@@ -432,31 +560,33 @@ tbody th { padding-block: 0; font-weight: 400; white-space: nowrap; }
   .dose .rows li > span:first-child { padding-right: var(--space-3); }
   .legend { display: flex; margin: var(--space-2) 0 0; }
   .viewer-body { padding-inline: var(--space-4); }
-  /* the modal fills the width under a strip of the dimmed page and rises from the bottom edge */
-  .viewer[data-form="modal"] { --viewer-dur: var(--dur-drawer); padding: 0; transition: opacity var(--dur-modal) var(--ease-out), transform var(--dur-drawer) var(--ease-drawer), overlay var(--dur-drawer) allow-discrete, display var(--dur-drawer) allow-discrete; }
-  .viewer[data-form="modal"]:not([open]) { transform: translateY(100%); }
-  @starting-style { .viewer[data-form="modal"][open] { transform: translateY(100%); } }
-  .viewer[data-form="modal"] .viewer-panel { min-height: calc(100dvh - var(--space-7)); margin-top: var(--space-7); border-radius: var(--round) var(--round) 0 0; }
+  /* the layer fills the width under a strip of the dimmed page and rises from the foot as a sheet; the dossier in it only fades */
+  .viewer { --viewer-dur: var(--dur-drawer); padding: 0; transition: transform var(--dur-drawer) var(--ease-drawer), overlay var(--dur-drawer) allow-discrete, display var(--dur-drawer) allow-discrete; }
+  .viewer:not([open]) { transform: translateY(100%); }
+  .viewer:not([open]) .viewer-panel { transform: none; }
+  @starting-style { .viewer[open] { transform: translateY(100%); } .viewer[open] .viewer-panel { transform: none; } }
+  .viewer-panel { min-height: calc(100dvh - var(--space-7)); margin-block: var(--space-7) 0; border-radius: var(--round) var(--round) 0 0; }
 }
 
 @media (max-width: 30rem) {
   .rungs { grid-template-columns: minmax(0, 1fr); }
   .rungs li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--color-rule); }
   .axis i:nth-child(even) { display: none; }
+  .jar-name { display: none; } /* no room for a name under a jar: the jar says it to the finger */
   th, td { padding-right: var(--space-2); font-size: var(--text-xs); }
 }
 
-/* fewer and gentler, not none: a layer still fades in so its arrival is seen; nothing travels.
-   The script skips the View Transition under this setting. */
+/* fewer and gentler, not none: the dossier still fades in so its arrival is seen; nothing travels */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
-  .viewer, .viewer::backdrop { transition-property: opacity, overlay, display !important; transition-duration: 200ms !important; }
-  .viewer:not([open]) { opacity: 0; transform: none !important; }
-  @starting-style { .viewer[open] { opacity: 0; transform: none !important; } }
+  .viewer, .viewer-panel, .viewer::backdrop { transition-property: opacity, overlay, display !important; transition-duration: 200ms !important; }
+  .viewer:not([open]), .viewer:not([open]) .viewer-panel { transform: none !important; }
+  @starting-style { .viewer[open], .viewer[open] .viewer-panel { transform: none !important; } }
 }
 
 @media print {
-  .sections, .filters, .strength, .skip, .proto-picker, .viewer, .card-close, .pager { display: none; }
+  .sections, .strength, .skip, .viewer, .pager, .turn-key, .tip, .pick-dots { display: none; }
+  html:has(.viewer[open]) { overflow: visible; padding-right: 0; } /* printed with a dossier open, the index is not held */
   .plate { position: static; }
 }

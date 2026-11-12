@@ -1,27 +1,51 @@
 // Content of the terpene atlas. One file, so a translation is one file.
-// Identity data: PubChem (NIH), fetched 2026-11-10; boiling points and odour notes carry
+// Identity data and the structure records in mol/: PubChem (NIH), fetched 2026-11-10; the 3D records in mol3d/, 2026-11-12; boiling points and odour notes carry
 // the PubChem contributing source in brackets. Scent words and "found in" lists are
 // High Forest's own, from the page this atlas replaces. Study summaries cite refs by number.
 
-export const revised = '11 November 2026'
+export const revised = '12 November 2026'
 
+// What we say of each honey, condensed from the page these pages replace (highforest.ca/botanical-terpenes,
+// read 2026-11-12). time: the part of the day it is made for. aroma: what it smells of ("Aromatic profile").
+// told: what "customers and testers have described", in that page's words, three of its four items.
 export const blends = {
-  sunshine: { name: 'Sunshine', honey: 'summer wildflower honey', url: '/sunshine-tea' },
-  berry: { name: 'Soothing Berry', honey: 'wild-blueberry-blossom honey', url: '/soothing-berry-fr' },
-  rest: { name: 'Grounding Rest', honey: 'buckwheat honey', url: '/grounding-rest-fr' },
+  sunshine: {
+    name: 'Sunshine', honey: 'summer wildflower honey', url: '/sunshine-tea', time: 'morning',
+    aroma: 'Bright citrus and conifer, then fresh green, floral and woody notes.',
+    told: 'a brighter morning, a sense of renewed energy, greater freshness or clarity',
+  },
+  berry: {
+    name: 'Soothing Berry', honey: 'wild-blueberry-blossom honey', url: '/soothing-berry-fr', time: 'afternoon',
+    aroma: 'A fresh opening, floral roundness, and deeper herbal, gently woody notes.',
+    told: 'feeling calmer during the afternoon, a more balanced state, a steady pause during a busy day',
+  },
+  rest: {
+    name: 'Grounding Rest', honey: 'buckwheat honey', url: '/grounding-rest-fr', time: 'evening',
+    aroma: 'Earthy, herbal and hop-like, with a softer floral side and fresh green, balsamic notes.',
+    told: 'deeper relaxation, finding it easier to let go at the end of the day, improved sleep',
+  },
 }
 
 export const families = { mono: 'Monoterpene', alcohol: 'Monoterpene alcohol', sesqui: 'Sesquiterpene' }
 
 // evidence ladder, lowest rung first; a compound's `level` is the highest rung reached (1-based).
-// `reach` is the rung's name inside a sentence.
+// `reach` is the rung's name inside a sentence, `icon` a file in icons/.
 export const rungs = [
-  { name: 'Cells', reach: 'cells', note: 'Activity seen in cells or isolated tissue. Shows that something can happen, not that it does in a body.' },
-  { name: 'Animals', reach: 'animals', note: 'An effect measured in rodents, often at large doses.' },
-  { name: 'People, small', reach: 'small studies in people', note: 'Measured in people: how it is absorbed, or a small laboratory study.' },
-  { name: 'People, trials', reach: 'randomized trials', note: 'Randomized, placebo-controlled trials of the compound itself as a treatment.' },
+  { name: 'Cells', reach: 'cells', icon: 'microscope', note: 'Activity seen in cells or isolated tissue. Shows that something can happen, not that it does in a body.' },
+  { name: 'Animals', reach: 'animals', icon: 'rat', note: 'An effect measured in rodents, often at large doses.' },
+  { name: 'People, small', reach: 'small studies in people', icon: 'user', note: 'Measured in people: how it is absorbed, or a small laboratory study.' },
+  { name: 'People, trials', reach: 'randomized trials', icon: 'users', note: 'Randomized, placebo-controlled trials of the compound itself as a treatment.' },
 ]
 
+// jecfa: how the Joint FAO/WHO Expert Committee on Food Additives judged the compound as a flavouring:
+// [the year of the evaluation, its verdict as a clause, the number of its entry in the JECFA database].
+// Each read on 2026-11-12 in that entry (apps.who.int/food-additives-contaminants-jecfa-database/Home/Chemical/<number>)
+// and in the PubChem record, which carries the same; tools/jecfa-check.mjs reads the entries again and
+// holds these against them. Humulene has no evaluation listed in PubChem.
+const clear = 'no safety concern at current levels of intake when used as a flavouring agent'
+
+// plate.parts: how many of the plate's largest connected parts make the figure on the compound's tile
+// (the plant with its fruit, without the dissections around it). One unless said. Cut by tools/plates.mjs.
 export const terpenes = [
   {
     id: 'limonene', name: 'Limonene', cid: 440917, form: 'D-limonene, the (R)-(+) form of citrus peel',
@@ -31,8 +55,9 @@ export const terpenes = [
     named: 'After the lemon, Citrus limon.',
     shape: 'One six-membered ring with a tail. The molecule exists in two mirror-image forms; citrus peel makes almost only this one.',
     plants: ['lemon, orange, grapefruit and lime peel', 'juniper berries', 'peppermint', 'rosemary', 'fennel', 'dill', 'caraway and celery seed'],
-    plate: { species: 'Citrus × limon', common: 'lemon', printed: 'Citrus Limonum Risso', book: 'kohler' },
+    plate: { species: 'Citrus × limon', common: 'lemon', printed: 'Citrus Limonum Risso', book: 'kohler', parts: 3 },
     blends: ['sunshine', 'berry'], level: 3,
+    jecfa: [2004, 'an acceptable daily intake “not specified”, the committee’s term where it does not consider a numerical limit necessary', 558],
     studied: [
       ['human', 'People absorb it. A 1998 dose-finding study gave patients with advanced cancer 0.5 to 12 g per square metre of body surface a day by mouth and followed it through the blood.', [9]],
       ['human', 'In a 2013 pilot study, women with early-stage breast cancer took 2 g a day for two to six weeks; limonene collected in breast tissue.', [10]],
@@ -50,6 +75,7 @@ export const terpenes = [
     plants: ['pine, spruce and fir', 'rosemary', 'juniper', 'sage', 'eucalyptus', 'basil, dill and parsley', 'frankincense'],
     plate: { species: 'Pinus sylvestris', common: 'Scots pine', printed: 'Pinus silvestris L.', book: 'kohler' },
     blends: ['sunshine', 'berry'], level: 2,
+    jecfa: [2004, clear, 5177],
     studied: [
       ['animal', 'In a 2017 study, mice given 10 mg per kg did better on learning and memory tests after their memory had been impaired with the drug scopolamine.', [7]],
       ['review', 'A 2019 review summarizes cell and animal work on inflammation, microbes and nerve cells, and notes how few studies there are.', [6]],
@@ -61,16 +87,17 @@ export const terpenes = [
     formula: 'C10H16', mw: 136.23, cas: '127-91-3', fema: '2903', bp: [165, '163–166 °C', 'JECFA'],
     family: 'mono', iupac: '6,6-dimethyl-2-methylidenebicyclo[3.1.1]heptane',
     scent: ['green', 'woody', 'resinous', 'pine-like'], odour: ['dry, woody or resinous aroma', 'HSDB'],
-    named: 'The second pinene, made of the same atoms as α-pinene.',
-    shape: 'It has the same two fused rings, with the double bond outside the ring instead of inside it.',
+    named: 'The second pinene.',
+    shape: 'The same atoms and the same two fused rings as α-pinene, with the double bond outside the ring instead of inside it.',
     plants: ['fir, spruce and pine needles', 'rosemary', 'basil', 'dill and parsley', 'nutmeg'],
     plate: { species: 'Abies alba', common: 'silver fir', printed: 'Abies alba Miller', book: 'kohler' },
     blends: ['sunshine', 'berry'], level: 2,
+    jecfa: [2004, clear, 5332],
     studied: [
       ['animal', 'A 2007 rodent study of two eucalyptus-oil compounds found pain relief from cineole. β-Pinene worked weakly, in rats only, and reversed morphine’s pain relief about as much as the blocking drug naloxone does.', [8]],
       ['review', 'Reviewed together with α-pinene for antimicrobial and anti-inflammatory activity in cells and animals.', [6]],
     ],
-    unknown: 'Any effect in people. This atlas cites one animal study of the compound itself.',
+    unknown: 'Any effect in people. One animal study of the compound itself is cited here.',
   },
   {
     id: 'myrcene', name: 'Myrcene', plain: 'Beta-myrcene', cid: 31253,
@@ -82,6 +109,7 @@ export const terpenes = [
     plants: ['hops', 'mango', 'lemongrass', 'thyme', 'bay laurel', 'basil', 'parsley', 'cardamom'],
     plate: { species: 'Humulus lupulus', common: 'hops', printed: 'Humulus Lupulus L.', book: 'kohler' },
     blends: ['berry', 'rest'], level: 2,
+    jecfa: [2004, clear, 5171],
     studied: [
       ['animal', 'Its sleepy reputation comes from rodents given large doses. A 2021 review found animal results for pain, inflammation and sedation, and no human studies.', [15]],
       ['safety', 'In a two-year study, male rats given very large amounts by stomach tube developed kidney tumours, and male mice liver tumours (US National Toxicology Program, 2010). The International Agency for Research on Cancer classed myrcene in 2019 as possibly carcinogenic to humans, group 2B.', [20, 25]],
@@ -98,6 +126,7 @@ export const terpenes = [
     plants: ['dill', 'fennel', 'eucalyptus', 'black pepper', 'cinnamon leaf', 'parsley', 'star anise', 'elemi'],
     plate: { species: 'Foeniculum vulgare', common: 'fennel', printed: 'Foeniculum capillaceum Gilib.', book: 'kohler' },
     blends: ['sunshine', 'rest'], level: 2,
+    jecfa: [2004, clear, 5173],
     studied: [
       ['review', 'A 2022 systematic review found twelve studies of the pure compound, in cells and animals, on pain, tumour cells and microbes. It points out that toxicology and human data are missing.', [19]],
     ],
@@ -110,8 +139,9 @@ export const terpenes = [
     scent: ['fresh', 'herbal', 'softly pine-like', 'lightly floral'], odour: ['sweet, pine odor', 'HSDB'],
     shape: 'Limonene’s close relative: the same ring, with the tail’s double bond turned toward it.',
     plants: ['nutmeg', 'tea tree', 'apple', 'cumin', 'lilac', 'sage and rosemary', 'pine and fir', 'marjoram'],
-    plate: { species: 'Myristica fragrans', common: 'nutmeg', printed: 'Myristica fragrans Houtt.', book: 'kohler' },
+    plate: { species: 'Myristica fragrans', common: 'nutmeg', printed: 'Myristica fragrans Houtt.', book: 'kohler', parts: 3 },
     blends: ['rest'], level: 2,
+    jecfa: [2004, clear, 5384],
     studied: [
       ['animal', 'In a 2013 study, mice breathing air that carried terpinolene moved about less, which the authors read as sedation.', [16]],
     ],
@@ -127,6 +157,7 @@ export const terpenes = [
     plants: ['lavender', 'coriander', 'basil', 'thyme', 'bergamot', 'rosewood', 'jasmine', 'neroli', 'mint'],
     plate: { species: 'Lavandula angustifolia', common: 'lavender', printed: 'Lavandula vera D.C.', book: 'kohler' },
     blends: ['rest'], level: 2, related: true,
+    jecfa: [1998, `${clear}; it also comes under a group acceptable daily intake of 0–0.5 mg per kg of body weight`, 4144],
     studied: [
       ['animal', 'In a 2018 study, mice that smelled linalool behaved less anxiously. Mice that had lost their sense of smell did not respond, so the effect travelled through the nose.', [13]],
       ['related', 'Five randomized trials of Silexan, an 80 mg daily capsule of a standardized lavender oil, found less anxiety than with placebo. Silexan contains linalool and many other compounds; the trials tested the capsule, not linalool.', [14]],
@@ -144,6 +175,7 @@ export const terpenes = [
     plants: ['rose', 'geranium', 'palmarosa', 'lemongrass', 'citronella', 'neroli', 'coriander', 'blueberry'],
     plate: { species: 'Rosa × centifolia', common: 'cabbage rose', printed: 'Rosa centifolia L.', book: 'kohler' },
     blends: ['sunshine', 'berry'], level: 2,
+    jecfa: [2003, clear, 3549],
     studied: [
       ['review', 'A 2019 pharmacology review summarizes cell and animal work on inflammation, oxidation and microbes.', [17]],
     ],
@@ -159,6 +191,7 @@ export const terpenes = [
     plants: ['rose', 'geranium', 'citronella', 'lemongrass', 'lemon balm', 'eucalyptus', 'mint'],
     plate: { species: 'Melissa officinalis', common: 'lemon balm', printed: 'Melissa officinalis L.', book: 'kohler' },
     blends: ['sunshine', 'rest'], level: 2,
+    jecfa: [2003, 'covered by a group acceptable daily intake of 0–0.5 mg per kg of body weight, shared with citral, linalool, geranyl acetate and linalyl acetate', 4465],
     studied: [
       ['animal', 'In a 2010 study, citronellol injected into the veins of rats (1 to 20 mg per kg) lowered blood pressure, and it relaxed isolated artery tissue.', [18]],
     ],
@@ -174,6 +207,7 @@ export const terpenes = [
     plants: ['clove', 'black pepper', 'hops', 'basil', 'oregano', 'rosemary', 'lavender', 'cinnamon leaf', 'copaiba'],
     plate: { species: 'Syzygium aromaticum', common: 'clove', printed: 'Caryophyllus aromaticus L.', book: 'kohler' },
     blends: ['sunshine', 'berry', 'rest'], level: 2,
+    jecfa: [2004, clear, 5167],
     studied: [
       ['animal', 'It binds the CB2 receptor, part of the body’s own cannabinoid system, without the intoxicating effects linked to the CB1 receptor. In a 2014 study, mice fed caryophyllene showed less inflammatory and nerve pain, and the effect depended on CB2.', [4]],
       ['review', 'A 2020 review summarizes mostly preclinical work on chronic inflammation.', [3]],
@@ -200,12 +234,6 @@ export const terpenes = [
 export const books = {
   kohler: 'Köhler’s Medizinal-Pflanzen, Gera, 1887',
   thome: 'O. W. Thomé, Flora von Deutschland, Österreich und der Schweiz, Gera, 1885',
-}
-
-export const plateSize = {
-  'alpha-pinene': [900, 1167], 'beta-pinene': [900, 1167], caryophyllene: [900, 1266], citronellol: [900, 973],
-  geraniol: [900, 1233], humulene: [900, 1452], limonene: [900, 1130], linalool: [900, 1297], myrcene: [900, 1013],
-  phellandrene: [900, 1122], terpinolene: [900, 978],
 }
 
 export const grades = {
@@ -251,4 +279,5 @@ export const refs = [
   [23, 'Donelli et al.', 'Effects of Lavender on Anxiety: A Systematic Review and Meta-Analysis', 'Phytomedicine 65:153099, 2019', 'https://pubmed.ncbi.nlm.nih.gov/31655395/'],
   [24, 'Health Canada', 'Infant Botulism', '', 'https://www.canada.ca/en/health-canada/services/food-safety-vulnerable-populations/infant-botulism.html'],
   [25, 'International Agency for Research on Cancer', 'Some Chemicals That Cause Tumours of the Urinary Tract in Rodents', 'IARC Monographs Volume 119, 2019', 'https://publications.iarc.who.int/575'],
+  [26, 'Joint FAO/WHO Expert Committee on Food Additives', 'Evaluations of the Joint FAO/WHO Expert Committee on Food Additives (JECFA)', 'Online database', 'https://apps.who.int/food-additives-contaminants-jecfa-database/'],
 ]

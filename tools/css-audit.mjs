@@ -6,6 +6,7 @@
 // structure, not the cascade; treat findings as places to look. Custom properties are
 // resolved across all files given in one run, and count as defined when the supplied
 // HTML/JS sets them inline (style="--p: …" or setProperty('--p', …)).
+// A property that is both declared in a stylesheet and set inline is an error: one of the two meanings is lost.
 
 import { readFileSync } from 'node:fs'
 
@@ -105,6 +106,8 @@ const inline = name => used != null && new RegExp(`${name}\\s*:|setProperty\\(\\
 for (const r of runs) {
   for (const [name, ref] of r.referenced) if (!ref.fallback && !has('defined', name) && !inline(name)) r.issues.push({ level: 'error', rule: 'undefined-var', line: r.line(ref.pos), note: `${name} is used and defined nowhere` })
   for (const [name, pos] of r.defined) if (!has('referenced', name) && !(used && used.includes(name))) r.issues.push({ level: 'warn', rule: 'unused-var', line: r.line(pos), note: `${name} is defined and never used` })
+  // a script or a style attribute that sets a property a stylesheet declares replaces it for everything below that element
+  for (const [name, pos] of r.defined) if (inline(name)) r.issues.push({ level: 'error', rule: 'shadowed-var', line: r.line(pos), note: `${name} is declared here and also set from the supplied HTML/JS, which overrides it wherever it is read` })
   r.issues.sort((a, b) => a.line - b.line)
 }
 for (const { file, issues } of runs) {
